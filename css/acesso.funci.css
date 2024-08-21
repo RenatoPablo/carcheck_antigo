@@ -1,0 +1,83 @@
+
+.icons{
+    display: flex;
+    gap: 37px;
+    position: absolute;
+    right: 70px;
+    top: 45px;
+
+}
+.container-header{
+    
+    display: flex;
+    align-items: center;
+    
+}
+.div-inicial{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    
+    text-align: center;
+    transform: translate(-50%, -50%);
+
+    color: #0D3587;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+.div-inicial h2{
+    position: relative;
+    top: -35px;
+    font-size: 40px;
+    margin: 0 auto;
+}
+.div-inicial p{
+    position: relative;
+    top: -20px;
+    
+    font-size: 20px;
+    margin: 0 auto;
+}
+
+/**/
+.container-acesso{
+    display: grid;
+    grid-template-columns: repeat(3, 250px);
+    /* grid-template-rows: repeat(, 230px); */
+    gap: 20px;
+    justify-content: center;
+    color: white;
+    position: relative;
+    top: 0px;
+}
+.square {
+    width: 250px;
+    height: 205px;
+    background-color: #0D3587;
+    color: #ffffff;
+    border-radius: 10px;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 15%;
+    text-decoration: underline;
+    font-size: 20px;
+    cursor: pointer;
+    
+}
+.square:hover {
+    background-color: #0b2a63;
+}
+
+.container-meio{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}

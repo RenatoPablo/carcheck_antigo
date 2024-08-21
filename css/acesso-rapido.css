@@ -1,0 +1,88 @@
+header{
+    background-color: #0D3587;
+    color: white;
+    height: 80px;
+    padding: 0px 20px 20px 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    
+    
+    
+}
+header h1{
+    margin: 0;
+    font-size: 50px;
+
+}
+.icons{
+    display: flex;
+    gap: 37px;
+    position: absolute;
+    right: 70px;
+    top: 45px;
+
+}
+.botao{
+    background-color: transparent; /* Botão sem cor de fundo */
+    border: none;       /* Remove a borda padrão */
+    cursor: pointer; /* Mostra o cursor de mão para indicar que é clicável */
+    padding: 0;      /* Remove o preenchimento padrão */
+}
+
+.container-acesso-rapido{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+body h2{
+    margin: 0 auto;
+    font-size: 50px;
+    color: #0D3587;
+    
+    
+}
+main{
+    margin-top: 70px;
+}
+body{
+    background-color: #E2FBFF;
+}
+.container-header{
+    
+    display: flex;
+    align-items: center;
+}
+
+.container-acesso{
+    display: grid;
+    grid-template-columns: repeat(2, 250px);
+    grid-template-rows: repeat(2, 230px);
+    gap: 20px;
+    justify-content: center;
+    color: white;
+}
+.square {
+    width: 250px;
+    height: 205px;
+    background-color: #0D3587;
+    color: #ffffff;
+    border-radius: 10px;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 5%;
+    text-decoration: underline;
+    font-size: 20px;
+    cursor: pointer;
+}
+.square:hover {
+    background-color: #0b2a63;
+}
