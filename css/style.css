@@ -1,103 +1,124 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
-/*/////////////////// CABEÇALHO //////////////////////////////*/
-/* Estilos gerais */
-header{
+/* Estilos gerais do body */
+body {
+    font-family: Lora, serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita rolagem horizontal */
+    overflow-y: hidden; /* Evita rolagem vertical */
+    background-color: #E2FBFF; /* Adicionado para consistência */
+}
+
+/* Estilos gerais do header */
+header {
     background-color: #0D3587;
     color: white;
     height: 80px;
-    padding: 0px 20px 20px 10px;
+    padding: 0 20px;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
-    
-    
-    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
-header h1{
+
+/* Estilo para o título no header */
+header h1 {
     margin: 0;
-    font-size: 50px;
-
-}
-main{
-    margin-top: 70px;
+    font-size: 50px; /* Ajustado para maior tamanho */
 }
 
-body {
-    font-family: Lora;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Evita rolagem horizontal quando a sidebar está aberta */
-    overflow-y: hidden;/* Evita rolagem vertical quando a sidebar está aberta */
-    background-color: #E2FBFF;
+/* Container para o botão e ícones no header */
+.container-header {
+    display: flex;
+    align-items: center;
 }
 
+/* Estilo dos ícones na barra superior */
+.icons {
+    display: flex;
+    gap: 37px;
+    position: absolute;
+    top: 20px;
+    right: 70px;
+    align-items: center;
+    transition: margin-left 0.5s; /* Transição suave */
+}
 
-/*/////////////////// SIDE BAR ////////////////////////////////////////*/
-/*/////////////////// Estilos da sidebar //////////////////////////////*/
+/* Ajuste dos ícones quando a sidebar está aberta */
+.sidebar.open ~ .icons {
+    margin-left: 210px; /* Empurra os ícones para a direita */
+}
+
+/* Botão para abrir a sidebar */
+.open-btn {
+    font-size: 30px;
+    cursor: pointer;
+    background-color: #0d3587; /* Cor da sidebar */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    position: fixed; /* Fixo na tela */
+    top: 20px;
+    right: 20px; /* Ajuste a posição conforme necessário */
+    z-index: 1100; /* Deve estar sobre a sidebar */
+    transition: 0.3s;
+}
+
+/* Estilos da sidebar */
 .sidebar {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     top: 0;
-    left: 0;
+    right: 0;
     background-color: #0d3587;
     overflow-x: hidden;
-    transition: 0.5s;
+    transition: width 0.5s;
     padding-top: 60px;
-    border-right: 2px solid #111111; /* Borda adicionada */
-
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    align-items: flex-start;
     gap: 20px;
+    box-sizing: border-box;
 }
 
-/* Classe para a sidebar aberta */
+/* Sidebar aberta */
 .sidebar.open {
-    width: 250px; /* Largura quando aberta */
+    width: 210px; /* Largura quando aberta */
+    border-left: 10px solid transparent;
+    border-image: linear-gradient(45deg, #00dbde, #301ef5) 1;
 }
 
+/* Links dentro da sidebar */
 .sidebar a {
     padding: 10px 15px;
     text-decoration: none;
     font-size: 18px;
     color: white;
     display: block;
-    transition: 0.3s;
+    transition: background-color 0.3s;
 }
 
+/* Estilo do primeiro link na sidebar */
 .sidebar a:first-child {
-    margin-top: 50px; /* Espaço maior no primeiro link */
+    margin-top: 50px;
 }
 
-
+/* Hover effect para os links da sidebar */
 .sidebar a:hover {
     background-color: #575757;
 }
 
-/* Botão para abrir a sidebar */
-.open-btn {
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #0d3587;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    position: flex;
-    top: 20px;
-    left: 20px;
-    z-index: 1;
-    transition: 0.3s;
-}
-
 /* Conteúdo principal */
-.main-content {
+main {
     padding: 30px;
-    margin-left: 0;
-    margin-top: 100px;
+    margin-top: 80px; /* Ajustado para caber o header fixo */
     transition: margin-left 0.5s;
 }

@@ -37,22 +37,24 @@ header h1{
     top: 60%;
     left: 50%;
     text-align: center;
+    justify-content: center;
     transform: translate(-50%, -50%);
 }
 
-body h2{
+.container-acesso-rapido h2{
     margin: 0 auto;
     font-size: 50px;
     color: #0D3587;
+    position: relative;
+    top: -35px;
+    /* left: -35px; */
+    
+    justify-items: center;
+
     
     
 }
-main{
-    margin-top: 70px;
-}
-body{
-    background-color: #E2FBFF;
-}
+
 .container-header{
     
     display: flex;
@@ -66,23 +68,6 @@ body{
     gap: 20px;
     justify-content: center;
     color: white;
+    justify-items: center;
 }
-.square {
-    width: 250px;
-    height: 205px;
-    background-color: #0D3587;
-    color: #ffffff;
-    border-radius: 10px;
-    border: 2px solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 5%;
-    text-decoration: underline;
-    font-size: 20px;
-    cursor: pointer;
-}
-.square:hover {
-    background-color: #0b2a63;
-}
+

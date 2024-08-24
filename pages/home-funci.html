@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/acesso.funci.css"> <!-- CSS da Sidebar -->
+    <link rel="stylesheet" href="../css/home-funci.css"> <!-- CSS da Sidebar -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/card-itens.css">
     <link href="../fontawesome/css/all.css" rel="stylesheet">
@@ -11,30 +11,27 @@
 </head>
 <body>
     <header>
-
         <!-- Sidebar -->
         <div class="sidebar">
             <a href="#home">Home</a>
             <a href="#services">Services</a>
             <a href="#clients">Clients</a>
-            <a href="#contact">Contact</a>
+            <a href="login.html">Sair</a>
         </div>
-
-        
-
+    
         <div class="container-header">
-            <!-- Botão para abrir a Sidebar -->
-            <button class="open-btn" onclick="toggleSidebar()">☰</button>
             <img src="../image/logo-carcheck.png" alt="Logo CarCheck" title="CarCheck">
             <h1>CarCheck</h1>
         </div>
-
+    
         <div class="icons">
             <a href="pages/notificacao.html"><i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></a>
             <a href="pages/home.html"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
             <a href="pages/perfil.html"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
         </div>
-        
+    
+        <!-- Botão para abrir a sidebar -->
+        <button class="open-btn" onclick="toggleSidebar()">☰</button>
     </header>
 
     <div class="div-inicial">
@@ -43,28 +40,39 @@
         
         <div class="container-acesso">
             <!-- Cartões de acesso rápido -->
+            <a href="cadastrar-cliente.html">
+                <div class="card">
+                    <p class="heading">Cadastrar Cliente</p>
+                </div>
+            </a>
+            <a href="">
+                <div class="card">
+                    <p class="heading">Cadastrar Veículos</p>
+                </div>
+            </a>
             <a href="">
                 <div class="card">
                     <p class="heading">Cadastrar Cliente</p>
                 </div>
             </a>
-            <div class="card">
-                <p class="heading">Cadastrar Veículos</p>
-            </div>
-            <div class="card">
-                <p class="heading">Cadastrar Cliente</p>
-            </div>
-            <div class="card">
-                <p class="heading">Cadastrar Serviços</p>
-            </div>
-            <div class="card">
-                <p class="heading">Gerenciar Estoque</p>
-            </div>
-            <div class="card">
-                <p class="heading">Emitir Ordem de Serviço</p>
-            </div>
+            <a href="">
+                <div class="card">
+                    <p class="heading">Cadastrar Serviços</p>
+                </div>
+            </a>
+            <a href="">
+                <div class="card">
+                    <p class="heading">Gerenciar Estoque</p>
+                </div>
+            </a>
+            <a href="">
+                <div class="card">
+                    <p class="heading">Emitir Ordem de Serviço</p>
+                </div>
+            </a>
         </div>
     </div>
+    
 
     <script src="../js/script.js"></script>
 </body>

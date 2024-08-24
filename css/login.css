@@ -99,15 +99,20 @@ input[type="checkbox"] {
 }
 
 label {
+    margin: 0 auto;
     display: flex;
     align-items: center;
     font-size: 12px;
+    position: relative;
+    top: -20px;
     
 }
 .p-esqueci{
     display: inline-flex;
     margin-left: 80px;
+    margin-top: 0 auto;
 }
+
 label input[type="checkbox"] {
     margin-right: 10px; /* Espaçamento entre a caixa de seleção e o texto */
 }
@@ -125,9 +130,44 @@ a{
 .imagem-login{
     width: 430px;
     margin-left: 7%;
+    }
+
+.error-message{
+    color: red;
+    font-size: 13px;
+    position: relative;
+    /* left: 65px;*/
+    top: -12px;
+    
+    margin: 0 auto;
 }
 
 
+  
+  .input {
+    width: 100%;
+    height: 45px;
+    line-height: 30px;
+    padding: 0 5rem;
+    padding-left: 3rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    background-color: #f8fafc;
+    color: #0d0c22;
+    transition: .5s ease;
+  }
+  
+  .input::placeholder {
+    color: #94a3b8;
+  }
+  
+  .input:focus, input:hover {
+    outline: none;
+    border-color: rgba(129, 140, 248);
+    background-color: #fff;
+    box-shadow: 0 0 0 5px rgb(129 140 248 / 30%);
+  }
 
 
 

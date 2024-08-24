@@ -1,18 +1,5 @@
 
-.icons{
-    display: flex;
-    gap: 37px;
-    position: absolute;
-    right: 70px;
-    top: 45px;
 
-}
-.container-header{
-    
-    display: flex;
-    align-items: center;
-    
-}
 .div-inicial{
     position: absolute;
     top: 10%;
@@ -80,4 +67,7 @@
     left: 50%;
     text-align: center;
     transform: translate(-50%, -50%);
+}
+a{
+    color: white;
 }

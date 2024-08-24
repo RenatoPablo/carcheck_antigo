@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+/*/////////////////// CABEÇALHO //////////////////////////////*/
+/* Estilos gerais */
+header{
+    background-color: #0D3587;
+    color: white;
+    height: 80px;
+    padding: 0px 20px 20px 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    
+    
+    
+}
+header h1{
+    margin: 0;
+    font-size: 50px;
+
+}
+main{
+    margin-top: 70px;
+}
+
+body {
+    font-family: Lora;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita rolagem horizontal quando a sidebar está aberta */
+    overflow-y: hidden;/* Evita rolagem vertical quando a sidebar está aberta */
+    background-color: #E2FBFF;
+}
+.icons{
+    display: flex;
+    gap: 37px;
+    position: absolute;
+    right: 70px;
+    top: 20px;
+    align-items: center;
+
+}
+
+.icons{
+    display: flex;
+    gap: 37px;
+    position: absolute;
+    right: 70px;
+    top: 20px;
+    align-items: center;
+
+}
+
+.container-header{
+    
+    display: flex;
+    align-items: center;
+    
+}
+
+
+/*/////////////////// SIDE BAR ////////////////////////////////////////*/
+/*/////////////////// Estilos da sidebar //////////////////////////////*/
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #0d3587;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    border-left: 2px hidden #111111; /* Borda adicionada */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 20px;
+}
+
+/* Classe para a sidebar aberta */
+.sidebar.open {
+    width: 210px; /* Largura quando aberta */
+    border-left: 10px solid transparent;
+    border-image: linear-gradient(45deg, #00dbde, #301ef5) 1;
+    
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:first-child {
+    margin-top: 50px; /* Espaço maior no primeiro link */
+}
+
+
+.sidebar a:hover {
+    background-color: #575757;
+    width: 100%;
+}
+
+/* Botão para abrir a sidebar */
+.open-btn {
+    font-size: 30px;
+    cursor: pointer;
+    background-color: #0d3587;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    position: flex;
+    top: 20px;
+    margin-left: 140px;
+    margin-right: -30px;
+    right: 20px;
+    z-index: 1;
+    transition: 0.3s;
+    
+}
+
+/* Conteúdo principal */
+.main-content {
+    padding: 30px;
+    margin-left: 0;
+    margin-top: 100px;
+    transition: margin-left 0.5s;
+}

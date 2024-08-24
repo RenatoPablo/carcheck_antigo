@@ -1,4 +1,4 @@
-/* From Uiverse.io by satyamchaudharydev */ 
+/*///////////////////////////////botao entrar/////////////////////////////*/ 
 button {
     --primary-color: #0D3587;
     --secondary-color: #fff;
@@ -62,3 +62,10 @@ button {
   button:hover .arrow:before {
     right: 0;
   }
+
+
+  /*////////////////////////////botao login///////////////////////////////////
+
+  /* From Uiverse.io by ozgeozkaraa01 */ 
+
+
