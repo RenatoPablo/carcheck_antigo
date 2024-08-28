@@ -87,6 +87,7 @@ header h1 {
     align-items: flex-start;
     gap: 20px;
     box-sizing: border-box;
+    
 }
 
 /* Sidebar aberta */
@@ -114,6 +115,7 @@ header h1 {
 /* Hover effect para os links da sidebar */
 .sidebar a:hover {
     background-color: #575757;
+    
 }
 
 /* Conteúdo principal */

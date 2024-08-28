@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    // print_r($_SESSION);
+    if(!isset($_SESSION) OR $_SESSION['logado'] != true):
+		header("location: ../config/sair.php");		
+	else:
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -19,7 +26,7 @@
             <a href="#home">Home</a>
             <a href="#services">Services</a>
             <a href="#clients">Clients</a>
-            <a href="login.html">Sair</a>
+            <a href="../config/sair.php">Sair</a>
         </div>
 
         <div class="container-header">
@@ -77,4 +84,5 @@
     
     <script src="../js/script.js"></script>
 </body>
-</html>imagem/logo-carcheck.jpg
+</html>
+<?php endif; ?>
