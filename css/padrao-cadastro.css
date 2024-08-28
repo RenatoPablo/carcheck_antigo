@@ -1,9 +1,28 @@
 /* From Uiverse.io by PriyanshuGupta28 */ 
+
+.imgCadastroPessoa{
+    display: flex;
+    align-items: center;
+}
+
+.container-cadastro{
+    display: grid;
+    grid-template-columns: repeat(2, 350px);
+    grid-template-rows: auto;
+    gap: 20px;
+    justify-content: center;
+    align-content: end;
+    position: relative;
+    top: 284px;
+    
+}
+
 .input-container {
     position: relative;
-    margin: 20px;
-    width: 220px;
-    top: 200px;
+    
+    margin: auto;
+    /* width: 220px;
+    top: 200px; */
 
     
   }

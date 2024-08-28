@@ -55,6 +55,7 @@
             </a>
             <a href="">
                 <div class="card">
+                    <img src="../image/carro.png" alt="icone de carro">
                     <p class="heading">Cadastrar Veículos</p>
                 </div>
             </a>
