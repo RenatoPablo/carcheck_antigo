@@ -39,13 +39,15 @@ header h1 {
     align-items: center;
 }
 
+
+
 /* Estilo dos ícones na barra superior */
 .icons {
     display: flex;
     gap: 37px;
-    position: absolute;
-    top: 20px;
-    right: 70px;
+    position: relative;
+    top: 30px;
+    right: 240px;
     align-items: center;
     transition: margin-left 0.5s; /* Transição suave */
 }
@@ -64,7 +66,7 @@ header h1 {
     padding: 10px 15px;
     border: none;
     position: fixed; /* Fixo na tela */
-    top: 20px;
+    top: 10px;
     right: 20px; /* Ajuste a posição conforme necessário */
     z-index: 1100; /* Deve estar sobre a sidebar */
     transition: 0.3s;
