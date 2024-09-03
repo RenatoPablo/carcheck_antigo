@@ -3,7 +3,7 @@
     //
     date_default_timezone_set("America/Sao_Paulo");
 
-    $db = 'mysql:host=localhost;port=3306;dbname=carcheckteste';
+    $db = 'mysql:host=localhost;port=3306;dbname=carcheckdb';
    $usuario = 'root';
    $senha = '';
 

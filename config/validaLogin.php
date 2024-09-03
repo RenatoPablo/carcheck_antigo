@@ -2,7 +2,7 @@
 	
 	session_start();
 
-	if(!isset($_POST) OR empty($_POST['nome']) OR empty($_POST['senha']))  {
+	if(!isset($_POST) OR empty($_POST['endereco_email']) OR empty($_POST['senha']))  {
 	
 		header("location: sair.php");			
 	}
@@ -11,14 +11,14 @@
 		include('config.php');
 		
 		$dados = [
-			'nome'	=> $_POST['nome'],
+			'email'	=> $_POST['endereco_email'],
 			'senha'		=> sha1($_POST['senha'])		
 		];
 		
 		
 		$sql = "SELECT *
-					FROM usuarios
-					WHERE nome = :nome
+					FROM pessoas
+					WHERE endereco_email = :email
 					and senha = :senha";
 	
 	
@@ -36,15 +36,15 @@
 					$linha = $consulta->fetch(PDO::FETCH_OBJ);
 					
 					$_SESSION['logado'] 			= true;
-					$_SESSION['nomeUsuario'] 	   = $linha->nome;
-					$_SESSION['emailUsuario'] 	   = $linha->email;
-					$_SESSION['permissaoUsuario']  = $linha->permissao;
+					$_SESSION['nomeUsuario'] 	   = $linha->nome_pessoa;
+					$_SESSION['emailUsuario'] 	   = $linha->endereco_email;
+					$_SESSION['permissaoUsuario']  = $linha->fk_id_permissao;
 					
-					if($_SESSION['permissaoUsuario'] == true) {
+					if($_SESSION['permissaoUsuario'] == 3) {
 						header('location: ../pages/home-funci.php');
-					} else {
+					} elseif ($_SESSION['permissaoUsuario'] == 1) {
 						header('location: ../pages/home-cliente.php');
-					}
+					} 		
 					
 										
 					
