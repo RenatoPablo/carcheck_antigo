@@ -20,75 +20,134 @@
 }
 
 .input-container {
-    position: relative;
-    
-    margin: auto;
-    /* width: 220px;
-    top: 200px; */
+  position: relative;
+  margin: auto;
+}
 
-    
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #301ef5 0%, #00dbde 100%);
+  transition: width 0.3s;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+  width: 200px;
+  outline: none;
+}
+
+.input:focus + .underline {
+  width: 100%;
+}
+
+@keyframes floating-label {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  .input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    background-color: white;
-    color: #333;
-    width: 200px;
-    outline: none;
-  }
-  
-  .underline {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #301ef5 0%, #00dbde 100%);
-    transition: width 0.3s;
-  }
-  
-  .input[type="text"]:focus + .underline {
-    width: 100%;
-  }
-  
-  @keyframes floating-label {
-    0% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  
-    100% {
-      transform: translateY(-25px);
-      opacity: 0;
-    }
-  }
-  
-  .input[type="text"]:placeholder-shown + label {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    font-size: 14px;
-    color: #777;
-    pointer-events: none;
-    transition: transform 0.3s, font-size 0.3s, color 0.3s;
-  }
-  
-  .input[type="text"]:focus:not(:placeholder-shown) + label {
+  100% {
     transform: translateY(-25px);
-    font-size: 12px;
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-    animation: floating-label 0.3s forwards;
+    opacity: 0;
   }
-  
+}
+
+.input:placeholder-shown + label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #777;
+  pointer-events: none;
+  transition: transform 0.3s, font-size 0.3s, color 0.3s;
+}
+
+.input:focus:not(:placeholder-shown) + label {
+  transform: translateY(-25px);
+  font-size: 12px;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  animation: floating-label 0.3s forwards;
+}
+
+/* Estilização do campo select com a classe escolha-genero */
+.escolha-genero {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #333;
+  width: 220px;
+  height: 38.91px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: linear-gradient(43deg, #301ef5 0%, #00dbde 100%), 
+                    linear-gradient(135deg, #f0f0f0 50%, transparent 50%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.escolha-genero:hover {
+  background-color: #e0e0e0;
+}
+
+.escolha-genero:focus {
+  border-color: #301ef5;
+}
+
+.escolha-genero.select-arrow {
+  position: relative;
+  top: -5px;
+  right: -10px;
+  pointer-events: none;
+}
+
+/* Estilização das opções do select com a classe escolha-genero */
+.escolha-genero option {
+  color: #333;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.escolha-genero option:hover {
+  background-color: #e0e0e0;
+}
+
+.escolha-genero option:checked {
+  background-color: #4158D0;
+  color: white;
+}
+
+/* Estilização do container ao redor do select */
+.input-container .escolha-genero {
+  border: 2px solid transparent;
+  background-image: linear-gradient(43deg, #ffffff 0%, #ffffff 100%), 
+                    linear-gradient(to right, #fff, #fff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.input-container .escolha-genero:focus + .underline {
+  width: 100%;
+}

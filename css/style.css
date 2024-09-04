@@ -46,7 +46,7 @@ header h1 {
     display: flex;
     gap: 37px;
     position: relative;
-    top: 30px;
+    top: 100px;
     right: 240px;
     align-items: center;
     transition: margin-left 0.5s; /* Transição suave */
