@@ -2,7 +2,7 @@
     if(isset($_POST['submit'])) {
         include_once('../config/config.php');
 
-        $nome = $_POST['nome'];
+        $email = $_POST['endereco_email'];
         $senha = $_POST['senha'];
     }
 ?>
@@ -30,7 +30,7 @@
             <i class="fa-regular fa-user fa-2xl usuario" style="color: #0d3587;"></i>
 
             <form action="../config/validaLogin.php" method="POST" class="form-login">
-                <input class="input" type="text"  name="nome" required placeholder="Digite seu Login">
+                <input class="input" type="text"  name="endereco_email" required placeholder="Digite seu Email">
                 <br>
                 <input class="input" type="password"  name="senha" required placeholder="Digite sua Senha">
                 
