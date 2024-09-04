@@ -40,7 +40,7 @@
 					$_SESSION['emailUsuario'] 	   = $linha->endereco_email;
 					$_SESSION['permissaoUsuario']  = $linha->fk_id_permissao;
 					
-					if($_SESSION['permissaoUsuario'] == 3) {
+					if($_SESSION['permissaoUsuario'] == 3 || $_SESSION['permissaoUsuario'] == 2) {
 						header('location: ../pages/home-funci.php');
 					} elseif ($_SESSION['permissaoUsuario'] == 1) {
 						header('location: ../pages/home-cliente.php');
