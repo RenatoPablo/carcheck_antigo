@@ -48,7 +48,7 @@
         
         <div class="container-acesso">
             <!-- Cartões de acesso rápido -->
-            <a href="cadastrar-cliente.html">
+            <a href="cadastrar-cliente.php">
                 <div class="card">
                     <p class="heading">Cadastrar Cliente</p>
                 </div>
