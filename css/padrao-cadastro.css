@@ -9,7 +9,7 @@
 
 .container-cadastro{
     display: grid;
-    grid-template-columns: repeat(2, 350px);
+    grid-template-columns: repeat(3, 350px);
     grid-template-rows: auto;
     gap: 20px;
     justify-content: center;
@@ -162,7 +162,7 @@ label {
   border: 1.5px solid lightgrey;
   border-radius: 12px;
   color: #333;
-  width: 241.6px;
+  width: 242px;
   height:40px;
   outline: none;
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);

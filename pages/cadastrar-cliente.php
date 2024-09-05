@@ -103,13 +103,23 @@
                     <div class="underline"></div>
                 </div>
                  <div class="input-container">
-                    <label for="senha">Senha:</label>
+                    <label for="senha">Endereço:</label>
                     <input id="senha" name="senha" placeholder="Insira uma Senha" type="password" class="input">
                     <div class="underline"></div>
                 </div>
                  <div class="input-container">
                     <label for="cpf">CPF:</label>
                     <input id="cpf" name="cpf" placeholder="Digite seu CPF" type="number" class="input">
+                    <div class="underline"></div>
+                </div>
+                <div class="input-container">
+                    <label for="senha">Senha:</label>
+                    <input id="senha" name="senha" placeholder="Insira uma Senha" type="password" class="input">
+                    <div class="underline"></div>
+                </div>
+                <div class="input-container">
+                    <label for="nome">Rua:</label>
+                    <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
                     <div class="underline"></div>
                 </div>
                 <div class="input-container">
