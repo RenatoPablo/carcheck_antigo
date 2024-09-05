@@ -68,7 +68,8 @@
         
         <form action="../config/processa_dados.php" method="post">
             <div class="container-cadastro">
-            
+            <h2>Dados Pessoais</h2>
+            <br>
                 <div class="input-container">
                     <label for="nome">Nome Completo:</label>
                     <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
@@ -93,7 +94,7 @@
                     <div class="underline"></div>
                 </div>
                  <div class="input-container">
-                    <label for="email">email:</label>
+                    <label for="email">Email:</label>
                     <input id="email" name="email" placeholder="Digite seu email" type="email" class="input">
                     <div class="underline"></div>
                 </div>
@@ -102,18 +103,25 @@
                     <input id="datadenascimento" name="datadenascimento" placeholder="Digite sua Data de Nascimento" type="date" class="input">
                     <div class="underline"></div>
                 </div>
-                 <div class="input-container">
-                    <label for="senha">Endereço:</label>
+                <div class="input-container">
+                    <label for="senha">Senha:</label>
                     <input id="senha" name="senha" placeholder="Insira uma Senha" type="password" class="input">
                     <div class="underline"></div>
                 </div>
-                 <div class="input-container">
+                <div class="input-container">
                     <label for="cpf">CPF:</label>
                     <input id="cpf" name="cpf" placeholder="Digite seu CPF" type="number" class="input">
                     <div class="underline"></div>
                 </div>
                 <div class="input-container">
-                    <label for="senha">Senha:</label>
+                    <label for="confirmarsenha">Confirmar Senha:</label>
+                    <input id="confirmarsenha" name="confirmarsenha"placeholder="Confirme sua senha" type="password" class="input">
+                    <div class="underline"></div>
+                </div>
+                <br>
+        <h2>Endereço</h2>
+                <div class="input-container">
+                    <label for="senha">Estado:</label>
                     <input id="senha" name="senha" placeholder="Insira uma Senha" type="password" class="input">
                     <div class="underline"></div>
                 </div>
@@ -123,11 +131,35 @@
                     <div class="underline"></div>
                 </div>
                 <div class="input-container">
-                    <label for="confirmarsenha">Confirmar Senha:</label>
-                    <input id="confirmarsenha" name="confirmarsenha"placeholder="Confirme sua senha" type="password" class="input">
+                    <label for="nome">Cidade:</label>
+                    <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
                     <div class="underline"></div>
                 </div>
-                
+                <div class="input-container">
+                    <label for="nome">Numero:</label>
+                    <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                    <div class="underline"></div>
+                </div>
+                <div class="input-container">
+                    <label for="nome">Bairro:</label>
+                    <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                    <div class="underline"></div>
+                </div>
+                <div class="input-container">
+                    <label for="nome">Complemento:</label>
+                    <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                    <div class="underline"></div>
+                </div>
+                <div class="input-container">
+                    <label for="nome">CEP:</label>
+                    <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                    <div class="underline"></div>
+                </div>
+                <div class="input-container">
+                    <label for="nome">Ponto de Referência:</label>
+                    <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                    <div class="underline"></div>
+                </div>
             </div>
             <button class="botao-submit" type="submit">ENVIAR</button>
         </form>
