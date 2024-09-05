@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../css/card-itens.css">
     <title>CarCheck</title>
     <link href="../fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/popup-not.css">
 </head>
 <body>
     
@@ -38,14 +39,27 @@
         </div>
 
         <div class="icons">
-            <a href="pages/notificacao.html"><i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></a>
+            <!-- Botão para mostrar a notificação -->
+            <button onclick="showNotification()" class="icons-not">
+            <i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></button>
+
+            <!-- Popup de notificação -->
+            <div id="notification" class="notification">
+                <span id="notification-text">Este é um alerta de notificação!</span>
+                <span class="close-btn" onclick="closeNotification()">&times;</span>
+            </div>
+
+            <!-- <a href="pages/notificacao.html"><i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></a> -->
 
             <a href="pages/home.html"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
-
-            <a href="pages\perfil.html"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
-            
-            <button class="open-btn" onclick="toggleSidebar()">☰</button>
+            <a href="perfil.php"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
         </div>
+        <input type="checkbox" id="checkbox" onclick="toggleSidebar()">
+        <label for="checkbox" class="toggle">
+            <div class="bar bar--top"></div>
+            <div class="bar bar--middle"></div>
+            <div class="bar bar--bottom"></div>
+        </label>
         
         
     </header>
@@ -83,6 +97,7 @@
         </div>
     
     <script src="../js/script.js"></script>
+    <script src="../js/popup-not.js"></script>
 </body>
 </html>
 <?php endif; ?>

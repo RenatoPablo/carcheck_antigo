@@ -77,19 +77,6 @@ header h1 {
 }
 
 /* Botão para abrir a sidebar */
-.open-btn {
-    font-size: 30px;
-    cursor: pointer;
-    background-color: #0d3587; /* Cor da sidebar */
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    position: fixed; /* Fixo na tela */
-    top: 10px;
-    right: 20px; /* Ajuste a posição conforme necessário */
-    z-index: 1100; /* Deve estar sobre a sidebar */
-    transition: 0.3s;
-}
 
 /* Estilos da sidebar */
 .sidebar {
@@ -145,3 +132,85 @@ main {
     margin-top: 80px; /* Ajustado para caber o header fixo */
     transition: margin-left 0.5s;
 }
+
+/*  botao antigo de hamburguer 
+
+.open-btn {
+    font-size: 30px;
+    cursor: pointer;
+    background-color: #0d3587; /* Cor da sidebar 
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    position: fixed; /* Fixo na tela 
+    top: 10px;
+    right: 20px;  Ajuste a posição conforme necessário 
+    z-index: 1100; /* Deve estar sobre a sidebar 
+    transition: 0.3s;
+} */
+
+/* From Uiverse.io by vk-uiux */ 
+#checkbox {
+    display: none;
+  }
+  
+  .toggle {
+    position: fixed;
+    width: 38px;
+    cursor: pointer;
+    margin: auto;
+    display: flex;
+    right: 40px;
+    height: calc(4px * 3 + 10px * 2);
+    z-index: 1001;
+  }
+  
+  .bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: calc(4px / 2);
+    background: #ffffff;
+    color: inherit;
+    opacity: 1;
+    transition: none 0.35s cubic-bezier(.5,-0.35,.35,1.5) 0s;
+  }
+  
+  /***** Spin Animation *****/
+  
+  .bar--top {
+    bottom: calc(50% + 11px + 4px/ 2);
+    transition-property: bottom,transform;
+    transition-delay: calc(0s + 0.35s),0s;
+  }
+  
+  .bar--middle {
+    top: calc(50% - 4px/ 2);
+    transition-property: opacity;
+    transition-delay: calc(0s + 0.35s);
+  }
+  
+  .bar--bottom {
+    top: calc(50% + 11px + 4px/ 2);
+    transition-property: top,transform;
+    transition-delay: calc(0s + 0.35s),0s;
+  }
+  
+  #checkbox:checked + .toggle .bar--top {
+    bottom: calc(50% - 4px/ 2);
+    transform: rotate(135deg);
+    transition-delay: 0s,calc(0s + 0.35s);
+  }
+  
+  #checkbox:checked + .toggle .bar--middle {
+    opacity: 0;
+    transition-duration: 0s;
+    transition-delay: calc(0s + 0.35s);
+  }
+  
+  #checkbox:checked + .toggle .bar--bottom {
+    top: calc(50% - 4px/ 2);
+    transform: rotate(225deg);
+    transition-delay: 0s,calc(0s + 0.35s);
+  }

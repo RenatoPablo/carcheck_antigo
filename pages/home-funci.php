@@ -49,9 +49,17 @@
             <a href="pages/home.html"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
             <a href="pages/perfil.html"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
         </div>
-    
+        
+        <!-- botao hamburguer side bar -->
+        <input type="checkbox" id="checkbox" onclick="toggleSidebar()">
+        <label for="checkbox" class="toggle">
+            <div class="bar bar--top"></div>
+            <div class="bar bar--middle"></div>
+            <div class="bar bar--bottom"></div>
+        </label>
+
         <!-- Botão para abrir a sidebar -->
-        <button class="open-btn" onclick="toggleSidebar()">☰</button>
+        <!-- <button class="open-btn" onclick="toggleSidebar()">☰</button> -->
     </header>
 
     <div class="div-inicial">
