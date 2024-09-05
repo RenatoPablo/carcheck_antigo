@@ -5,16 +5,16 @@ body {
     font-family: Lora, serif;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Evita rolagem horizontal */
+    /*overflow-x: hidden; /* Evita rolagem horizontal */
     overflow-y: hidden; /* Evita rolagem vertical */
-    background-color: #E2FBFF; /* Adicionado para consistência */
+    background-color: #ffffff; /* Adicionado para consistência */
 }
 
 /* Estilos gerais do header */
 header {
-    background-color: #0D3587;
+    background-color: #002775;
     color: white;
-    height: 80px;
+    height: 100px;
     padding: 0 20px;
     position: fixed;
     width: 100%;
