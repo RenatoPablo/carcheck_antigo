@@ -155,7 +155,8 @@ label {
   border: 1.5px solid lightgrey;
   border-radius: 12px;
   color: #333;
-  width: 220px;
+  width: 241.6px;
+  height:40px;
   outline: none;
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   background-image: linear-gradient(43deg, #ffffff 0%, #ffffff 100%), 
@@ -170,5 +171,4 @@ label {
 .ls-custom-select {
   position: relative;
   margin: auto;
-  /* right: 0; */
 }
