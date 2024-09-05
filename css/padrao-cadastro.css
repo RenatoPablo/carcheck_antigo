@@ -150,7 +150,14 @@ label {
 
 /* Estilização do container ao redor do select */
 .input-container .escolha-genero {
-  border: 2px solid transparent;
+  padding: 10px;
+  font-size: 16px;
+  border: 1.5px solid lightgrey;
+  border-radius: 12px;
+  color: #333;
+  width: 220px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   background-image: linear-gradient(43deg, #ffffff 0%, #ffffff 100%), 
                     linear-gradient(to right, #fff, #fff);
   background-origin: border-box;
@@ -159,4 +166,9 @@ label {
 
 .input-container .escolha-genero:focus + .underline {
   width: 100%;
+}
+.ls-custom-select {
+  position: relative;
+  margin: auto;
+  /* right: 0; */
 }
