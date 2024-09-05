@@ -50,6 +50,25 @@ header h1 {
     right: 100px;
     align-items: center;
     transition: margin-left 0.5s; /* Transição suave */
+    
+}
+
+.icons-not{
+        display: flex;
+        gap: 37px;
+        position: relative;
+        top: 0px;
+        right: 0px;
+        align-items: center;
+        transition: margin-left 0.5s; /* Transição suave */
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.3 ease;
+}
+
+.icons-not i{
+    font-size: 30px;
 }
 
 /* Ajuste dos ícones quando a sidebar está aberta */

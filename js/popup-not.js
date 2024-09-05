@@ -6,7 +6,7 @@ function showNotification() {
     // Remover notificação após 4 segundos
     setTimeout(function() {
         notification.classList.remove("show");
-    }, 4000);
+    }, 40000);
 }
 
 // Função para fechar a notificação manualmente
