@@ -174,7 +174,8 @@ CREATE TABLE marcas_servicos_produtos (
 
 CREATE TABLE servicos_produtos (
     id_servico_produto INT AUTO_INCREMENT PRIMARY KEY,
-    descricao VARCHAR(400),
+    nome_servico_produto varchar(150) NOT NULL,
+    descricao TEXT,
     valor_servico_produto FLOAT,
     fk_id_marca_produto INT,
     FOREIGN KEY (fk_id_marca_produto) REFERENCES marcas_servicos_produtos(id_marca_produto) ON UPDATE CASCADE ON DELETE SET NULL
