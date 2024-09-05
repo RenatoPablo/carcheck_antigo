@@ -117,8 +117,9 @@
                     <input id="confirmarsenha" name="confirmarsenha"placeholder="Confirme sua senha" type="password" class="input">
                     <div class="underline"></div>
                 </div>
-                <button type="submit">ENVIAR</button>
+                
             </div>
+            <button class="botao-submit" type="submit">ENVIAR</button>
         </form>
     
 
