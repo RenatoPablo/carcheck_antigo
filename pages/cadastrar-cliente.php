@@ -15,6 +15,7 @@
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/padrao-cadastro.css">
     <link rel="stylesheet" href="../css/popup-not.css">
+    <link rel="stylesheet" href="../css/popup-cadastro.css">
     
     <title>Cadastro Cliente</title>
 </head>
@@ -74,6 +75,26 @@
                 <div class="cadastrar-cliente">
                     <div class="dados-pessoais">
                         <h2>Dados Pessoais</h2>
+
+
+                        <!-- Botão para abrir o popup -->
+                        <button class="open-popup-btn" onclick="openPopup()">Cadastrar</button>
+
+                        <!-- Popup (modal) -->
+                        <div class="modal" id="myModal">
+                            <div class="modal-content">
+                                <span class="close-btn" onclick="closePopup()">&times;</span>
+                                <h2>Cadastro</h2>
+                                <form action="processa_cadastro.php" method="POST">
+                                    <input type="text" name="nome" placeholder="Nome completo" required>
+                                    <input type="email" name="email" placeholder="Email" required>
+                                    <input type="password" name="senha" placeholder="Senha" required>
+                                    <input type="date" name="nascimento" placeholder="Data de nascimento">
+                                    <button type="submit" class="submit-btn">Cadastrar</button>
+                                </form>
+                            </div>
+                        </div>
+
                         <br>
                         <!-- select para indeficar se pessoa fisica ou juridica -->
                     
@@ -135,8 +156,9 @@
                             <div class="input-container">
                                 <label for="cpf">CPF:</label>
                                 <input id="cpf" name="cpf" maxlength="14" placeholder="000.000.000-00" oninput="mascaraCPF(this)" type="text" class="input">
-                            </div>
                                 <div class="underline"></div>
+                            </div>
+
                             <div class="input-container">
                                 <label for="cpf">RG:</label>
                                 <input id="rg" name="rg" maxlength="13" placeholder="00.000.000-00" oninput="mascaraRG(this)" type="text" class="input">
@@ -147,7 +169,13 @@
                             <div class="input-container">
                                 <label for="cnpj">CNPJ:</label>
                                 <input id="cnpj" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCNPJ(this)" type="text" class="input">
+                                <div class="underline"></div>
                             <div class="underline"></div>
+                            <div class="input-container">
+                                <label for="ie">IE</label>
+                                <input id="ie" name="ie" maxlength="15" placeholder="00.000.000.000" oninput="mascaraIE(this)" type="text" class="input">
+                                <div class="underline"></div>
+                            </div>
                         </div>
                         <!-- <div class="input-container">
                             <label for="cpf">CPF:</label>
@@ -205,7 +233,7 @@
         </form>
     
 
-    
+    <script src="../js/pop-cadastro.js"></script>
     <script src="../js/valida-fisica-juridi.js"></script>
     <script src="../js/mascaras.js"></script>
     <script src="../js/script.js"></script>
