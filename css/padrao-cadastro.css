@@ -7,16 +7,34 @@
     size: 35px;
 }
 
-.container-cadastro{
-    display: grid;
-    grid-template-columns: repeat(2, 350px);
-    grid-template-rows: auto;
+
+.cadastrar-cliente{
+  display: grid;
+  grid-template-columns: repeat(2, 600px);
+  align-content: center;
+  gap: 20px;
+  justify-content: center; 
+  align-content: end;
+  position: relative;
+  top: 284px;
+}
+.dados-pessoais{
+  display: grid;
     gap: 20px;
-    justify-content: center;
-    align-content: end;
-    position: relative;
-    top: 284px;
+    grid-template-columns: repeat(2, 285px);
     
+    /* align-content: end; */
+    position: relative;
+
+}
+.endereco{
+  display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, 285px);
+    
+    /* align-content: end; */
+    position: relative;
+
 }
 
 .botao-submit{
