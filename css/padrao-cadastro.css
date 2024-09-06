@@ -38,7 +38,7 @@
 }
 
 .botao-submit{
-  position: absolute;
+  position: fixed;
   top: 95%;
   left: 90%;
 
@@ -196,4 +196,8 @@ label {
 .ls-custom-select {
   position: relative;
   margin: auto;
+}
+
+.especifico {
+  display: none; /* Inicialmente, escondemos os campos */
 }
