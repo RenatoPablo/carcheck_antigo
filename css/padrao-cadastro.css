@@ -18,6 +18,7 @@
   position: relative;
   top: 284px;
 }
+
 .dados-pessoais{
   display: grid;
     gap: 20px;
@@ -27,6 +28,7 @@
     position: relative;
 
 }
+
 .endereco{
   display: grid;
     gap: 20px;
@@ -36,6 +38,7 @@
     position: relative;
 
 }
+
 
 .botao-submit{
   position: fixed;
