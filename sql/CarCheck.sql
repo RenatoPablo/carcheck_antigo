@@ -1,51 +1,51 @@
 CREATE TABLE ruas (
     id_rua INT AUTO_INCREMENT PRIMARY KEY,
-    nome_rua VARCHAR(200)
+    nome_rua VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE estados (
     id_estado INT AUTO_INCREMENT PRIMARY KEY,
-    nome_estado VARCHAR(50)
+    nome_estado VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE ufs (
     id_uf INT AUTO_INCREMENT PRIMARY KEY,
-    sigla CHAR(2) UNIQUE
+    sigla CHAR(2) UNIQUE NOT NULL
 );
 
 CREATE TABLE complementos (
     id_complemento INT AUTO_INCREMENT PRIMARY KEY,
-    desc_complemento TEXT
+    desc_complemento TEXT NOT NULL
 );
 
 CREATE TABLE pontos_referencias (
     id_ponto_ref INT AUTO_INCREMENT PRIMARY KEY,
-    desc_ponto_ref TEXT
+    desc_ponto_ref TEXT NOT NULL
 );
 
 CREATE TABLE numeros_casas (
     id_numero_casa INT AUTO_INCREMENT PRIMARY KEY,
-    numero_casa VARCHAR(10)
+    numero_casa VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE cidades (
     id_cidade INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cidade VARCHAR(150)
+    nome_cidade VARCHAR(150) NOT NULL
 );
 
 CREATE TABLE bairros (
     id_bairro INT AUTO_INCREMENT PRIMARY KEY,
-    nome_bairro VARCHAR(100)
+    nome_bairro VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE ceps (
     id_cep INT AUTO_INCREMENT PRIMARY KEY,
-    numero_cep VARCHAR(20)
+    numero_cep VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE generos (
     id_genero INT AUTO_INCREMENT PRIMARY KEY,
-    sexo VARCHAR(20)
+    sexo VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE permissoes (
@@ -55,13 +55,13 @@ CREATE TABLE permissoes (
 
 CREATE TABLE pessoas (  
     id_pessoa INT AUTO_INCREMENT PRIMARY KEY,
-    nome_pessoa VARCHAR(200),
+    nome_pessoa VARCHAR(200) NOT NULL,
     data_nasc DATE,
     foto BLOB,
     numero_telefone VARCHAR(20) NOT NULL UNIQUE,
     endereco_email VARCHAR(200) NOT NULL UNIQUE,
     senha VARCHAR(200) NOT NULL,
-    cpf_cnpj VARCHAR(20) NOT NULL UNIQUE, 
+    
     fk_id_permissao INT,
     fk_id_cep INT,
     fk_id_estado INT,
@@ -87,14 +87,34 @@ CREATE TABLE pessoas (
     FOREIGN KEY (fk_id_bairro) REFERENCES bairros(id_bairro) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
+CREATE TABLE pessoas_fisicas(
+    id_pessoa_fisi INT PRIMARY KEY,
+    cpf varchar(11) NOT NULL UNIQUE,
+    rg varchar(9) NOT NULL UNIQUE,
+    fk_id_pessoa INT,
+
+    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id-pessoa) ON UPDATE CASCADE ON DELETE SET NULL
+),
+
+CREATE TABLE pessoas_juridicas(
+    id_pessoa_juri INT PRIMARY KEY,
+    cnpj VARCHAR(14) NOT NULL UNIQUE,
+    ie VARCHAR(9) NOT NULL UNIQUE
+    razao_social VARCHAR(200),
+    nome_fantasia VARCHAR(150),
+    fk_id_pessoa INT,
+
+    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE SET NULL,
+),
+
 CREATE TABLE cargos (
     id_cargo INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cargo VARCHAR(100)
+    nome_cargo VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE funcoes (
     id_funcao INT AUTO_INCREMENT PRIMARY KEY,
-    nome_funcao VARCHAR(50)
+    nome_funcao VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE funcionarios (
@@ -109,28 +129,28 @@ CREATE TABLE funcionarios (
 
 CREATE TABLE cores (
     id_cor INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cor VARCHAR(15)
+    nome_cor VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE modelos (
     id_modelo INT AUTO_INCREMENT PRIMARY KEY,
-    nome_modelo VARCHAR(30)
+    nome_modelo VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE marcas (
     id_marca INT AUTO_INCREMENT PRIMARY KEY,
-    nome_marca VARCHAR(30)
+    nome_marca VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE tipos_veiculos (
     id_tipo_veiculo INT AUTO_INCREMENT PRIMARY KEY,
-    nome_tipo_veiculo VARCHAR(20)
+    nome_tipo_veiculo VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE veiculos (
     id_veiculo INT AUTO_INCREMENT PRIMARY KEY,
     fk_id_pessoa INT,
-    placa VARCHAR(8),
+    placa VARCHAR(8) NOT NULL UNIQUE,
     status BOOLEAN,
     fk_id_cor INT,
     fk_id_tipo_veiculo INT,
@@ -145,12 +165,12 @@ CREATE TABLE veiculos (
 
 CREATE TABLE formas_pagamento (
     id_forma_pagamento INT AUTO_INCREMENT PRIMARY KEY,
-    tipo_pagamento VARCHAR(50)
+    tipo_pagamento VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE pagamentos (
     id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
-    valor_pagamento FLOAT,
+    valor_pagamento FLOAT NOT NULL,
     fk_id_forma_pagamento INT,
     FOREIGN KEY (fk_id_forma_pagamento) REFERENCES formas_pagamento(id_forma_pagamento) ON UPDATE CASCADE ON DELETE SET NULL
 );
@@ -159,7 +179,7 @@ CREATE TABLE manutencoes (
     id_manutencao INT AUTO_INCREMENT PRIMARY KEY,
     time_inicio TIMESTAMP NULL,
     time_saida TIMESTAMP NULL,
-    km VARCHAR(10),
+    km VARCHAR(10) NOT NULL,
     defeito VARCHAR(500),
     fk_id_veiculo INT,
     fk_id_pagamento INT,
@@ -169,22 +189,22 @@ CREATE TABLE manutencoes (
 
 CREATE TABLE marcas_servicos_produtos (
     id_marca_produto INT AUTO_INCREMENT PRIMARY KEY,
-    nome_marca_produto VARCHAR(30)
+    nome_marca_produto VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE servicos_produtos (
     id_servico_produto INT AUTO_INCREMENT PRIMARY KEY,
     nome_servico_produto varchar(150) NOT NULL,
     descricao TEXT,
-    valor_servico_produto FLOAT,
+    valor_servico_produto FLOAT NOT NULL,
     fk_id_marca_produto INT,
     FOREIGN KEY (fk_id_marca_produto) REFERENCES marcas_servicos_produtos(id_marca_produto) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE itens_manutencoes_servicos (
     id_itens_manutencao_servico INT AUTO_INCREMENT PRIMARY KEY,
-    quantidade INT,
-    valor_total FLOAT,
+    quantidade INT NOT NULL,
+    valor_total FLOAT NOT NULL,
     fk_id_servico_produto INT,
     fk_id_manutencao INT,
     FOREIGN KEY (fk_id_servico_produto) REFERENCES servicos_produtos(id_servico_produto) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -199,16 +219,16 @@ CREATE TABLE fornecedores (
 
 CREATE TABLE compras (
     id_compra INT AUTO_INCREMENT PRIMARY KEY,
-    data_compra TIMESTAMP,
-    valor_compra FLOAT,
+    data_compra TIMESTAMP NOT NULL,
+    valor_compra FLOAT NOT NULL,
     fk_id_fornecedor INT,
     FOREIGN KEY (fk_id_fornecedor) REFERENCES fornecedores(id_fornecedor) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE itens_compras_produtos (
     id_itens_compra_produto INT AUTO_INCREMENT PRIMARY KEY,
-    quantidade INT,
-    valor_unitario FLOAT,
+    quantidade INT NOT NULL,
+    valor_unitario FLOAT NOT NULL,
     fk_id_servico_produto INT,
     fk_id_compra INT,
     FOREIGN KEY (fk_id_servico_produto) REFERENCES servicos_produtos(id_servico_produto) ON UPDATE CASCADE ON DELETE CASCADE,
