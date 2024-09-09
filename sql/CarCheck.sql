@@ -88,24 +88,24 @@ CREATE TABLE pessoas (
 );
 
 CREATE TABLE pessoas_fisicas(
-    id_pessoa_fisi INT PRIMARY KEY,
-    cpf varchar(11) NOT NULL UNIQUE,
-    rg varchar(9) NOT NULL UNIQUE,
+    id_pessoa_fisi INT AUTO_INCREMENT PRIMARY KEY,
+    cpf varchar(14) NOT NULL UNIQUE,
+    rg varchar(20) NOT NULL UNIQUE,
     fk_id_pessoa INT,
 
-    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id-pessoa) ON UPDATE CASCADE ON DELETE SET NULL
-),
+    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE SET NULL
+);
 
 CREATE TABLE pessoas_juridicas(
-    id_pessoa_juri INT PRIMARY KEY,
-    cnpj VARCHAR(14) NOT NULL UNIQUE,
-    ie VARCHAR(9) NOT NULL UNIQUE
+    id_pessoa_juri INT AUTO_INCREMENT PRIMARY KEY,
+    cnpj VARCHAR(18) NOT NULL UNIQUE,
+    ie VARCHAR(20) NOT NULL UNIQUE,
     razao_social VARCHAR(200),
     nome_fantasia VARCHAR(150),
     fk_id_pessoa INT,
 
-    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE SET NULL,
-),
+    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE SET NULL
+);
 
 CREATE TABLE cargos (
     id_cargo INT AUTO_INCREMENT PRIMARY KEY,

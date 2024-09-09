@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const camposJuridica = document.getElementById("campos-juridica");
 
     // Pegando os elementos dos radio buttons
-    const radioFisica = document.querySelector('input[name="example-radio"][value="fisica"]');
-    const radioJuridica = document.querySelector('input[name="example-radio"][value="juridica"]');
+    const radioFisica = document.querySelector('input[name="tipo_pessoa"][value="fisica"]');
+    const radioJuridica = document.querySelector('input[name="tipo_pessoa"][value="juridica"]');
 
     // Função para esconder ou mostrar os campos
     function toggleCampos() {

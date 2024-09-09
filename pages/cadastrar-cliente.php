@@ -68,45 +68,32 @@
     
         <!-- <img class="imgCadastroPessoa" src="../image/perfilCadastro.png" alt="foto cadastro pessoa"> -->
         
-        <form action="../config/processa_dados.php" method="post">
+        <form action="../config/processa_dados.php" method="POST">
             
-        
+                <!-- Botão para abrir o popup -->
+                <button class="open-popup-btn" onclick="openPopup()">Cadastrar</button>
+
 
                 <div class="cadastrar-cliente">
                     <div class="dados-pessoais">
                         <h2>Dados Pessoais</h2>
 
 
-                        <!-- Botão para abrir o popup -->
-                        <button class="open-popup-btn" onclick="openPopup()">Cadastrar</button>
-
-                        <!-- Popup (modal) -->
-                        <div class="modal" id="myModal">
-                            <div class="modal-content">
-                                <span class="close-btn" onclick="closePopup()">&times;</span>
-                                <h2>Cadastro</h2>
-                                <form action="processa_cadastro.php" method="POST">
-                                    <input type="text" name="nome" placeholder="Nome completo" required>
-                                    <input type="email" name="email" placeholder="Email" required>
-                                    <input type="password" name="senha" placeholder="Senha" required>
-                                    <input type="date" name="nascimento" placeholder="Data de nascimento">
-                                    <button type="submit" class="submit-btn">Cadastrar</button>
-                                </form>
-                            </div>
-                        </div>
+                        
 
                         <br>
                         <!-- select para indeficar se pessoa fisica ou juridica -->
                     
                         <label class="radio-button">
-                            <input type="radio" name="example-radio" value="fisica">
-                            <span class="radio"></span>
-                            Pessoa Física.
+                        <input type="radio" name="tipo_pessoa" value="fisica">
+                        <span class="radio"></span>
+                        Pessoa Física.
                         </label>
+
                         <label class="radio-button">
-                            <input type="radio" name="example-radio" value="juridica">
-                            <span class="radio"></span>
-                            Pessoa Jurídica
+                        <input type="radio" name="tipo_pessoa" value="juridica">
+                        <span class="radio"></span>
+                        Pessoa Jurídica
                         </label>
                         <div class="input-container">
                             <label for="nome">Nome Completo:</label>
@@ -227,9 +214,9 @@
                             <div class="underline"></div>
                         </div>
                     </div>
+                    <button class="botao-submit" type="submit">ENVIAR</button>
                 </div>
         
-            <button class="botao-submit" type="submit">ENVIAR</button>
         </form>
     
 
