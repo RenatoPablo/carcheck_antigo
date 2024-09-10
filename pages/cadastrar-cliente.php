@@ -152,65 +152,74 @@
                             <div class="underline"></div>
                             </div>
                         </div>
-                        <div id="campos-juridica" class="especifico">
+                    <div id="campos-juridica" class="especifico">
                             <div class="input-container">
                                 <label for="cnpj">CNPJ:</label>
                                 <input id="cnpj" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCNPJ(this)" type="text" class="input">
                                 <div class="underline"></div>
-                            <div class="underline"></div>
+                            </div>
                             <div class="input-container">
                                 <label for="ie">IE</label>
-                                <input id="ie" name="ie" maxlength="15" placeholder="00.000.000.000" oninput="mascaraIE(this)" type="text" class="input">
+                                <input id="ie" name="ie" maxlength="20" placeholder="00.000.000.000" oninput="mascaraIE(this)" type="text" class="input">
                                 <div class="underline"></div>
                             </div>
-                        </div>
+                            <div class="input-container">
+                                <label for="razao-social">Razão Social</label>
+                                <input id="razao-social" name="razao-social"  placeholder="Digite sua Razão Social"  type="text" class="input">
+                                <div class="underline"></div>
+                            </div>
+                            <div class="input-container">
+                                <label for="nome-fantasia">Nome Fantasia</label>
+                                <input id="nome-fantasia" name="nome-fantasia"  placeholder="Digite seu Nome Fantasia" type="text" class="input">
+                                <div class="underline"></div>
+                            </div>
+                    </div>
                         <!-- <div class="input-container">
                             <label for="cpf">CPF:</label>
                             <input id="cpf" name="cpf" placeholder="Digite seu CPF" type="number" class="input">
                             <div class="underline"></div>
                         </div> -->
-                    </div>
                     <br>
                     <h2>Endereço</h2>
                     <div class="endereco">
                         <div class="input-container">
-                            <label for="senha">Estado:</label>
-                            <input id="senha" name="senha" placeholder="Insira uma Senha" type="password" class="input">
+                            <label for="estado">Estado:</label>
+                            <input id="estado" name="estado" placeholder="Insira uma Estado" type="password" class="input">
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
-                            <label for="nome">Rua:</label>
-                            <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                            <label for="rua">Rua:</label>
+                            <input id="rua" name="rua" placeholder="Digite sua Rua" type="text" class="input">
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
-                            <label for="nome">Cidade:</label>
-                            <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                            <label for="cidade">Cidade:</label>
+                            <input id="cidade" name="cidade" placeholder="Digite sua Cidade" type="text" class="input">
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
-                            <label for="nome">Numero:</label>
-                            <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                            <label for="numero">Numero:</label>
+                            <input id="numero" name="numero" placeholder="Digite seu Numero" type="text" class="input">
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
-                            <label for="nome">Bairro:</label>
-                            <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                            <label for="bairro">Bairro:</label>
+                            <input id="bairro" name="bairro" placeholder="Digite seu Bairro" type="text" class="input">
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
-                            <label for="nome">Complemento:</label>
-                            <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                            <label for="complemento">Complemento:</label>
+                            <input id="complemento" name="complemento" placeholder="Digite seu Complemento" type="text" class="input">
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
-                            <label for="nome">CEP:</label>
-                            <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                            <label for="cep">CEP:</label>
+                            <input id="cep" name="cep" placeholder="Digite seu CEP" type="text" class="input">
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
-                            <label for="nome">Ponto de Referência:</label>
-                            <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
+                            <label for="ponto_ref">Ponto de Referência:</label>
+                            <input id="ponto_ref" name="ponto_ref" placeholder="Digite seu Ponto de Referência" type="text" class="input">
                             <div class="underline"></div>
                         </div>
                     </div>
