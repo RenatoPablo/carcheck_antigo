@@ -70,8 +70,7 @@
         
         <form action="../config/processa_dados.php" method="POST">
             
-                <!-- Botão para abrir o popup -->
-                <button class="open-popup-btn" onclick="openPopup()">Cadastrar</button>
+                
 
 
                 <div class="cadastrar-cliente">
@@ -174,19 +173,32 @@
                                 <div class="underline"></div>
                             </div>
                     </div>
-                        <!-- <div class="input-container">
-                            <label for="cpf">CPF:</label>
-                            <input id="cpf" name="cpf" placeholder="Digite seu CPF" type="number" class="input">
-                            <div class="underline"></div>
-                        </div> -->
+                        
                     <br>
                     <h2>Endereço</h2>
                     <div class="endereco">
+                        
                         <div class="input-container">
                             <label for="estado">Estado:</label>
                             <input id="estado" name="estado" placeholder="Insira uma Estado" type="password" class="input">
                             <div class="underline"></div>
                         </div>
+
+                        <!-- Botão para abrir o popup -->
+                        <button class="open-popup-btn" type="button" onclick="openPopupEstado()">Cadastrar</button>
+                        <!-- Popup (modal) -->
+                        <div class="modal" id="modal-estado">
+                            <div class="modal-content">
+                                <span class="close-btn" onclick="closePopupEstado()">&times;</span>
+                                <h2>Cadastro</h2>
+                                <form action="../config/processa_dados.php" method="POST">
+                                    <label for="estado-cadastro">Estado:</label>
+                                    <input type="text" name="estado-cadastro"   id="">
+                                    <button type="submit" class="submit-btn">Cadastrar</button>
+                                </form>
+                            </div>
+                        </div>
+
                         <div class="input-container">
                             <label for="rua">Rua:</label>
                             <input id="rua" name="rua" placeholder="Digite sua Rua" type="text" class="input">

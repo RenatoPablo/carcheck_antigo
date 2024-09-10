@@ -1,14 +1,19 @@
-///pop up para cadastro com fk
+<div class="input-container">
+    <label for="estado">Estado:</label>
+    <input id="estado" name="estado" placeholder="Insira uma Estado" type="password" class="input">
+    <div class="underline"></div>
+</div>
+
+<!-- Botão para abrir o popup -->
+<button class="open-popup-btn" type="button" onclick="openPopupEstado()">Cadastrar</button>
 <!-- Popup (modal) -->
-<div class="modal" id="myModal">
+<div class="modal" id="modal-estado">
     <div class="modal-content">
-        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <span class="close-btn" onclick="closePopupEstado()">&times;</span>
         <h2>Cadastro</h2>
-        <form action="processa_cadastro.php" method="POST">
-            <input type="text" name="nome" placeholder="Nome completo" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="senha" placeholder="Senha" required>
-            <input type="date" name="nascimento" placeholder="Data de nascimento">
+        <form action="../config/processa_dados.php" method="POST">
+            <label for="estado-cadastro">Estado:</label>
+            <input type="text" name="estado-cadastro"   id="">
             <button type="submit" class="submit-btn">Cadastrar</button>
         </form>
     </div>
