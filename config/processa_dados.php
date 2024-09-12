@@ -10,8 +10,12 @@ include 'config.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         if (isset($_POST['estado'])) {
-                
-        
+
+            $estado = htmlspecialchars($_POST['estado'], ENT_QUOTES, 'UTF-8');
+
+            $sql_estado = "SELECT id_estado FROM estados WHERE nome_estado = ?";
+            $stmt = $pdo->prepare($sql_estado);
+            $stmt->bindParam('?',$estado);
         
             if (!empty($_POST['nome']) && 
                 !empty($_POST['genero']) && 
