@@ -9,13 +9,48 @@ include 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        if (isset($_POST['estado'])) {
+        // if (isset($_POST['estado'])) {
 
-            $estado = htmlspecialchars($_POST['estado'], ENT_QUOTES, 'UTF-8');
+        //     $estado = htmlspecialchars($_POST['estado'], ENT_QUOTES, 'UTF-8');
 
-            $sql_estado = "SELECT id_estado FROM estados WHERE nome_estado = ?";
-            $stmt = $pdo->prepare($sql_estado);
-            $stmt->bindParam('?',$estado);
+        //     $sql_estado = "SELECT id_estado FROM estados WHERE nome_estado = ?";
+        //     $stmt = $pdo->prepare($sql_estado);
+        //     $stmt->bindParam('?',$estado);
+        //     $stmt->execute();
+        //     $result = $stmt->getresulti();
+
+        //     if ($result->num_rows > 0) {
+        //         //estado ja existe, obter ID
+        //         $row = $result->fetch_assoc();
+        //         $estadoID = $row['id'];
+        //         echo "O estado já existe com o ID: " . $estadoID;
+        //     } else {
+        //         //estado nao existe, inserir no banco de dados
+        //         $sqlInsert = "INSERT INTO estados(nome_estado) values (?)";
+        //         $stmtInsert = $pdo->prepare($sqlInsert);
+        //         $stmtInsert->bind_param("s")
+        //     }
+        function inserirEstado($pdo, $nomeEstado) {
+            //verificar se o estado ja existe no banco
+            $sqlCheck = "SELECT id_estado FROM estados WHERE nome_estado = :nome";
+            $stmtCheck = $pdo->prepare($sqlCheck);
+            $stmtCheck->execute([':nome' => $nomeEstado]);
+
+            //se o estado ja existir, retorna o ID
+            if ($stmtCheck->rowCount() > 0) {
+                $estado = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+                return $estado['id']; //retorna o ID do estado existente
+            }
+            //caso contrario, insere um novo estado
+            $sqlInsert = "INSERT INTO estados(nome_estado) VALUES (:nome)";
+            $stmtInsert = $pdo->prepare($sqlInsert);
+
+            //executa a inserção do novo estados
+            $stmtInsert->execute([':nome' => $nomeEstado]);
+
+            //retorna o ID do novo estado inserido
+            return $pdo->lastInsertId();
+        }
         
             if (!empty($_POST['nome']) && 
                 !empty($_POST['genero']) && 
@@ -83,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo "Dados de pessoa jurídica inseridos com sucesso";
                     }
             }
-        }
+        //}
             
         } else {
             echo "Por favor, preencha corretamente todos os dados, e verifique se as senhas coincidem";
