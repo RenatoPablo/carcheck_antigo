@@ -175,8 +175,10 @@
                     </div>
                         
                     <br>
-                    <h2>Endereço</h2>
+                    
                     <div class="endereco">
+                    <h2>Endereço</h2>
+                    <br>
                         
                         <div class="input-container">
                             <label for="estado">Estado:</label>

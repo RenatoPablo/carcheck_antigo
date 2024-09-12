@@ -7,22 +7,23 @@
     size: 35px;
 }
 
-
 .cadastrar-cliente{
   display: grid;
   grid-template-columns: repeat(2, 600px);
   align-content: center;
   gap: 20px;
-  justify-content: center; 
-  align-content: end;
-  position: relative;
-  top: 284px;
+  justify-content: right; 
+  /* align-content: end; */
+  position: fixed;
+  top: 140px;
+  right: 320px;
 }
 
 .dados-pessoais{
   display: grid;
     gap: 20px;
     grid-template-columns: repeat(2, 285px);
+    right: 420px;
     
     /* align-content: end; */
     position: relative;
@@ -33,7 +34,7 @@
   display: grid;
     gap: 20px;
     grid-template-columns: repeat(2, 285px);
-    
+    left: 820px;
     /* align-content: end; */
     position: relative;
 
@@ -44,6 +45,17 @@
   position: fixed;
   top: 95%;
   left: 90%;
+  display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #0D3587;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px;
+    top:980px;
+
 
 }
 
