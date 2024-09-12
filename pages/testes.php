@@ -5,21 +5,22 @@
 		header("location: ../config/sair.php");		
 	else:
 ?>
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-bt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/home-funci.css"> <!-- CSS da Sidebar -->
+    <title>Testes</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/card-itens.css">
-    <link href="../fontawesome/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/popup-not.css">
-    <title>Acesso Rápido</title>
+    <style>
+        .form-teste{
+            position: relative;
+            top: 200px;
+        }
+    </style>
 </head>
 <body>
-    <header>
+<header>
         <!-- Sidebar -->
         <div class="sidebar">
             <a href="#home">Home</a>
@@ -62,49 +63,25 @@
         <!-- <button class="open-btn" onclick="toggleSidebar()">☰</button> -->
     </header>
 
-    <div class="div-inicial">
-        <h2>Olá, Malaria Gorda!</h2>
-        <p>O que você deseja fazer? Selecione uma das opções:</p>
-        
-        <div class="container-acesso">
-            <!-- Cartões de acesso rápido -->
-            <a href="cadastrar-cliente.php">
-                <div class="card">
-                    <p class="heading">Cadastrar Cliente</p>
-                </div>
-            </a>
-            <a href="testes.php">
-                <div class="card">
-                    <img src="../image/carro.png" alt="icone de carro">
-                    <p class="heading">Cadastrar Veículos</p>
-                </div>
-            </a>
-            <a href="">
-                <div class="card">
-                    <p class="heading">Cadastrar Cliente</p>
-                </div>
-            </a>
-            <a href="">
-                <div class="card">
-                    <p class="heading">Cadastrar Serviços</p>
-                </div>
-            </a>
-            <a href="">
-                <div class="card">
-                    <p class="heading">Gerenciar Estoque</p>
-                </div>
-            </a>
-            <a href="">
-                <div class="card">
-                    <p class="heading">Emitir Ordem de Serviço</p>
-                </div>
-            </a>
-        </div>
-    </div>
-    
+    <form action="../config/logica_teste.php" method="post" class="form-teste">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome">
 
-    <script src="../js/script.js"></script>
-    <script src="../js/popup-not.js"></script>
+        <label for="telefone">Telefone:</label>
+        <input type="tel" name="telefone" id="telefone">
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email">
+
+        <label for="senha">Senha</label>
+        <input type="password" name="senha" id="senha">
+
+        <label for="estado">Estado:</label>
+        <input id="estado" name="estado" type="text">
+
+        <button type="submit">Enviar</button>
+    </form>
 </body>
 </html>
+
 <?php endif; ?>

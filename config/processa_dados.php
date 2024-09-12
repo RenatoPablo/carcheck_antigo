@@ -9,27 +9,7 @@ include 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // if (isset($_POST['estado'])) {
-
-        //     $estado = htmlspecialchars($_POST['estado'], ENT_QUOTES, 'UTF-8');
-
-        //     $sql_estado = "SELECT id_estado FROM estados WHERE nome_estado = ?";
-        //     $stmt = $pdo->prepare($sql_estado);
-        //     $stmt->bindParam('?',$estado);
-        //     $stmt->execute();
-        //     $result = $stmt->getresulti();
-
-        //     if ($result->num_rows > 0) {
-        //         //estado ja existe, obter ID
-        //         $row = $result->fetch_assoc();
-        //         $estadoID = $row['id'];
-        //         echo "O estado já existe com o ID: " . $estadoID;
-        //     } else {
-        //         //estado nao existe, inserir no banco de dados
-        //         $sqlInsert = "INSERT INTO estados(nome_estado) values (?)";
-        //         $stmtInsert = $pdo->prepare($sqlInsert);
-        //         $stmtInsert->bind_param("s")
-        //     }
+        
         function inserirEstado($pdo, $nomeEstado) {
             //verificar se o estado ja existe no banco
             $sqlCheck = "SELECT id_estado FROM estados WHERE nome_estado = :nome";
@@ -70,15 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $cpf = isset($_POST['cpf']) ? htmlspecialchars($_POST['cpf'], ENT_QUOTES, 'UTF-8') : null;
                 $rg = isset($_POST['rg']) ? htmlspecialchars($_POST['rg'], ENT_QUOTES, 'UTF-8') : null;
 
-                $sql_pessoas = "INSERT INTO pessoas(nome_pessoa, fk_id_genero, numero_telefone, endereco_email, data_nasc, senha)
-                                VALUES (:nome_pessoa, :genero, :telefone, :email, :data_nasc, :senha)";
+                $sql_pessoas = "INSERT INTO pessoas(nome_pessoa, fk_id_genero, numero_telefone, endereco_email, data_nasc, senha, fk_id_estado)
+                                VALUES (:nome_pessoa, :genero, :telefone, :email, :data_nasc, :senha, :fk_id_estado)";
                 $stmt = $pdo->prepare($sql_pessoas);
                 $stmt->bindParam(':nome_pessoa', $nome);
                 $stmt->bindParam(':genero', $genero);
                 $stmt->bindParam(':telefone', $telefone);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':data_nasc', $data_nasc);
-                $stmt->bindParam(':senha', $senha);
+                $stmt->bindParam(':senha', $senha); 
                 $stmt->execute();
 
                 $id_pessoa = $pdo->lastInsertId();

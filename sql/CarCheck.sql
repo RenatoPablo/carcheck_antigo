@@ -6,6 +6,9 @@ CREATE TABLE ruas (
 CREATE TABLE estados (
     id_estado INT AUTO_INCREMENT PRIMARY KEY,
     nome_estado VARCHAR(50) NOT NULL
+
+    fk_id_uf INT,
+    FOREIGN KEY (fk_id_uf) REFERENCES ufs(id_uf) ON UPDATE CASCADE ON DELETE SET NULL,
 );
 
 CREATE TABLE ufs (
@@ -30,7 +33,10 @@ CREATE TABLE numeros_casas (
 
 CREATE TABLE cidades (
     id_cidade INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cidade VARCHAR(150) NOT NULL
+    nome_cidade VARCHAR(150) NOT NULL,
+
+    fk_id_estado INT,
+    FOREIGN KEY (fk_id_estado) REFERENCES estados(id_estado) ON UPDATE CASCADE ON DELETE SET NULL,
 );
 
 CREATE TABLE bairros (
@@ -64,10 +70,10 @@ CREATE TABLE pessoas (
     
     fk_id_permissao INT,
     fk_id_cep INT,
-    fk_id_estado INT,
+    
     fk_id_rua INT,
     fk_id_genero INT,
-    fk_id_uf INT,
+    
     fk_id_numero_casa INT,
     fk_id_cidade INT,
     fk_id_bairro INT,
@@ -78,10 +84,10 @@ CREATE TABLE pessoas (
     FOREIGN KEY (fk_id_complemento) REFERENCES complementos(id_complemento) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (fk_id_ponto_ref) REFERENCES pontos_referencias(id_ponto_ref) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (fk_id_cep) REFERENCES ceps(id_cep) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_estado) REFERENCES estados(id_estado) ON UPDATE CASCADE ON DELETE SET NULL,
+    
     FOREIGN KEY (fk_id_rua) REFERENCES ruas(id_rua) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (fk_id_genero) REFERENCES generos(id_genero) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_uf) REFERENCES ufs(id_uf) ON UPDATE CASCADE ON DELETE SET NULL,
+    
     FOREIGN KEY (fk_id_numero_casa) REFERENCES numeros_casas(id_numero_casa) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (fk_id_cidade) REFERENCES cidades(id_cidade) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (fk_id_bairro) REFERENCES bairros(id_bairro) ON UPDATE CASCADE ON DELETE SET NULL
