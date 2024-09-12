@@ -7,14 +7,33 @@ CREATE TABLE estados (
     id_estado INT AUTO_INCREMENT PRIMARY KEY,
     nome_estado VARCHAR(50) NOT NULL
 
-    fk_id_uf INT,
-    FOREIGN KEY (fk_id_uf) REFERENCES ufs(id_uf) ON UPDATE CASCADE ON DELETE SET NULL,
+    
 );
 
 CREATE TABLE ufs (
     id_uf INT AUTO_INCREMENT PRIMARY KEY,
-    sigla CHAR(2) UNIQUE NOT NULL
+    sigla CHAR(2) UNIQUE NOT NULL,
+
+    fk_id_estado INT,
+    FOREIGN KEY (fk_id_estado) REFERENCES estados(id_estado) ON UPDATE CASCADE ON DELETE SET NULL
 );
+
+CREATE TABLE cidades (
+    id_cidade INT AUTO_INCREMENT PRIMARY KEY,
+    nome_cidade VARCHAR(150) NOT NULL,
+
+    fk_id_uf INT,
+    FOREIGN KEY (fk_id_uf) REFERENCES ufs(id_uf) ON UPDATE CASCADE ON DELETE SET NULL,
+);
+
+CREATE TABLE ceps (
+    id_cep INT AUTO_INCREMENT PRIMARY KEY,
+    numero_cep VARCHAR(20) NOT NULL,
+
+    fk_id_cidade INT,
+    FOREIGN KEY (fk_id_cidade) REFERENCES cidades(id_cidade) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
 
 CREATE TABLE complementos (
     id_complemento INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,23 +50,12 @@ CREATE TABLE numeros_casas (
     numero_casa VARCHAR(10) NOT NULL
 );
 
-CREATE TABLE cidades (
-    id_cidade INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cidade VARCHAR(150) NOT NULL,
-
-    fk_id_estado INT,
-    FOREIGN KEY (fk_id_estado) REFERENCES estados(id_estado) ON UPDATE CASCADE ON DELETE SET NULL,
-);
 
 CREATE TABLE bairros (
     id_bairro INT AUTO_INCREMENT PRIMARY KEY,
     nome_bairro VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE ceps (
-    id_cep INT AUTO_INCREMENT PRIMARY KEY,
-    numero_cep VARCHAR(20) NOT NULL
-);
 
 CREATE TABLE generos (
     id_genero INT AUTO_INCREMENT PRIMARY KEY,

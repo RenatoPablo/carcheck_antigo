@@ -35,12 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             return $pdo->lastInsertId();
         }
         
-        function cadastrarcidade($pdo, $nomeCidade, $estadoId) {
+        function cadastrarCidade($pdo, $nomeCidade, $estadoId) {
             $sqlCheck = "SELECT id_cidade FROM cidades WHERE nome_cidade = :nome";
             $stmtCheck = $pdo->prepare($sqlCheck);
             $stmtCheck->execute([':nome' => $nomeCidade]);
 
-            if ($stmtCheck->rowCounts() > 0 ) {
+            if ($stmtCheck->rowCount() > 0 ) {
                 $cidade = $stmtCheck->fetch(PDO::FETCH_ASSOC);
                 echo "Cidade ja existe";
                 return $cidade['id_cidade'];
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sqlInsertNumeroCasa = "INSERT INTO numeros_casas(numero_casa) VALUES (:numero)";
             $stmtInsert = $pdo->prepare($sqlInsertNumeroCasa);
 
-            $stmtInsert->execute([':numero', $numeroCasa]);
+            $stmtInsert->execute([':numero' => $numeroCasa]);
             return $pdo->lastInsertId();
         }
 
@@ -99,11 +99,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sqlInsertBairro = "INSERT INTO bairros(nome_bairro) VALUES (:nome)";
             $stmtInsert = $pdo->prepare($sqlInsertBairro);
 
-            $stmtInsert->execute([':nome', $nomeBairro]);
+            $stmtInsert->execute([':nome' => $nomeBairro]);
             return $pdo->lastInsertId();
         }
 
-        function
+        function cadastrarComplemento($pdo, $descComplemento) {
+            $sqlCheck = "SELECT id_complemento FROM complementos WHERE desc_complemento = :descr";
+            $stmtCheck = $pdo->prepare($sqlCheck);
+            $stmtCheck->execute([':descr' => $descComplemento]);
+
+            if ($stmtCheck->rowCount() > 0) {
+                $complemento = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+                return $complemento['id_complemento'];
+            }
+            $sqlInsertComplemento = "INSERT INTO complementos(desc_complemento) VALUES (:descr)";
+            $stmtInsert = $pdo->prepare($sqlInsertComplemento);
+
+            $stmtInsert->execute([':descr' => $descComplemento]);
+            return $pdo->lastInsertId();
+        }
 
 
         /////////////////////////pessoas/////////////////////////
@@ -113,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmtInsertPessoa->execute([
                 ':nomePessoa' => $nomePessoa,
                 ':numTelefone'=> $numTelefone,
-                'enderecoEmail' => $enderecoEmail,
+                ':enderecoEmail' => $enderecoEmail,
                 ':senha' => $senha,
                 
                 ':ruaId' => $ruaId,
@@ -140,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['estado']) && 
             isset($_POST['rua']) &&
             isset($_POST['cidade']) &&
-            isset($_POST´['numero']) &&
+            isset($_POST['numero']) &&
             isset($_POST['nome']) && 
             isset($_POST['telefone']) &&
             isset($_POST['email']) &&
