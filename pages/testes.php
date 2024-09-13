@@ -64,7 +64,7 @@
     </header>
 
     <form action="../config/logica_teste.php" method="post" class="form-teste">
-        <label for="nome">Nome:</label>
+        <!-- <label for="nome">Nome:</label>
         <input type="text" name="nome" id="nome">
 
         <label for="telefone">Telefone:</label>
@@ -77,8 +77,10 @@
         <input type="password" name="senha" id="senha">
 
         <label for="estado">Estado:</label>
-        <input id="estado" name="estado" type="text">
+        <input id="estado" name="estado" type="text"> -->
 
+        <label for="cep">CEP</label>
+        <input type="text" name="cep" id="cep">
         <button type="submit">Enviar</button>
     </form>
 </body>

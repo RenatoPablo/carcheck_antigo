@@ -23,7 +23,7 @@ CREATE TABLE cidades (
     nome_cidade VARCHAR(150) NOT NULL,
 
     fk_id_uf INT,
-    FOREIGN KEY (fk_id_uf) REFERENCES ufs(id_uf) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_uf) REFERENCES ufs(id_uf) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE ceps (

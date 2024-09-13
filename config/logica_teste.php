@@ -2,192 +2,59 @@
 session_start();
 if (!isset($_SESSION) OR $_SESSION['logado'] != true) {
     header("location: ../config/sair.php");
-    exit();	
+    exit();    
 }
 
-include 'config.php';
+// Importar arquivos
+require 'config.php';
+require 'api_cep.php';
+require 'funcoes_cadastro_pessoa.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        // Captura o CEP enviado pelo formulário
+        $cep = isset($_POST['cep']) ? $_POST['cep'] : null;
 
-        
+        if ($cep) {
+            // Buscar dados do CEP
+            $dadosCep = buscarDadosCep($cep);
 
-        function cadastrarEstado($pdo, $nomeEstado) {
-            //verificar se o estado ja existe no banco
-            $sqlCheck = "SELECT id_estado FROM estados WHERE nome_estado = :nome";
-            $stmtCheck = $pdo->prepare($sqlCheck);
-            $stmtCheck->execute([':nome' => $nomeEstado]);
-
-            //se o estado ja existir, retorna o ID
-            if ($stmtCheck->rowCount() > 0) {
-                $estado = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-                echo "Estado ja existe";
-                return $estado['id_estado']; //retorna o ID do estado existente
+            // Verificar se houve erro ao buscar o CEP
+            if (isset($dadosCep['erro']) && $dadosCep['erro'] === true) {
+                echo json_encode(['success' => false, 'message' => 'CEP inválido']);
+                exit();  // Para a execução após a mensagem de erro
             }
-            //caso contrario, insere um novo estado
-            $sqlInsertEstado = "INSERT INTO estados(nome_estado) VALUES (:nome)";
-            $stmtInsert = $pdo->prepare($sqlInsertEstado);
-            
-            //executa a inserção do novo estados
-            $stmtInsert->execute([':nome' => $nomeEstado]);
-            
-            //retorna o ID do novo estado inserido
-            return $pdo->lastInsertId();
-        }
-        
-        function cadastrarCidade($pdo, $nomeCidade, $estadoId) {
-            $sqlCheck = "SELECT id_cidade FROM cidades WHERE nome_cidade = :nome";
-            $stmtCheck = $pdo->prepare($sqlCheck);
-            $stmtCheck->execute([':nome' => $nomeCidade]);
 
-            if ($stmtCheck->rowCount() > 0 ) {
-                $cidade = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-                echo "Cidade ja existe";
-                return $cidade['id_cidade'];
-            }
-            $sqlInsertCidade = "INSERT INTO cidades(nome_cidade, fk_id_estado) VALUES (:nome, :estadoId)";
-            $stmtInsert = $pdo->prepare($sqlInsertCidade);
+            // Supondo que os dados do CEP estejam corretos e venham com 'uf' e 'estado'
+            $nomeEstadoCompleto = $dadosCep['estado']; // Nome completo do estado
+            $siglaEstado = $dadosCep['uf']; // Sigla do estado, ex: "SP"
 
-            $stmtInsert->execute([':nome' => $nomeCidade, ':estadoId' => $estadoId]);
-            return $pdo->lastInsertId();
+            // Inserir o nome do estado na tabela de estados
+            $idEstado = inserirEstado($pdo, $nomeEstadoCompleto);
+ 
+            // Inserir a sigla do estado na tabela de UFs (usando a chave estrangeira do estado)
+            $idUf = inserirUf($pdo, $siglaEstado, $idEstado);
+
+            // Inserir a cidade usando a referência de UF
+            $idCidade = inserirCidade($pdo, $dadosCep['localidade'], $idUf);
+
+            // Inserir o CEP
+            $response = inserirCep($pdo, $cep, $idCidade);
+
+            // Retorna a resposta em formato JSON
+            echo json_encode(['success' => true, 'message' => $response['message'], 'id_cep' => $response['id_cep']]);
+            var_dump($dadosCep);
+        } else {
+            // Caso o CEP não tenha sido informado
+            echo json_encode(['success' => false, 'message' => 'CEP não informado']);
         }
 
-        function cadastrarRua($pdo, $nomeRua) {
-            $sqlCheck = "SELECT id_rua FROM ruas WHERE nome_rua = :nome";
-            $stmtCheck = $pdo->prepare($sqlCheck);
-            $stmtCheck->execute([':nome' => $nomeRua]);
-
-            if ($stmtCheck->rowCount() > 0) {
-                $rua = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-                echo "Rua ja existe";
-                return $rua['id_rua'];
-            }
-            $sqlInsertRua = "INSERT INTO ruas(nome_rua) VALUES (:nome)";
-            $stmtInsert = $pdo->prepare($sqlInsertRua);
-
-            $stmtInsert->execute([':nome' => $nomeRua]);
-            return $pdo->lastInsertId();
-        }
-
-        function cadastraNumeroCasa($pdo, $numeroCasa) {
-            $sqlCheck = "SELECT id_numero_casa FROM numeros_casas WHERE numero_casa = :numero";
-            $stmtCheck = $pdo->prepare($sqlCheck);
-            $stmtCheck->execute([':numero' => $numeroCasa]);
-
-            if ($stmtCheck->rowCount() > 0) {
-                $numero = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-                echo "Numero ja existe";
-                return $numero['id_numero_casa'];
-            }
-            $sqlInsertNumeroCasa = "INSERT INTO numeros_casas(numero_casa) VALUES (:numero)";
-            $stmtInsert = $pdo->prepare($sqlInsertNumeroCasa);
-
-            $stmtInsert->execute([':numero' => $numeroCasa]);
-            return $pdo->lastInsertId();
-        }
-
-        function cadastrarBairro($pdo, $nomeBairro) {
-            $sqlCheck = "SELECT id_bairro FROM bairros WHERE nome_bairro = :nome";
-            $stmtCheck = $pdo->prepare($sqlCheck);
-            $stmtCheck->execute([':nome' => $nomeBairro]);
-
-            if ($stmtCheck->rowCount() > 0) {
-                $bairro = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-                echo "Bairro ja existe";
-                return $bairro['id_bairro'];
-            }
-            $sqlInsertBairro = "INSERT INTO bairros(nome_bairro) VALUES (:nome)";
-            $stmtInsert = $pdo->prepare($sqlInsertBairro);
-
-            $stmtInsert->execute([':nome' => $nomeBairro]);
-            return $pdo->lastInsertId();
-        }
-
-        function cadastrarComplemento($pdo, $descComplemento) {
-            $sqlCheck = "SELECT id_complemento FROM complementos WHERE desc_complemento = :descr";
-            $stmtCheck = $pdo->prepare($sqlCheck);
-            $stmtCheck->execute([':descr' => $descComplemento]);
-
-            if ($stmtCheck->rowCount() > 0) {
-                $complemento = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-                return $complemento['id_complemento'];
-            }
-            $sqlInsertComplemento = "INSERT INTO complementos(desc_complemento) VALUES (:descr)";
-            $stmtInsert = $pdo->prepare($sqlInsertComplemento);
-
-            $stmtInsert->execute([':descr' => $descComplemento]);
-            return $pdo->lastInsertId();
-        }
-
-
-        /////////////////////////pessoas/////////////////////////
-        function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha,  $ruaId, $cidadeId, $numeroCasaId) {
-            $sqlInsertPessoa = "INSERT INTO pessoas(nome_pessoa, numero_telefone, endereco_email, senha, fk_id_estado, fk_id_rua, fk_id_cidade, fk_id_numero_casa) VALUES (:nomePessoa, :numTelefone, :enderecoEmail, :senha, :ruaId, :cidadeId, :numeroCasa)";
-            $stmtInsertPessoa = $pdo->prepare($sqlInsertPessoa);
-            $stmtInsertPessoa->execute([
-                ':nomePessoa' => $nomePessoa,
-                ':numTelefone'=> $numTelefone,
-                ':enderecoEmail' => $enderecoEmail,
-                ':senha' => $senha,
-                
-                ':ruaId' => $ruaId,
-                ':cidadeId' => $cidadeId,
-                ':numeroCasa' => $numeroCasaId
-            ]);
-
-            return $pdo->lastInsertId();
-            
-        }
-
-        function cadastrarPessoaFisica($pdo, $cpf, $rg, $pessoaId) {
-            $sqlInsertPessoaFisica = "INSERT INTO pessoas_fisicas(cpf, rg, fk_id_pessoa) VALUES (:cpf, :rg, :pessoaId)";
-            $stmtInsertPessoaFisica = $pdo->prepare($sqlInsertPessoaFisica);
-            $stmtInsertPessoaFisica->execute([
-                ':cpf' => $cpf,
-                ':rg' => $rg,
-                ':pessoaId' => $pessoaId
-            ]);
-
-            return $pdo->lastInsertId();
-        }
-
-        if (isset($_POST['estado']) && 
-            isset($_POST['rua']) &&
-            isset($_POST['cidade']) &&
-            isset($_POST['numero']) &&
-            isset($_POST['nome']) && 
-            isset($_POST['telefone']) &&
-            isset($_POST['email']) &&
-            isset($_POST['senha'])) {
-
-            $nomeEstado = $_POST['estado']; //nome estado enviado pelo formulario
-            $nomeRua = $_POST['rua'];
-            $nomeCidade = $_POST['cidade'];
-            $numeroCasa = $_POST['numero'];
-
-
-            $nomePessoa = $_POST['nome'];
-            $numTelefone = $_POST['telefone'];
-            $enderecoEmail = $_POST['email'];
-            $senha = $_POST['senha'];
-
-            //cadastrar estado
-            $estadoId = cadastrarEstado($pdo, $nomeEstado);
-            $ruaId = cadastrarRua($pdo, $nomeRua);
-            $cidadeId = cadastrarCidade($pdo, $nomeCidade, $estadoId);
-            $numeroCasaId = cadastraNumeroCasa($pdo, $numeroCasa);
-            
-
-            //cadastrar pessoa com id de estado
-            $pessoaId = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $estadoId, $ruaId, $cidadeId, $numeroCasaId);
-
-            
-
-            echo "Pessoa cadastrada com sucesso, ID: " . $pessoaId . " ID estado: " . $estadoId . " ID rua: " . $ruaId . " ID cidade: " . $cidadeId;
-        }
     } catch (PDOException $e) {
-        echo "ERRO: " . $e->getMessage();
+        // Captura e exibe erros de banco de dados
+        echo json_encode(['success' => false, 'message' => 'Erro no servidor: ' . $e->getMessage()]);
     }
+} else {
+    // Caso o método não seja POST
+    echo json_encode(['success' => false, 'message' => 'Método não suportado']);
 }
-
 ?>
