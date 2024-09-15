@@ -23,8 +23,8 @@
   display: grid;
     gap: 20px;
     grid-template-columns: repeat(2, 285px);
-    right: 420px;
-    
+    right: 60px;
+    top: 52px;
     /* align-content: end; */
     position: relative;
 
@@ -37,6 +37,7 @@
     left: 820px;
     /* align-content: end; */
     position: relative;
+    top: -410px;
 
 }
 
@@ -60,7 +61,7 @@
 }
 
 .input-container {
-  position: relative;
+  position: flex;
   margin: auto;
 }
 
