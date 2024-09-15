@@ -151,28 +151,28 @@
                             <div class="underline"></div>
                             </div>
                         </div>
-                    <div id="campos-juridica" class="especifico">
-                            <div class="input-container">
-                                <label for="cnpj">CNPJ:</label>
-                                <input id="cnpj" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCNPJ(this)" type="text" class="input">
-                                <div class="underline"></div>
-                            </div>
-                            <div class="input-container">
-                                <label for="ie">IE</label>
-                                <input id="ie" name="ie" maxlength="20" placeholder="00.000.000.000" oninput="mascaraIE(this)" type="text" class="input">
-                                <div class="underline"></div>
-                            </div>
-                            <div class="input-container">
-                                <label for="razao-social">Razão Social</label>
-                                <input id="razao-social" name="razao-social"  placeholder="Digite sua Razão Social"  type="text" class="input">
-                                <div class="underline"></div>
-                            </div>
-                            <div class="input-container">
-                                <label for="nome-fantasia">Nome Fantasia</label>
-                                <input id="nome-fantasia" name="nome-fantasia"  placeholder="Digite seu Nome Fantasia" type="text" class="input">
-                                <div class="underline"></div>
-                            </div>
-                    </div>
+                        <div id="campos-juridica" class="especifico">
+                                <div class="input-container">
+                                    <label for="cnpj">CNPJ:</label>
+                                    <input id="cnpj" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCNPJ(this)" type="text" class="input">
+                                    <div class="underline"></div>
+                                </div>
+                                <div class="input-container">
+                                    <label for="ie">IE</label>
+                                    <input id="ie" name="ie" maxlength="20" placeholder="00.000.000.000" oninput="mascaraIE(this)" type="text" class="input">
+                                    <div class="underline"></div>
+                                </div>
+                                <div class="input-container">
+                                    <label for="razao-social">Razão Social</label>
+                                    <input id="razao-social" name="razao-social"  placeholder="Digite sua Razão Social"  type="text" class="input">
+                                    <div class="underline"></div>
+                                </div>
+                                <div class="input-container">
+                                    <label for="nome-fantasia">Nome Fantasia</label>
+                                    <input id="nome-fantasia" name="nome-fantasia"  placeholder="Digite seu Nome Fantasia" type="text" class="input">
+                                    <div class="underline"></div>
+                                </div>
+                        </div>
                     </div>
                         
                     <br>
