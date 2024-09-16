@@ -138,41 +138,50 @@
                             <div class="underline"></div>
                         </div>
                         <!-- campos especificos pessoa fisica/juridica -->
-                        <div id="campos-fisica" class="especifico">
+                        <div id="campos-fisica1" class="especifico">
                             <div class="input-container">
                                 <label for="cpf">CPF:</label>
                                 <input id="cpf" name="cpf" maxlength="14" placeholder="000.000.000-00" oninput="mascaraCPF(this)" type="text" class="input">
                                 <div class="underline"></div>
                             </div>
-
+                        </div>
+                        <div id="campos-fisica2" class="especifico">
                             <div class="input-container">
-                                <label for="cpf">RG:</label>
+                                <label for="rg">RG:</label>
                                 <input id="rg" name="rg" maxlength="13" placeholder="00.000.000-00" oninput="mascaraRG(this)" type="text" class="input">
-                            <div class="underline"></div>
+                                <div class="underline"></div>
                             </div>
                         </div>
-                        <div id="campos-juridica" class="especifico">
-                                <div class="input-container">
-                                    <label for="cnpj">CNPJ:</label>
-                                    <input id="cnpj" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCNPJ(this)" type="text" class="input">
-                                    <div class="underline"></div>
-                                </div>
-                                <div class="input-container">
-                                    <label for="ie">IE</label>
-                                    <input id="ie" name="ie" maxlength="20" placeholder="00.000.000.000" oninput="mascaraIE(this)" type="text" class="input">
-                                    <div class="underline"></div>
-                                </div>
-                                <div class="input-container">
-                                    <label for="razao-social">Razão Social</label>
-                                    <input id="razao-social" name="razao-social"  placeholder="Digite sua Razão Social"  type="text" class="input">
-                                    <div class="underline"></div>
-                                </div>
-                                <div class="input-container">
-                                    <label for="nome-fantasia">Nome Fantasia</label>
-                                    <input id="nome-fantasia" name="nome-fantasia"  placeholder="Digite seu Nome Fantasia" type="text" class="input">
-                                    <div class="underline"></div>
-                                </div>
+                        <!--/////////pessoa juridica/////////-->
+                        <div id="campos-juridica1" class="especifico">
+                            <div class="input-container">
+                                <label for="cnpj">CNPJ:</label>
+                                <input id="cnpj" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCNPJ(this)" type="text" class="input">
+                                <div class="underline"></div>
+                            </div>
                         </div>
+                        <div id="campos-juridica2" class="especifico">
+                            <div class="input-container">
+                                <label for="ie">IE</label>
+                                <input id="ie" name="ie" maxlength="20" placeholder="00.000.000.000" oninput="mascaraIE(this)" type="text" class="input">
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+                        <div id="campos-juridica3" class="especifico">
+                            <div class="input-container">
+                                <label for="razao-social">Razão Social</label>
+                                <input id="razao-social" name="razao-social"  placeholder="Digite sua Razão Social"  type="text" class="input">
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+                        <div id="campos-juridica4" class="especifico">
+                            <div class="input-container">
+                                <label for="nome-fantasia">Nome Fantasia</label>
+                                <input id="nome-fantasia" name="nome-fantasia"  placeholder="Digite seu Nome Fantasia" type="text" class="input">
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+                    
                     </div>
                         
                     <br>
@@ -180,36 +189,28 @@
                     <div class="endereco">
                     <h2>Endereço</h2>
                     <br>
-                        
+                    
                         <div class="input-container">
-                            <label for="estado">Estado:</label>
-                            <input id="estado" name="estado" placeholder="Insira uma Estado" type="password" class="input">
+                            <label for="cep">CEP:</label>
+                            <input id="cep" name="cep" placeholder="Digite seu CEP" type="text" class="input" onblur="buscarCep()">
                             <div class="underline"></div>
                         </div>
-
-                        <!-- Botão para abrir o popup -->
-                        <button class="open-popup-btn" type="button" onclick="openPopupEstado()">Cadastrar</button>
-                        <!-- Popup (modal) -->
-                        <div class="modal" id="modal-estado">
-                            <div class="modal-content">
-                                <span class="close-btn" onclick="closePopupEstado()">&times;</span>
-                                <h2>Cadastro</h2>
-                                <form action="../config/processa_dados.php" method="POST">
-                                    <label for="estado-cadastro">Estado:</label>
-                                    <input type="text" name="estado-cadastro"   id="">
-                                    <button type="submit" class="submit-btn">Cadastrar</button>
-                                </form>
-                            </div>
-                        </div>
-
                         <div class="input-container">
-                            <label for="rua">Rua:</label>
-                            <input id="rua" name="rua" placeholder="Digite sua Rua" type="text" class="input">
+                            <label for="estado">Estado:</label>
+                            <input id="estado" name="estado" placeholder="Estado" class="input">
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
                             <label for="cidade">Cidade:</label>
-                            <input id="cidade" name="cidade" placeholder="Digite sua Cidade" type="text" class="input">
+                            <input id="cidade" name="cidade" placeholder="Cidade" class="input">
+                            <div class="underline"></div>
+                        </div>
+
+                        
+
+                        <div class="input-container">
+                            <label for="rua">Rua:</label>
+                            <input id="rua" name="rua" placeholder="Digite sua Rua" type="text" class="input">
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
@@ -228,11 +229,6 @@
                             <div class="underline"></div>
                         </div>
                         <div class="input-container">
-                            <label for="cep">CEP:</label>
-                            <input id="cep" name="cep" placeholder="Digite seu CEP" type="text" class="input">
-                            <div class="underline"></div>
-                        </div>
-                        <div class="input-container">
                             <label for="ponto_ref">Ponto de Referência:</label>
                             <input id="ponto_ref" name="ponto_ref" placeholder="Digite seu Ponto de Referência" type="text" class="input">
                             <div class="underline"></div>
@@ -243,7 +239,7 @@
         
         </form>
     
-
+    <script src="../js/buscarCep.js"></script>
     <script src="../js/pop-cadastro.js"></script>
     <script src="../js/valida-fisica-juridi.js"></script>
     <script src="../js/mascaras.js"></script>

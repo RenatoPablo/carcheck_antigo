@@ -10,27 +10,7 @@ include 'config.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         
-        function inserirEstado($pdo, $nomeEstado) {
-            //verificar se o estado ja existe no banco
-            $sqlCheck = "SELECT id_estado FROM estados WHERE nome_estado = :nome";
-            $stmtCheck = $pdo->prepare($sqlCheck);
-            $stmtCheck->execute([':nome' => $nomeEstado]);
-
-            //se o estado ja existir, retorna o ID
-            if ($stmtCheck->rowCount() > 0) {
-                $estado = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-                return $estado['id']; //retorna o ID do estado existente
-            }
-            //caso contrario, insere um novo estado
-            $sqlInsert = "INSERT INTO estados(nome_estado) VALUES (:nome)";
-            $stmtInsert = $pdo->prepare($sqlInsert);
-
-            //executa a inserção do novo estados
-            $stmtInsert->execute([':nome' => $nomeEstado]);
-
-            //retorna o ID do novo estado inserido
-            return $pdo->lastInsertId();
-        }
+        
         
             if (!empty($_POST['nome']) && 
                 !empty($_POST['genero']) && 

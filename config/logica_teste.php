@@ -42,8 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $response = inserirCep($pdo, $cep, $idCidade);
 
             // Retorna a resposta em formato JSON
-            echo json_encode(['success' => true, 'message' => $response['message'], 'id_cep' => $response['id_cep']]);
-            var_dump($dadosCep);
+            echo json_encode([
+                'cidade' => $dadosCep['localidade'],
+                'estado' => $dadosCep['estado'],
+                'bairro' => $dadosCep['bairro'],
+                'cep' => $cep,
+                'mensagem' => 'Dados do CEP retornados com sucesso!'
+            ]);
+            
         } else {
             // Caso o CEP não tenha sido informado
             echo json_encode(['success' => false, 'message' => 'CEP não informado']);
