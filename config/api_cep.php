@@ -41,6 +41,40 @@ function buscarDadosCep($cep) {
 }
 
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
+        // Captura o CEP enviado pelo formulário
+        $cep = isset($_POST['cep']) ? $_POST['cep'] : null;
 
+        if ($cep) {
+            // Buscar dados do CEP
+            $dadosCep = buscarDadosCep($cep);
+
+            // Verificar se houve erro ao buscar o CEP
+            if (isset($dadosCep['erro']) && $dadosCep['erro'] === true) {
+                echo json_encode(['success' => false, 'message' => 'CEP inválido']);
+                exit();  // Para a execução após a mensagem de erro
+            }
+
+            
+            // Retorna a resposta em formato JSON
+            echo json_encode([
+                'cidade' => $dadosCep['localidade'],
+                'estado' => $dadosCep['estado'],
+                
+                'cep' => $cep,
+                'mensagem' => 'Dados do CEP retornados com sucesso!'
+            ]);
+            
+        } else {
+            // Caso o CEP não tenha sido informado
+            echo json_encode(['success' => false, 'message' => 'CEP não informado']);
+        }
+
+    } catch (PDOException $e) {
+        // Captura e exibe erros de banco de dados
+        echo json_encode(['success' => false, 'message' => 'Erro no servidor: ' . $e->getMessage()]);
+    }
+}
 
 ?>

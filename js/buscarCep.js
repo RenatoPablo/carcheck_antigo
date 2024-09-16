@@ -11,7 +11,7 @@ function buscarCep() {
 
     // Requisição AJAX para o PHP
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../config/logica_teste.php', true);
+    xhr.open('POST', '../config/api_cep.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {

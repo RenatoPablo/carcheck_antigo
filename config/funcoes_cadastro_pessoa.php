@@ -87,8 +87,10 @@ function cadastrarPontoRef($pdo, $descPontoRef) {
     return $pdo->lastInsertId();
 }
 
+
+
 /////////////////////////pessoas/////////////////////////
-function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc) {
+function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $idGenero) {
 
     if (!filter_var($enderecoEmail, FILTER_VALIDATE_EMAIL)) {
         throw new Exception('Email inválido.');
@@ -106,14 +108,15 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
     $hashedSenha = password_hash($senha, PASSWORD_DEFAULT);
 
     try {
-    $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha) VALUES (:nome, :dataNasc, :tele, :email, :senha)";
+    $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero)";
     $stmtInsert = $pdo->prepare($sqlInsert);
     $stmtInsert->execute([
         ':nome' => $nomePessoa,
         ':dataNasc' => $dataNasc,
         ':tele' => $numTelefone,
         ':email' => $enderecoEmail,
-        ':senha' => $hashedSenha
+        ':senha' => $hashedSenha,
+        ':genero' => $idGenero
     ]);
     return $pdo->lastInsertId();
     } catch (PDOException $e) {

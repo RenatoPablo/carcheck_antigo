@@ -5,13 +5,17 @@ if (!isset($_SESSION) OR $_SESSION['logado'] != true) {
     exit();	
 }
 
-include 'config.php';
+require 'config.php';
+require 'api_cep.php';
+require 'funcoes_cadastro_pessoa.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    
+    
+    
     try {
-        
-        
-        
+            
             if (!empty($_POST['nome']) && 
                 !empty($_POST['genero']) && 
                 !empty($_POST['telefone']) && 
@@ -21,27 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 !empty($_POST['confirmarsenha']) && 
                 $_POST['senha'] === $_POST['confirmarsenha']) {
 
-                $nome = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
-                $genero = intval($_POST['genero']);
-                $telefone = htmlspecialchars($_POST['telefone'], ENT_QUOTES, 'UTF-8');
-                $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-                $data_nasc = $_POST['datadenascimento'];
-                $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-                $cpf = isset($_POST['cpf']) ? htmlspecialchars($_POST['cpf'], ENT_QUOTES, 'UTF-8') : null;
-                $rg = isset($_POST['rg']) ? htmlspecialchars($_POST['rg'], ENT_QUOTES, 'UTF-8') : null;
+                $nomePessoa = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
+                $idGenero = intval($_POST['genero']);
+                $numTelefone = htmlspecialchars($_POST['telefone'], ENT_QUOTES, 'UTF-8');
+                $enderecoEmail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+                $dataNasc = $_POST['datadenascimento'];
+                $senha = $_POST['senha'];
+                
+                
+                // $cpf = isset($_POST['cpf']) ? htmlspecialchars($_POST['cpf'], ENT_QUOTES, 'UTF-8') : null;
+                // $rg = isset($_POST['rg']) ? htmlspecialchars($_POST['rg'], ENT_QUOTES, 'UTF-8') : null;
 
-                $sql_pessoas = "INSERT INTO pessoas(nome_pessoa, fk_id_genero, numero_telefone, endereco_email, data_nasc, senha, fk_id_estado)
-                                VALUES (:nome_pessoa, :genero, :telefone, :email, :data_nasc, :senha, :fk_id_estado)";
-                $stmt = $pdo->prepare($sql_pessoas);
-                $stmt->bindParam(':nome_pessoa', $nome);
-                $stmt->bindParam(':genero', $genero);
-                $stmt->bindParam(':telefone', $telefone);
-                $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':data_nasc', $data_nasc);
-                $stmt->bindParam(':senha', $senha); 
-                $stmt->execute();
+                
 
-                $id_pessoa = $pdo->lastInsertId();
+                $id_pessoa = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $idGenero);
 
                 if (isset($_POST['tipo_pessoa'])) {
                     $tipo_pessoa = $_POST['tipo_pessoa'];
@@ -81,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //}
             
         } else {
-            echo "Por favor, preencha corretamente todos os dados, e verifique se as senhas coincidem";
+            echo "Preencha todos os dados pessoais, ou verifique se as senhas coincidem.";
         }
 
     } catch (PDOException $e) {
