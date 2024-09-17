@@ -10,11 +10,13 @@
 .cadastrar-cliente{
   display: flex;
   flex-direction: column;
-  height: 1000px;
+  
   justify-content: center; 
   /* align-content: end; */
   position: relative;
   top: 140px;
+  left: 30%;
+  width: 800px;
   
 }
 
@@ -26,7 +28,7 @@
     top: 52px;
     /* align-content: end; */
     
-    width: 100%;
+
 
 }
 
