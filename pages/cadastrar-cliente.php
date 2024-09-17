@@ -142,7 +142,7 @@
                             <div class="input-container">
                                 <label for="cpf">CPF:</label>
                                 <input id="cpf" name="cpf" maxlength="14" placeholder="000.000.000-00" oninput="mascaraCPF(this)" type="text" class="input">
-                                <div class="underline"></div>
+                                                                         <div class="underline"></div>
                             </div>
                         </div>
                         <div id="campos-fisica2" class="especifico">

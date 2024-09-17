@@ -8,11 +8,11 @@
 }
 
 .cadastrar-cliente{
-  display: grid;
-  grid-template-columns: repeat(2, 600px);
-  align-content: center;
+  display: flex;
+  width: 50%;
+  /* align-content: center;
   
-  justify-content: center; 
+  justify-content: center;  */
   /* align-content: end; */
   position: relative;
   top: 140px;
@@ -34,10 +34,10 @@
   display: grid;
     gap: 20px;
     grid-template-columns: repeat(2, 300px);
-    left: 130%;
+    left: 40%;
     /* align-content: end; */
     position: relative;
-    top: -410px;
+    top: 40%;
 
 }
 
