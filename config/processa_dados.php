@@ -36,7 +36,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // $cpf = isset($_POST['cpf']) ? htmlspecialchars($_POST['cpf'], ENT_QUOTES, 'UTF-8') : null;
                 // $rg = isset($_POST['rg']) ? htmlspecialchars($_POST['rg'], ENT_QUOTES, 'UTF-8') : null;
 
-                
+                if (!empty($_POST['cep']) &&
+                    !empty($_POST['cidade']) &&
+                    !empty($_POST['estado']) &&
+                    !empty($_POST['rua']) &&
+                    !empty($_POST['numero']) &&
+                    !empty($_POST['bairro'])) {
+                        $nomeEstado      = $_POST['estado'];
+                        $nomeCidade      = $_POST['cidade'];
+                        $cep             = $_POST['cep'];
+                        $nomeRua         = $_POST['rua'];
+                        $numeroCasa      = $_POST['numero'];
+                        $nomeBairro      = $_POST['bairro'];
+                        $descComplemento = $_POST['complemento'];
+                        $descPontoRef    = $_POST['ponto_ref'];
+
+                        // inserir estado
+                        $id_estado = inserirEstado($pdo, $nomeEstado);
+
+                        // inserir uf
+                        
+
+                        // inserir cidade
+                        $id_cidade = inserirCidade($pdo, $nomeCidade, $idUf);
+
+                        // inserir cep
+
+                    }
 
                 $id_pessoa = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $idGenero);
 
