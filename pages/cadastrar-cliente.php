@@ -109,14 +109,14 @@
                                     <option value="2">Feminino</option>
                                     <option value="3">Outro</option>
                                 </select>
+                                <div class="underline"></div>
                             </div>
-                            <div class="underline"></div>
                         </div>
-                        <div class="input-container">
-                            <label for="telefone">Telefone:</label>
-                            <input id="telefone" name="telefone" placeholder="Digite seu Telefone" type="number" class="input">
-                            <div class="underline"></div>
-                        </div>
+                            <div class="input-container">
+                                <label for="telefone">Telefone:</label>
+                                <input id="telefone" name="telefone" placeholder="Digite seu Telefone" type="number" class="input">
+                                <div class="underline"></div>
+                            </div>
                         <div class="input-container">
                             <label for="email">Email:</label>
                             <input id="email" name="email" placeholder="Digite seu email" type="email" class="input">

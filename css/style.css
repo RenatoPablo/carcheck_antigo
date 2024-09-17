@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* Evita rolagem horizontal */
-    /* overflow-y: hidden;  Evita rolagem vertical */
+     overflow-y: scroll; /* Evita rolagem vertical */
     background-color: #ffffff; /* Adicionado para consistência */
 }
 

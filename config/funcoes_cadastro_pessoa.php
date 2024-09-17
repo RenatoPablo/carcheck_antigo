@@ -100,7 +100,7 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
     $stmtCheck = $pdo->prepare($sqlCheck);
     $stmtCheck->execute([':email' => $enderecoEmail]);
 
-    if ($pessoa = $stmtCheck->fetch(PDO::FETCH_ASSOC)) {
+    if ($pessoa = $stmtCheck->fetch(PDO::FETCH_ASSOC)) {        
         
         return $pessoa['id_pessoa'];
     }
