@@ -11,7 +11,7 @@ function cadastrarRua($pdo, $nomeRua) {
 
     if ($stmtCheck->rowCount() > 0) {
         $rua = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-        echo "Rua ja existe";
+        
         return $rua['id_rua'];
     }
     $sqlInsertRua = "INSERT INTO ruas(nome_rua) VALUES (:nome)";
@@ -28,7 +28,7 @@ function cadastraNumeroCasa($pdo, $numeroCasa) {
 
     if ($stmtCheck->rowCount() > 0) {
         $numero = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-        echo "Numero ja existe";
+        
         return $numero['id_numero_casa'];
     }
     $sqlInsertNumeroCasa = "INSERT INTO numeros_casas(numero_casa) VALUES (:numero)";
@@ -45,7 +45,7 @@ function cadastrarBairro($pdo, $nomeBairro) {
 
     if ($stmtCheck->rowCount() > 0) {
         $bairro = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-        echo "Bairro ja existe";
+        
         return $bairro['id_bairro'];
     }
     $sqlInsertBairro = "INSERT INTO bairros(nome_bairro) VALUES (:nome)";
@@ -110,7 +110,33 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
     try {
 
     if ($comple_verif && $ponto_verif) {
-        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_complemento, fk_id_ponto_ref) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :complemento, :ponto)";
+        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, 
+        data_nasc, 
+        numero_telefone, 
+        endereco_email, 
+        senha, 
+        fk_id_genero, 
+        fk_id_cidade, 
+        fk_id_cep, 
+        fk_id_rua, 
+        fk_id_numero_casa, 
+        fk_id_bairro, 
+        fk_id_complemento, 
+        fk_id_ponto_ref) 
+        VALUES 
+        (:nome, 
+        :dataNasc, 
+        :tele, 
+        :email, 
+        :senha, 
+        :genero, 
+        :cidade, 
+        :cep, 
+        :rua, 
+        :numeroCasa, 
+        :bairro, 
+        :complemento, 
+        :ponto)";
     $stmtInsert = $pdo->prepare($sqlInsert);
     $stmtInsert->execute([
         ':nome' => $nomePessoa,
@@ -119,13 +145,18 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
         ':email' => $enderecoEmail,
         ':senha' => $hashedSenha,
         ':genero' => $id_genero,
+        ':cidade' => $id_cidade,
+        ':cep' => $id_cep,
+        ':rua' => $id_rua,
+        ':numeroCasa' => $id_numero_casa,
+        ':bairro' => $id_bairro,
         ':complemento' => $id_complemento,
         ':ponto' => $id_ponto_ref
     ]);
     return $pdo->lastInsertId();
 
     } elseif ($ponto_verif) {
-        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_ponto_ref) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :ponto)";
+        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_cidade, fk_id_cep, fk_id_rua, fk_id_numero_casa, fk_id_bairro, fk_id_ponto_ref) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :cidade, :cep, :rua, :numeroCasa, :bairro, :ponto)";
     $stmtInsert = $pdo->prepare($sqlInsert);
     $stmtInsert->execute([
         ':nome' => $nomePessoa,
@@ -134,11 +165,16 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
         ':email' => $enderecoEmail,
         ':senha' => $hashedSenha,
         ':genero' => $id_genero,
+        ':cidade' => $id_cidade,
+        ':cep' => $id_cep,
+        ':rua' => $id_rua,
+        ':numeroCasa' => $id_numero_casa,
+        ':bairro' => $id_bairro,
         ':ponto' => $id_ponto_ref
     ]);
     return $pdo->lastInsertId();
     } elseif ($comple_verif) {
-        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_complemento, ) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :complemento, )";
+        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_cidade, fk_id_cep, fk_id_rua, fk_id_numero_casa, fk_id_bairro, fk_id_complemento) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :cidade, :cep, :rua, :numeroCasa, :bairro, :complemento)";
     $stmtInsert = $pdo->prepare($sqlInsert);
     $stmtInsert->execute([
         ':nome' => $nomePessoa,
@@ -147,12 +183,17 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
         ':email' => $enderecoEmail,
         ':senha' => $hashedSenha,
         ':genero' => $id_genero,
-        ':complemento' => $id_complemento,
+        ':cidade' => $id_cidade,
+        ':cep' => $id_cep,
+        ':rua' => $id_rua,
+        ':numeroCasa' => $id_numero_casa,
+        ':bairro' => $id_bairro,
+        ':complemento' => $id_complemento
         
     ]);
     return $pdo->lastInsertId();
     } else {
-        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_estado, fk_id_uf, fk_id_cidade, fk_id_cep, fk_id_rua, fk_id_numero_casa, fk_id_bairro) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :estado, :uf, :cidade, :cep, :rua, :numeroCasa, :bairro)";
+        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_cidade, fk_id_cep, fk_id_rua, fk_id_numero_casa, fk_id_bairro) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero,  :cidade, :cep, :rua, :numeroCasa, :bairro)";
         $stmtInsert = $pdo->prepare($sqlInsert);
         $stmtInsert->execute([
             ':nome' => $nomePessoa,
@@ -161,8 +202,6 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
             ':email' => $enderecoEmail,
             ':senha' => $hashedSenha,
             ':genero' => $id_genero,
-            ':estado' => $id_estado,
-            ':uf' => $id_uf,
             ':cidade' => $id_cidade,
             ':cep' => $id_cep,
             ':rua' => $id_rua,
@@ -204,8 +243,8 @@ function cadastrarPessoaJuridica($pdo, $cnpj, $ie, $razao, $fantasia) {
         return $juridica['id_pessoa_juridica'];
     }
     $sqlInsert = "INSERT INTO pessoas_juridicas(cnpj, ie, razao_social, nome_fantasia) VALUES (:cnpj, :ie, :razao, :fantasia)";
-    $sqlInsert = $pdo->prepare($sqlInsert);
-    $sqlInsert->execute([
+    $stmtInsert = $pdo->prepare($sqlInsert);
+    $stmtInsert->execute([
         ':cnpj'     => $cnpj,
         ':ie'       => $ie,
         ':razao'    => $razao,

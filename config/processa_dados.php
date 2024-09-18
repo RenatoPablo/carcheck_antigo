@@ -12,7 +12,14 @@ require 'funcoes_cadastro_pessoa.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     
-    
+    $id_complemento = null;
+    $id_ponto_ref = null;
+    $cpf = null;
+    $rg = null;
+    $cnpj = null;
+    $ie = null;
+    $razao = null;
+    $fantasia = null;
     
     try {
             
@@ -26,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_POST['senha'] === $_POST['confirmarsenha']) {
 
                 $nomePessoa = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
-                $idGenero = intval($_POST['genero']);
+                $id_genero = intval($_POST['genero']);
                 $numTelefone = htmlspecialchars($_POST['telefone'], ENT_QUOTES, 'UTF-8');
                 $enderecoEmail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
                 $dataNasc = $_POST['datadenascimento'];
@@ -42,15 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     !empty($_POST['rua']) &&
                     !empty($_POST['numero']) &&
                     !empty($_POST['bairro'])) {
-                        $nomeEstado      = $_POST['estado'];
-                        $sigla           = $dadosCep['uf'];
-                        $nomeCidade      = $_POST['cidade'];
-                        $cep             = $_POST['cep'];
-                        $nomeRua         = $_POST['rua'];
-                        $numeroCasa      = $_POST['numero'];
-                        $nomeBairro      = $_POST['bairro'];
-                        $descComplemento = $_POST['complemento'];
-                        $descPontoRef    = $_POST['ponto_ref'];
+                        $nomeEstado = is_array($_POST['estado']) ? $_POST['estado'][0] : $_POST['estado'];
+                        $sigla = $dadosCep['uf'];
+                        $nomeCidade = is_array($_POST['cidade']) ? $_POST['cidade'][0] : $_POST['cidade'];
+                        $cep        = is_array($_POST['cep']) ? $_POST['cep'][0] : $_POST['cep'];
+                        $nomeRua    = is_array($_POST['rua']) ? $_POST['rua'][0] : $_POST['rua'];
+                        $numeroCasa = is_array($_POST['numero']) ? $_POST['numero'][0] : $_POST['numero'];
+                        $nomeBairro = is_array($_POST['bairro']) ? $_POST['bairro'][0] : $_POST['bairro'];
+                        $descComplemento = is_array($_POST['complemento']) ? $_POST['complemento'][0] : $_POST['complemento'];
+                        $descPontoRef = is_array($_POST['ponto_ref']) ? $_POST['ponto_ref'][0] : $_POST['ponto_ref'];
+                        
                         // inserir estado
                         $id_estado = inserirEstado($pdo, $nomeEstado);
 
@@ -63,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         // inserir cep
                         $id_cep = inserirCep($pdo, $cep, $id_cidade);
+                        $id_cep = intval($id_cep);
 
                         //cadatrar rua
                         $id_rua = cadastrarRua($pdo, $nomeRua);
@@ -72,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         //cadastrar bairro
                         $id_bairro = cadastrarBairro($pdo, $nomeBairro);
+                        
 
                         //verifica se os campos foram preenchidos
                         if (!empty($_POST['complemento'])) {
@@ -89,59 +99,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $ponto_verif = false;
                         }
 
-                        if (!empty($_POST['nome']) &&
-                            !empty($_POST['genero']) &&
-                            !empty($_POST['telefone']) &&
-                            !empty($_POST['email']) &&
-                            !empty($_POST['datadenascimento']) &&
-                            !empty($_POST['senha']) &&
-                            !empty($_POST['confirmarsenha']) &&
-                            $_POST['senha'] === $_POST['confirmarsenha']) {
-
-                                $nomePessoa = $_POST['nome'];
-                                $numTelefone = $_POST['telefone'];
-                                $enderecoEmail = $_POST['email'];
-                                $senha = $_POST['senha'];
-                                $dataNasc = $_POST['datadenascimento'];
-                                $id_genero = $_POST['genero'];
-                            }
-                        }
                         
-                $id_pessoa = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $id_genero, $id_complemento, $id_ponto_ref, $comple_verif, $ponto_verif);
+                        }
+                        var_dump($id_cep);
+
+                $id_pessoa = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $id_genero, $id_complemento, $id_ponto_ref, $id_estado, $id_uf, $id_cidade, $id_cep, $id_rua, $id_numero_casa, $id_bairro, $comple_verif, $ponto_verif);
 
                 if (isset($_POST['tipo_pessoa'])) {
                     $tipo_pessoa = $_POST['tipo_pessoa'];
 
                     if ($tipo_pessoa === 'fisica' && $cpf && $rg) {
-                        $sql = "INSERT INTO pessoas_fisicas (cpf, rg, fk_id_pessoa)
-                                VALUES (:cpf, :rg, :fk_id_pessoa)";
-                        $stmt = $pdo->prepare($sql);
-                        $stmt->bindParam(':cpf', $cpf);
-                        $stmt->bindParam(':rg', $rg);
-                        $stmt->bindParam(':fk_id_pessoa', $id_pessoa);
-                        $stmt->execute();
-                        
-                        echo "Dados de pessoa física inseridos com sucesso";
+                        $cpf = $_POST['cpf'];
+                        $rg = $_POST['rg'];
+
+                        $id_pessoa_fisica = cadastrarPessoaFisica($pdo, $cpf, $rg, $id_pessoa);
+
+                        echo "Dados Cliente Físico Cadastrado com ID: " . $id_pessoa_fisica;
 
                     } elseif ($tipo_pessoa === 'juridica') {
-                        // Inserir dados de pessoa jurídica
-                        $cnpj = htmlspecialchars($_POST['cnpj'], ENT_QUOTES, 'UTF-8');
-                        $razao_social = htmlspecialchars($_POST['razao-social'], ENT_QUOTES, 'UTF-8');
-                        $ie = htmlspecialchars($_POST['ie'], ENT_QUOTES, 'UTF-8');
-                        $nome_fantasia = htmlspecialchars($_POST['nome-fantasia'], ENT_QUOTES, 'UTF-8');    
+                        $cnpj = $_POST['cnpj'];
+                        $ie = $_POST['ie'];
+                        $razao = $_POST['razao-social'];
+                        $fantasia = $_POST['nome-fantasia'];
 
+                        $id_pessoa_juridica = cadastrarPessoaJuridica($pdo, $cnpj, $ie, $razao, $fantasia);
 
-                        $sql = "INSERT INTO pessoas_juridicas (ie, cnpj, razao_social, nome_fantasia, fk_id_pessoa)
-                                VALUES (:ie, :cnpj, :razao_social, :nome_fantasia, :fk_id_pessoa)";
-                        $stmt = $pdo->prepare($sql);
-                        $stmt->bindParam(':ie', $ie);
-                        $stmt->bindParam(':cnpj', $cnpj);
-                        $stmt->bindParam(':razao_social', $razao_social);
-                        $stmt->bindParam(':nome_fantasia', $nome_fantasia);
-                        $stmt->bindParam(':fk_id_pessoa', $id_pessoa);
-                        $stmt->execute();
-
-                        echo "Dados de pessoa jurídica inseridos com sucesso";
+                        echo "Dados Cliente Jurídico Cadastrado com ID: " . $id_pessoa_juridica;
                     }
             }
         //}
