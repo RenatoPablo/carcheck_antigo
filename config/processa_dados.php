@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     !empty($_POST['numero']) &&
                     !empty($_POST['bairro'])) {
                         $nomeEstado      = $_POST['estado'];
+                        $sigla           = $dadosCep['uf'];
                         $nomeCidade      = $_POST['cidade'];
                         $cep             = $_POST['cep'];
                         $nomeRua         = $_POST['rua'];
@@ -50,21 +51,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $nomeBairro      = $_POST['bairro'];
                         $descComplemento = $_POST['complemento'];
                         $descPontoRef    = $_POST['ponto_ref'];
-
                         // inserir estado
                         $id_estado = inserirEstado($pdo, $nomeEstado);
 
                         // inserir uf
-                        
+                        $id_uf = inserirUf($pdo, $sigla, $id_estado);
+
 
                         // inserir cidade
-                        $id_cidade = inserirCidade($pdo, $nomeCidade, $idUf);
+                        $id_cidade = inserirCidade($pdo, $nomeCidade, $id_uf);
 
                         // inserir cep
+                        $id_cep = inserirCep($pdo, $cep, $id_cidade);
 
-                    }
+                        //cadatrar rua
+                        $id_rua = cadastrarRua($pdo, $nomeRua);
 
-                $id_pessoa = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $idGenero);
+                        //cadastrar numero casa
+                        $id_numero_casa = cadastraNumeroCasa($pdo, $numeroCasa);
+
+                        //cadastrar bairro
+                        $id_bairro = cadastrarBairro($pdo, $nomeBairro);
+
+                        //verifica se os campos foram preenchidos
+                        if (!empty($_POST['complemento'])) {
+                            //cadastrar complemento
+                            $id_complemento = cadastrarComplemento($pdo, $descComplemento);
+                            $comple_verif = true;                              
+                        } else {
+                            $comple_verif = false;
+                        }
+                        if (!empty($_POST['ponto_ref'])) {                                
+                            //cadastrar ponto referencia
+                            $id_ponto_ref = cadastrarPontoRef($pdo, $descPontoRef);
+                            $ponto_verif = true;
+                        } else {
+                            $ponto_verif = false;
+                        }
+
+                        if (!empty($_POST['nome']) &&
+                            !empty($_POST['genero']) &&
+                            !empty($_POST['telefone']) &&
+                            !empty($_POST['email']) &&
+                            !empty($_POST['datadenascimento']) &&
+                            !empty($_POST['senha']) &&
+                            !empty($_POST['confirmarsenha']) &&
+                            $_POST['senha'] === $_POST['confirmarsenha']) {
+
+                                $nomePessoa = $_POST['nome'];
+                                $numTelefone = $_POST['telefone'];
+                                $enderecoEmail = $_POST['email'];
+                                $senha = $_POST['senha'];
+                                $dataNasc = $_POST['datadenascimento'];
+                                $id_genero = $_POST['genero'];
+                            }
+                        }
+                        
+                $id_pessoa = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $id_genero, $id_complemento, $id_ponto_ref, $comple_verif, $ponto_verif);
 
                 if (isset($_POST['tipo_pessoa'])) {
                     $tipo_pessoa = $_POST['tipo_pessoa'];

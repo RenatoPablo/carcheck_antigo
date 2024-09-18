@@ -90,7 +90,7 @@ function cadastrarPontoRef($pdo, $descPontoRef) {
 
 
 /////////////////////////pessoas/////////////////////////
-function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $idGenero) {
+function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $id_genero, $id_complemento, $id_ponto_ref, $id_estado, $id_uf, $id_cidade, $id_cep, $id_rua, $id_numero_casa, $id_bairro, $comple_verif, $ponto_verif) {
 
     if (!filter_var($enderecoEmail, FILTER_VALIDATE_EMAIL)) {
         throw new Exception('Email inválido.');
@@ -108,7 +108,9 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
     $hashedSenha = password_hash($senha, PASSWORD_DEFAULT);
 
     try {
-    $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero)";
+
+    if ($comple_verif && $ponto_verif) {
+        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_complemento, fk_id_ponto_ref) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :complemento, :ponto)";
     $stmtInsert = $pdo->prepare($sqlInsert);
     $stmtInsert->execute([
         ':nome' => $nomePessoa,
@@ -116,9 +118,65 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
         ':tele' => $numTelefone,
         ':email' => $enderecoEmail,
         ':senha' => $hashedSenha,
-        ':genero' => $idGenero
+        ':genero' => $id_genero,
+        ':complemento' => $id_complemento,
+        ':ponto' => $id_ponto_ref
     ]);
     return $pdo->lastInsertId();
+
+    } elseif ($ponto_verif) {
+        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_ponto_ref) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :ponto)";
+    $stmtInsert = $pdo->prepare($sqlInsert);
+    $stmtInsert->execute([
+        ':nome' => $nomePessoa,
+        ':dataNasc' => $dataNasc,
+        ':tele' => $numTelefone,
+        ':email' => $enderecoEmail,
+        ':senha' => $hashedSenha,
+        ':genero' => $id_genero,
+        ':ponto' => $id_ponto_ref
+    ]);
+    return $pdo->lastInsertId();
+    } elseif ($comple_verif) {
+        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_complemento, ) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :complemento, )";
+    $stmtInsert = $pdo->prepare($sqlInsert);
+    $stmtInsert->execute([
+        ':nome' => $nomePessoa,
+        ':dataNasc' => $dataNasc,
+        ':tele' => $numTelefone,
+        ':email' => $enderecoEmail,
+        ':senha' => $hashedSenha,
+        ':genero' => $id_genero,
+        ':complemento' => $id_complemento,
+        
+    ]);
+    return $pdo->lastInsertId();
+    } else {
+        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_estado, fk_id_uf, fk_id_cidade, fk_id_cep, fk_id_rua, fk_id_numero_casa, fk_id_bairro) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :estado, :uf, :cidade, :cep, :rua, :numeroCasa, :bairro)";
+        $stmtInsert = $pdo->prepare($sqlInsert);
+        $stmtInsert->execute([
+            ':nome' => $nomePessoa,
+            ':dataNasc' => $dataNasc,
+            ':tele' => $numTelefone,
+            ':email' => $enderecoEmail,
+            ':senha' => $hashedSenha,
+            ':genero' => $id_genero,
+            ':estado' => $id_estado,
+            ':uf' => $id_uf,
+            ':cidade' => $id_cidade,
+            ':cep' => $id_cep,
+            ':rua' => $id_rua,
+            ':numeroCasa' => $id_numero_casa,
+            ':bairro' => $id_bairro
+
+
+
+
+        ]);
+        return $pdo->lastInsertId();
+
+    }
+
     } catch (PDOException $e) {
         throw new Exception('Erro ao cadastrar a pessoa: ' . $e->getMessage());
     }
