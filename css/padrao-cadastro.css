@@ -222,4 +222,23 @@ label {
 
 .especifico {
   display: none; /* Inicialmente, escondemos os campos */
+  position: flex;
+  margin: auto;
 }
+
+/* foto */
+input[type="file"] {
+  padding: 10px;
+  border: 2px solid #4158D0;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+}
+
+input[type="file"]:hover {
+  border-color: #301ef5;
+  background-color: #f0f0f0;
+}
+

@@ -77,10 +77,23 @@
                     <div class="dados-pessoais">
                         <h2>Dados Pessoais</h2>
 
-
-                        
-
                         <br>
+
+                        <!-- adicionando foto de cadastro -->
+                         <div class="input-container">
+                            <label for="foto">Foto de Perfil:</label>
+                            <!-- Campo de upload de arquivo -->
+                            <input type="file" id="foto" name="foto" accept="image/*" onchange="previewImage(event)">
+                        </div>
+
+                          <!-- Div para pré-visualizar a imagem -->
+                        <div id="image-preview">
+                            <img id="output" width="150" style="display: none;" />
+                        </div>
+                        </form>
+                        
+                        
+                    
                         <!-- select para indeficar se pessoa fisica ou juridica -->
                     
                         <label class="radio-button">
@@ -139,43 +152,43 @@
                         </div>
                         <!-- campos especificos pessoa fisica/juridica -->
                         <div id="campos-fisica1" class="especifico">
-                            <div class="input-container">
+                        <div class="input-container">
                                 <label for="cpf">CPF:</label>
                                 <input id="cpf" name="cpf" maxlength="14" placeholder="000.000.000-00" oninput="mascaraCPF(this)" type="text" class="input">
-                                                                         <div class="underline"></div>
+                                <div class="underline"></div>
                             </div>
                         </div>
                         <div id="campos-fisica2" class="especifico">
-                            <div class="input-container">
+                        <div class="input-container">
                                 <label for="rg">RG:</label>
                                 <input id="rg" name="rg" maxlength="13" placeholder="00.000.000-00" oninput="mascaraRG(this)" type="text" class="input">
                                 <div class="underline"></div>
                             </div>
                         </div>
                         <!--/////////pessoa juridica/////////-->
+                        <div class="input-container">
                         <div id="campos-juridica1" class="especifico">
-                            <div class="input-container">
                                 <label for="cnpj">CNPJ:</label>
                                 <input id="cnpj" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCNPJ(this)" type="text" class="input">
                                 <div class="underline"></div>
                             </div>
                         </div>
+                        <div class="input-container">
                         <div id="campos-juridica2" class="especifico">
-                            <div class="input-container">
                                 <label for="ie">IE</label>
                                 <input id="ie" name="ie" maxlength="20" placeholder="00.000.000.000" oninput="mascaraIE(this)" type="text" class="input">
                                 <div class="underline"></div>
                             </div>
                         </div>
+                        <div class="input-container">
                         <div id="campos-juridica3" class="especifico">
-                            <div class="input-container">
                                 <label for="razao-social">Razão Social</label>
                                 <input id="razao-social" name="razao-social"  placeholder="Digite sua Razão Social"  type="text" class="input">
                                 <div class="underline"></div>
                             </div>
                         </div>
+                        <div class="input-container">
                         <div id="campos-juridica4" class="especifico">
-                            <div class="input-container">
                                 <label for="nome-fantasia">Nome Fantasia</label>
                                 <input id="nome-fantasia" name="nome-fantasia"  placeholder="Digite seu Nome Fantasia" type="text" class="input">
                                 <div class="underline"></div>
@@ -245,6 +258,7 @@
     <script src="../js/mascaras.js"></script>
     <script src="../js/script.js"></script>
     <script src="../js/popup-not.js"></script>
+    <script src="../js/foto.js" ></script>
 </body>
 </html>
 <?php endif; ?>
