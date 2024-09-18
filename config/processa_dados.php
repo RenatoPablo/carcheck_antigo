@@ -20,6 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ie = null;
     $razao = null;
     $fantasia = null;
+
+    $senha_incorreta = false;
+    $verificar_campos = false;
+    $sucesso_fisica = false;
+    $sucesso_juridica = false;
     
     try {
             
@@ -29,8 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 !empty($_POST['email']) && 
                 !empty($_POST['datadenascimento']) && 
                 !empty($_POST['senha']) && 
-                !empty($_POST['confirmarsenha']) && 
-                $_POST['senha'] === $_POST['confirmarsenha']) {
+                !empty($_POST['confirmarsenha'])) {
+
+                    if ($_POST['senha'] === $_POST['confirmarsenha']) {
 
                 $nomePessoa = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
                 $id_genero = intval($_POST['genero']);
@@ -101,43 +107,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         
                         }
-                        var_dump($id_cep);
+                        
 
                 $id_pessoa = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $id_genero, $id_complemento, $id_ponto_ref, $id_estado, $id_uf, $id_cidade, $id_cep, $id_rua, $id_numero_casa, $id_bairro, $comple_verif, $ponto_verif);
+
+                
 
                 if (isset($_POST['tipo_pessoa'])) {
                     $tipo_pessoa = $_POST['tipo_pessoa'];
 
-                    if ($tipo_pessoa === 'fisica' && $cpf && $rg) {
+                    if ($tipo_pessoa === 'fisica') {
                         $cpf = $_POST['cpf'];
                         $rg = $_POST['rg'];
 
                         $id_pessoa_fisica = cadastrarPessoaFisica($pdo, $cpf, $rg, $id_pessoa);
 
-                        echo "Dados Cliente Físico Cadastrado com ID: " . $id_pessoa_fisica;
-
+                        // echo "Dados Cliente Físico Cadastrado com ID: " . $id_pessoa_fisica;
+                        $sucesso_fisica = true;
                     } elseif ($tipo_pessoa === 'juridica') {
                         $cnpj = $_POST['cnpj'];
                         $ie = $_POST['ie'];
                         $razao = $_POST['razao-social'];
                         $fantasia = $_POST['nome-fantasia'];
 
-                        $id_pessoa_juridica = cadastrarPessoaJuridica($pdo, $cnpj, $ie, $razao, $fantasia);
+                        $id_pessoa_juridica = cadastrarPessoaJuridica($pdo, $cnpj, $ie, $razao, $fantasia, $id_pessoa);
 
-                        echo "Dados Cliente Jurídico Cadastrado com ID: " . $id_pessoa_juridica;
+                        // echo "Dados Cliente Jurídico Cadastrado com ID: " . $id_pessoa_juridica;
+
+                        $sucesso_juridica = true;
                     }
             }
-        //}
+        } else {
+            $senha_incorreta = true;
+        }
             
         } else {
-            echo "Preencha todos os dados pessoais, ou verifique se as senhas coincidem.";
+            // echo "Preencha todos os dados pessoais, ou verifique se as senhas coincidem.";
+            $verificar_campos = true;
         }
+
+        // Redirecionar para o HTML com parâmetros de resultado
+        $url = "../pages/cadastrar-cliente.php?sucesso_fisica=" . ($sucesso_fisica ? 'true' : 'false') .
+               "&sucesso_juridica=" . ($sucesso_juridica ? 'true' : 'false') .
+               "&senha_incorreta=" . ($senha_incorreta ? 'true' : 'false') .
+               "&verificar_campos=" . ($verificar_campos ? 'true' : 'false');
+        header("Location: $url");
+        exit();
 
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
     }
 } else {
-    header("Location: ../pages/cadastras-cliente.php");
+    header("Location: ../pages/cadastrar-cliente.php");
     exit();
 }
 ?>

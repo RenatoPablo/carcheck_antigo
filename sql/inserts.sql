@@ -62,6 +62,6 @@ VALUES
     
 INSERT INTO pessoas(nome_pessoa, numero_telefone, endereco_email, senha, data_nasc, fk_id_permissao, fk_id_cep, fk_id_rua, fk_id_genero, fk_id_numero_casa, fk_id_cidade, fk_id_bairro, fk_id_complemento, fk_id_ponto_ref)
 VALUES
-	('Renato Pablo Cuim Ferrarezi', '17997782137', 'renatocuim@gmail.com', '76028462b3ec05267dd142a0e93a401318bb7704', '2004-03-26', 3, 1, 1, 1, 1, 1, 1, 1, 1),
-    ('Gabriela Batista Matos', '18997610162', 'gabi_batistamatos@hotmail.com', '76028462b3ec05267dd142a0e93a401318bb7704', '2003-01-26', 1, 2, 2, 2, 2, 2, 2, 1, 1),
-    ('Joâo Pedro Gonçalves Pinheirinho ', '17997713350', 'trove.eu69@gmail.com', '76028462b3ec05267dd142a0e93a401318bb7704', '2002-10-07', 2, 1, 3, 3, 3, 1, 3, 1, 1);
+	('Renato Pablo Cuim Ferrarezi', '17997782137', 'renatocuim@gmail.com', '$2y$10$H4ZkVAC3yoXb7EGLxMkQGOeKFfGq.ALhIM4PMA9Ps6d6pIMH6BE.6', '2004-03-26', 3, 1, 1, 1, 1, 1, 1, 1, 1),
+    ('Gabriela Batista Matos', '18997610162', 'gabi_batistamatos@hotmail.com', '$2y$10$H4ZkVAC3yoXb7EGLxMkQGOeKFfGq.ALhIM4PMA9Ps6d6pIMH6BE.6', '2003-01-26', 1, 2, 2, 2, 2, 2, 2, 1, 1),
+    ('Joâo Pedro Gonçalves Pinheirinho ', '17997713350', 'trove.eu69@gmail.com', '$2y$10$H4ZkVAC3yoXb7EGLxMkQGOeKFfGq.ALhIM4PMA9Ps6d6pIMH6BE.6', '2002-10-07', 2, 1, 3, 3, 3, 1, 3, 1, 1);
