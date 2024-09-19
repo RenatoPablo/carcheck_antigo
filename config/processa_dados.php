@@ -111,7 +111,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $id_pessoa = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $id_genero, $id_complemento, $id_ponto_ref, $id_estado, $id_uf, $id_cidade, $id_cep, $id_rua, $id_numero_casa, $id_bairro, $comple_verif, $ponto_verif);
 
-                
+                // Verifica se o arquivo foi enviado
+                if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+
+                    // Parâmetros do arquivo enviado
+                    $fileTmpPath = $_FILES['foto']['tmp_name'];  // Caminho temporário do arquivo
+                    $fileName = $_FILES['foto']['name'];         // Nome original do arquivo
+                    $fileSize = $_FILES['foto']['size'];         // Tamanho do arquivo
+                    $fileType = $_FILES['foto']['type'];         // Tipo MIME do arquivo
+                    $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION); // Extensão do arquivo
+
+                    // Definir diretório de destino
+                    $uploadDir = '../image/'; // Certifique-se de criar essa pasta com permissão de escrita no servidor
+
+                    // Gerar um nome único para o arquivo
+                    $newFileName = uniqid() . '.' . $fileExtension;
+
+                    // Definir o caminho completo para o arquivo
+                    $uploadFilePath = $uploadDir . $newFileName;
+
+                    // Validar o tipo do arquivo (somente imagens)
+                    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                    if (in_array(strtolower($fileExtension), $allowedExtensions)) {
+
+                        // Validar o tamanho do arquivo (exemplo: max 5MB)
+                        if ($fileSize < 5 * 1024 * 1024) {
+
+                            // Mover o arquivo para o diretório de destino
+                            if (move_uploaded_file($fileTmpPath, $uploadFilePath)) {
+                                echo "Arquivo enviado com sucesso! Caminho: " . $uploadFilePath;
+
+                                // Agora vamos atualizar o registro da pessoa com o caminho da imagem
+                                $sql = "UPDATE pessoas SET foto = :foto WHERE id_pessoa = :id";
+
+                                // Preparar e executar a consulta
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->bindParam(':foto', $uploadFilePath);
+                                $stmt->bindParam(':id', $id_pessoa, PDO::PARAM_INT);
+
+                                if ($stmt->execute()) {
+                                    echo "Imagem cadastrada com sucesso!";
+                                } else {
+                                    echo "Erro ao cadastrar a imagem no banco de dados.";
+                                }
+
+                            } else {
+                                echo "Erro ao mover o arquivo para o diretório de destino.";
+                            }
+
+                        } else {
+                            echo "O arquivo é muito grande. O limite é de 5MB.";
+                        }
+
+                    } else {
+                        echo "Tipo de arquivo não permitido. Somente JPG, JPEG, PNG e GIF são aceitos.";
+                    }
+
+                } else {
+                    echo "Nenhum arquivo foi enviado ou houve um erro no upload.";
+                }
 
                 if (isset($_POST['tipo_pessoa'])) {
                     $tipo_pessoa = $_POST['tipo_pessoa'];

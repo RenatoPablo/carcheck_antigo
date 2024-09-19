@@ -69,7 +69,7 @@
     
         <!-- <img class="imgCadastroPessoa" src="../image/perfilCadastro.png" alt="foto cadastro pessoa"> -->
         
-        <form action="../config/processa_dados.php" method="POST">
+        <form action="../config/processa_dados.php" method="POST" enctype="multipart/form-data">
             
                 
 
@@ -80,20 +80,25 @@
 
                         <br>
 
+                        
+                        
+                        
+                        
                         <!-- adicionando foto de cadastro -->
-                         <div class="input-container">
-                            <label for="foto">Foto de Perfil:</label>
-                            <!-- Campo de upload de arquivo -->
+                        <div class="input-container">
+                            <label for="foto">Escolha uma foto:</label>
+                            <!-- Botão de upload personalizado -->
+                            <label for="foto" class="custom-file-upload">
+                                Selecione a foto
+                            </label>
                             <input type="file" id="foto" name="foto" accept="image/*" onchange="previewImage(event)">
-                        </div>
-
-                          <!-- Div para pré-visualizar a imagem -->
-                        <div id="image-preview">
-                            <img id="output" width="150" style="display: none;" />
-                        </div>
-                        </form>
-                        
-                        
+                            <!-- Área de visualização da imagem -->
+                            <div class="image-preview" id="imagePreview">
+                                <span>Imagem não selecionada</span>
+                            </div>
+                            
+                    </div>
+                        <div></div>
                     
                         <!-- select para indeficar se pessoa fisica ou juridica -->
                     
@@ -111,7 +116,7 @@
                         <div class="input-container">
                             <label for="nome">Nome Completo:</label>
                             <input id="nome" name="nome" placeholder="Digite seu Nome" type="text" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <div class="input-container">
                             <div class="ls-custom-select">
@@ -123,48 +128,48 @@
                                     <option value="2">Feminino</option>
                                     <option value="3">Outro</option>
                                 </select>
-                                <div class="underline"></div>
+                                <!-- <div class="underline"></div>  -->
                             </div>
                         </div>
-                            <div class="input-container">
-                                <label for="telefone">Telefone:</label>
-                                <input id="telefone" name="telefone" maxlength="14" placeholder="(xx)xxxxx-xxxx" oninput="mascaraTELEFONE(this)" 
-                                 type="text" class="input">
-                                <div class="underline"></div>
-                            </div>
+                        <div class="input-container">
+                            <label for="telefone">Telefone:</label>
+                            <input id="telefone" name="telefone" maxlength="15" placeholder="(00) 00000-0000" oninput="mascaraTelefone(this)" 
+                                type="text" class="input">
+                            <!-- <div class="underline"></div>  -->
+                        </div>
                         <div class="input-container">
                             <label for="email">Email:</label>
                             <input id="email" name="email" placeholder="Digite seu email" type="email" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <div class="input-container">
                             <label for="datadenascimento">Data de Nascimento:</label>
                             <input id="datadenascimento" name="datadenascimento" placeholder="Digite sua Data de Nascimento" type="date" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <div class="input-container">
                             <label for="senha">Senha:</label>
                             <input id="senha" name="senha" placeholder="Insira uma Senha" type="password" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <div class="input-container">
                             <label for="confirmarsenha">Confirmar Senha:</label>
                             <input id="confirmarsenha" name="confirmarsenha"placeholder="Confirme sua senha" type="password" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <!-- campos especificos pessoa fisica/juridica -->
                         <div id="campos-fisica1" class="especifico">
                         <div class="input-container">
                                 <label for="cpf">CPF:</label>
                                 <input id="cpf" name="cpf" maxlength="14" placeholder="000.000.000-00" oninput="mascaraCPF(this)" type="text" class="input">
-                                <div class="underline"></div>
+                                <!-- <div class="underline"></div>  -->
                             </div>
                         </div>
                         <div id="campos-fisica2" class="especifico">
                         <div class="input-container">
                                 <label for="rg">RG:</label>
                                 <input id="rg" name="rg" maxlength="13" placeholder="00.000.000-00" oninput="mascaraRG(this)" type="text" class="input">
-                                <div class="underline"></div>
+                                <!-- <div class="underline"></div>  -->
                             </div>
                         </div>
                         <!--/////////pessoa juridica/////////-->
@@ -172,28 +177,28 @@
                         <div id="campos-juridica1" class="especifico">
                                 <label for="cnpj">CNPJ:</label>
                                 <input id="cnpj" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCNPJ(this)" type="text" class="input">
-                                <div class="underline"></div>
+                                <!-- <div class="underline"></div>  -->
                             </div>
                         </div>
                         <div class="input-container">
                         <div id="campos-juridica2" class="especifico">
                                 <label for="ie">IE</label>
                                 <input id="ie" name="ie" maxlength="20" placeholder="00.000.000.000" oninput="mascaraIE(this)" type="text" class="input">
-                                <div class="underline"></div>
+                                <!-- <div class="underline"></div>  -->
                             </div>
                         </div>
                         <div class="input-container">
                         <div id="campos-juridica3" class="especifico">
                                 <label for="razao-social">Razão Social</label>
                                 <input id="razao-social" name="razao-social"  placeholder="Digite sua Razão Social"  type="text" class="input">
-                                <div class="underline"></div>
+                                <!-- <div class="underline"></div>  -->
                             </div>
                         </div>
                         <div class="input-container">
                         <div id="campos-juridica4" class="especifico">
                                 <label for="nome-fantasia">Nome Fantasia</label>
                                 <input id="nome-fantasia" name="nome-fantasia"  placeholder="Digite seu Nome Fantasia" type="text" class="input">
-                                <div class="underline"></div>
+                                <!-- <div class="underline"></div>  -->
                             </div>
                         </div>
                     
@@ -208,17 +213,17 @@
                         <div class="input-container">
                             <label for="cep">CEP:</label>
                             <input id="cep" name="cep" placeholder="Digite seu CEP" type="text" class="input" onblur="buscarCep()">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <div class="input-container">
                             <label for="estado">Estado:</label>
                             <input id="estado" name="estado" placeholder="Estado" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <div class="input-container">
                             <label for="cidade">Cidade:</label>
                             <input id="cidade" name="cidade" placeholder="Cidade" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
 
                         
@@ -226,27 +231,28 @@
                         <div class="input-container">
                             <label for="rua">Rua:</label>
                             <input id="rua" name="rua" placeholder="Digite sua Rua" type="text" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <div class="input-container">
                             <label for="numero">Numero:</label>
                             <input id="numero" name="numero" placeholder="Digite seu Numero" type="text" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <div class="input-container">
                             <label for="bairro">Bairro:</label>
                             <input id="bairro" name="bairro" placeholder="Digite seu Bairro" type="text" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                         <div class="input-container">
                             <label for="complemento">Complemento:</label>
                             <input id="complemento" name="complemento" placeholder="Digite seu Complemento" type="text" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
+                        <!--  -->
                         <div class="input-container">
                             <label for="ponto_ref">Ponto de Referência:</label>
                             <input id="ponto_ref" name="ponto_ref" placeholder="Digite seu Ponto de Referência" type="text" class="input">
-                            <div class="underline"></div>
+                            <!-- <div class="underline"></div>  -->
                         </div>
                     </div>
                     <button class="botao-submit" type="submit">ENVIAR</button>

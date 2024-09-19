@@ -8,6 +8,10 @@ body {
     overflow-x: hidden; /* Evita rolagem horizontal */
      overflow-y: scroll; /* Evita rolagem vertical */
     background-color: #ffffff; /* Adicionado para consistência */
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 180px;
 }
 
 /* Estilos gerais do header */
