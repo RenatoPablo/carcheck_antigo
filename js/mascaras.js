@@ -55,4 +55,19 @@
         
             input.value = ie;
         }
+
+        function mascaraTelefone(input) {
+            let telefone = input.value;
+            
+            // Remove qualquer coisa que não seja número
+            telefone = telefone.replace(/\D/g, "");
+        
+            // Adiciona a máscara para telefone (formato exemplo: (00) 00000-0000)
+            telefone = telefone.replace(/^(\d{2})(\d)/, "($1) $2");
+            telefone = telefone.replace(/(\d{5})(\d{1,2})$/, "$1-$2");
+        
+            input.value = telefone;
+        }
+        
+        
         

@@ -99,7 +99,7 @@
                         <label class="radio-button">
                         <input type="radio" name="tipo_pessoa" value="fisica">
                         <span class="radio"></span>
-                        Pessoa Física.
+                        Pessoa Física
                         </label>
 
                         <label class="radio-button">
@@ -127,7 +127,8 @@
                         </div>
                             <div class="input-container">
                                 <label for="telefone">Telefone:</label>
-                                <input id="telefone" name="telefone" placeholder="Digite seu Telefone" type="number" class="input">
+                                <input id="telefone" name="telefone" maxlength="14" placeholder="(xx)xxxxx-xxxx" oninput="mascaraTELEFONE(this)" 
+                                 type="text" class="input">
                                 <div class="underline"></div>
                             </div>
                         <div class="input-container">
