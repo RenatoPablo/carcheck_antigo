@@ -65,6 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'cep' => $cep,
                 'mensagem' => 'Dados do CEP retornados com sucesso!'
             ]);
+
+            //$json_response = ob_get_clean();
             
         } else {
             // Caso o CEP não tenha sido informado

@@ -15,17 +15,19 @@
 
         function mascaraRG(input) {
             let rg = input.value;
-
-            // Remove qualquer coisa que não seja número
-            rg = rg.replace(/\D/g, "");
-
+        
+            // Remove qualquer coisa que não seja número ou 'X' no final
+            rg = rg.replace(/[^0-9Xx]/g, ""); // Permite números e 'X'
+        
             // Adiciona pontos e traço
             rg = rg.replace(/(\d{2})(\d)/, "$1.$2");
             rg = rg.replace(/(\d{3})(\d)/, "$1.$2");
-            rg = rg.replace(/(\d{3})(\d{1})$/, "$1-$2");
-
-            input.value = rg;
+            rg = rg.replace(/(\d{3})([\dXx])$/, "$1-$2"); // Permite o último caractere ser 'X'
+        
+            input.value = rg.toUpperCase(); // Converte o 'x' minúsculo para 'X' maiúsculo, se for o caso
         }
+        
+        
 
         function mascaraCNPJ(input) {
             let cnpj = input.value;

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../css/padrao-cadastro.css">
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/popup-cadastro.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <title>Cadastro Cliente</title>
 </head>
@@ -253,6 +254,39 @@
         
         </form>
     
+        <script>
+        // Exibir popup com base nas variáveis passadas do PHP
+        <?php if (isset($_GET['sucesso_fisica']) && $_GET['sucesso_fisica'] == 'true'): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: 'Cadastro de pessoa física realizado com sucesso!',
+                confirmButtonText: 'OK'
+            });
+        <?php elseif (isset($_GET['sucesso_juridica']) && $_GET['sucesso_juridica'] == 'true'): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: 'Cadastro de pessoa jurídica realizado com sucesso!',
+                confirmButtonText: 'OK'
+            });
+        <?php elseif (isset($_GET['senha_incorreta']) && $_GET['senha_incorreta'] == 'true'): ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'As senhas não coincidem. Tente novamente.',
+                confirmButtonText: 'OK'
+            });
+        <?php elseif (isset($_GET['verificar_campos']) && $_GET['verificar_campos'] == 'true'): ?>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atenção!',
+                text: 'Preencha todos os campos obrigatórios.',
+                confirmButtonText: 'OK'
+            });
+        <?php endif; ?>
+    </script>
+
     <script src="../js/buscarCep.js"></script>
     <script src="../js/pop-cadastro.js"></script>
     <script src="../js/valida-fisica-juridi.js"></script>
