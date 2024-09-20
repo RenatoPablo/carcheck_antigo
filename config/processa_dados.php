@@ -7,7 +7,7 @@ if (!isset($_SESSION) OR $_SESSION['logado'] != true) {
 
 require 'config.php';
 require 'api_cep.php';
-require 'funcoes_cadastro_pessoa.php';
+require '../function/funcoes_cadastro_pessoa.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
