@@ -21,7 +21,7 @@
     font-size: 40px;
     margin: 0 auto;
 }
-.div-inicial p{
+.div-inicial-p{
     position: relative;
     top: -20px;
     
@@ -52,7 +52,7 @@
     align-items: center;
     justify-content: flex-start;
     padding-top: 15%;
-    text-decoration: underline;
+    
     font-size: 20px;
     cursor: pointer;
     

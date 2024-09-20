@@ -41,7 +41,7 @@
   }
   
   .heading {
-    font-size: 18px; /* Tamanho da fonte reduzido em 2px */
+    font-size: 17px; /* Tamanho da fonte reduzido em 2px */
     text-transform: capitalize;
     font-weight: 700;
   }
@@ -61,5 +61,23 @@
   
   .card:hover::before {
     transform: rotate(-90deg) scaleX(1.20) scaleY(0.93);
+  }
+
+  .img-card {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    bottom: 20px;
+    width: 55px;
+    height: 55px;
+    
+  }
+  .img-card-especifica{
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    bottom: 20px;
+    width: 100px;
+    height: 100px;
   }
   

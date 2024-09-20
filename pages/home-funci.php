@@ -64,38 +64,43 @@
 
     <div class="div-inicial">
         <h2>Olá, Malaria Gorda!</h2>
-        <p>O que você deseja fazer? Selecione uma das opções:</p>
+        <p class="div-inicial-p">O que você deseja fazer? Selecione uma das opções:</p>
         
         <div class="container-acesso">
             <!-- Cartões de acesso rápido -->
             <a href="cadastrar-cliente.php">
                 <div class="card">
+                <img src="../image/iconeCadastrarCliente.png" alt="Cadastrar Cliente" class="img-card">
                     <p class="heading">Cadastrar Cliente</p>
                 </div>
             </a>
             <a href="testes.php">
                 <div class="card">
-                    <img src="../image/carro.png" alt="icone de carro">
+                    <img src="../image/carro.png" alt="icone de carro" class="img-card-especifica">
                     <p class="heading">Cadastrar Veículos</p>
                 </div>
             </a>
             <a href="">
                 <div class="card">
-                    <p class="heading">Cadastrar Cliente</p>
+                    <img src="../image/iconeConsultarOrdemServiço.png" alt="Consultar Ordem Serviço" class="img-card">
+                    <p class="heading">Consultar Ordem de Serviço</p>
                 </div>
             </a>
             <a href="">
                 <div class="card">
+                    <img src="../image/iconeCadastrarServiço.png" alt="Cadastrar Serviço" class="img-card">
                     <p class="heading">Cadastrar Serviços</p>
                 </div>
             </a>
             <a href="">
                 <div class="card">
+                <img src="../image/iconeGerenciarEstoque.png" alt="Gerenciar Estoque" class="img-card">
                     <p class="heading">Gerenciar Estoque</p>
                 </div>
             </a>
             <a href="">
                 <div class="card">
+                    <img src="../image/iconeEmetirOrdemServiço.png" alt="icone emetir ordem de serviço" class="img-card">
                     <p class="heading">Emitir Ordem de Serviço</p>
                 </div>
             </a>
