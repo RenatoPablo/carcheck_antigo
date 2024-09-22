@@ -61,6 +61,21 @@
 
 
 }
+.botao-back{
+  position: relative;
+  width: 100px;
+  display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #0D3587;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px;
+    top: 90%;
+
+}
 
 .input-container {
   position: flex;

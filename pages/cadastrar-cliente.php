@@ -255,7 +255,8 @@
                             <!-- <div class="underline"></div>  -->
                         </div>
                     </div>
-                    <button class="botao-submit" type="submit">ENVIAR</button>
+                    <button class="botao-back" type="submit">VOLTAR</button>  
+                    <button class="botao-submit" type="back">ENVIAR</button>
                 </div>
         
         </form>
