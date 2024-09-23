@@ -8,6 +8,25 @@
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/cadastrar-veiculo.css">
+    <style>
+        /* Estilo básico para a lista de sugestões */
+        .suggestions {
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            position: absolute;
+            background-color: white;
+            width: 100%;
+            z-index: 100;
+        }
+        .suggestions li {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestions li:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -54,31 +73,32 @@
 
     </header>
 
-        <form action="processa-cadastro-veiculo.php" method="post">
+        <form action="../config/processa-cadastro-veiculo.php" method="post">
             <div class="cadastro-veiculo">
                 <div>
                     <label for="prop">Proprietário</label>
-                    <input id="prop" type="text">
+                    <input id="prop" type="text" name="proprietario" onkeyup="buscarProprietarios()" autocomplete="off">
+                    <ul id="sugestoes" class="suggestions"></ul>
                 </div>
                 <div>
                     <label for="placa">Placa</label>
-                    <input id="placa" type="text">
+                    <input id="placa" type="text" name="placa" oninput="mascaraPlacaVeiculo(this)">
                 </div>
                 <div>
                     <label for="cor">Cor</label>
-                    <input id="cor" type="text">
+                    <input id="cor" name="cor" type="text">
                 </div>
                 <div>
                     <label for="tipo">Tipo Veículo</label>
-                    <input id="tipo" type="text">
+                    <input id="tipo" name="tipo" type="text">
                 </div>
                 <div>
                     <label for="modelo">Modelo</label>
-                    <input id="modelo" type="text">
+                    <input id="modelo" name="modelo" type="text">
                 </div>
                 <div>
                     <label for="marca">Marca</label>
-                    <input id="marca" type="text">
+                    <input id="marca" name="marca" type="text">
                 </div>
                 <button type="submit">Enviar</button>
             </div>
@@ -87,5 +107,7 @@
 
     <script src="../js/script.js"></script>
     <script src="../js/popup-not.js"></script>
+    <script src="../js/buscarProprietario.js"></script>
+    <script src="../js/mascaras.js"></script>
 </body>
 </html>

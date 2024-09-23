@@ -70,6 +70,43 @@
         
             input.value = telefone;
         }
+
+        function mascaraPlacaVeiculo(input) {
+
+            let value = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+            // Variáveis para armazenar letras e números separados
+            let letters = '';
+            let numbers = '';
+        
+            // Separar letras e números
+            for (let char of value) {
+                if (/[A-Z]/.test(char)) {
+                    letters += char;
+                } else if (/[0-9]/.test(char)) {
+                    numbers += char;
+                }
+            }
+        
+            // Aplicar o formato com base na quantidade de letras e números
+            if (letters.length >= 4) {
+                // Formato AAA1A12
+                if (numbers.length >= 3) {
+                    input.value = `${letters.substring(0, 3)}${numbers[0]}${letters[3]}${numbers.substring(1, 3)}`;
+                } else {
+                    input.value = `${letters.substring(0, 3)}${letters[3]}${numbers}`;
+                }
+            } else if (letters.length === 3 && numbers.length >= 4) {
+                // Formato AAA-1111
+                input.value = `${letters.substring(0, 3)}-${numbers.substring(0, 4)}`;
+            } else {
+                // Se não corresponder a nenhum formato, apenas concatena
+                input.value = letters + numbers;
+            }
+        
+
+        }
+        
         
         
         
