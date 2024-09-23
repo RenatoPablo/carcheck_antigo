@@ -67,7 +67,7 @@
     </header>
 
     
-        <!-- <img class="imgCadastroPessoa" src="../image/perfilCadastro.png" alt="foto cadastro pessoa"> -->
+    
         
         <form action="../config/processa_dados.php" method="POST" enctype="multipart/form-data">
             
@@ -255,12 +255,12 @@
                             <!-- <div class="underline"></div>  -->
                         </div>
                     </div>
-                    <button class="botao-back" type="submit">VOLTAR</button>  
-                    <button class="botao-submit" type="back">ENVIAR</button>
+                    <button class="botao-back" type="button" onclick="voltarPagina()">VOLTAR</button>
+                    <button class="botao-submit" type="submit">ENVIAR</button>
                 </div>
         
         </form>
-    
+        
         <script>
         // Exibir popup com base nas variáveis passadas do PHP
         <?php if (isset($_GET['sucesso_fisica']) && $_GET['sucesso_fisica'] == 'true'): ?>
@@ -301,6 +301,7 @@
     <script src="../js/script.js"></script>
     <script src="../js/popup-not.js"></script>
     <script src="../js/foto.js" ></script>
+    <script src="../js/botao-voltar.js"></script>
 </body>
 </html>
 <?php endif; ?>
