@@ -24,8 +24,8 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
+            <a href="../pages/home-cliente.php">Home</a>
+            <a href="../pages/cadastrar-funci.php">Cadastrar Funcionário</a>
             <a href="#clients">Clients</a>
             <a href="../config/sair.php">Sair</a>
         </div>

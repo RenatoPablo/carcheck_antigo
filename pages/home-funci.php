@@ -23,7 +23,7 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <a href="#home">Home</a>
-            <a href="#services">Services</a>
+            <a href="../pages/cadastrar-funci.php">Cadastrar Funcionário</a>
             <a href="#clients">Clients</a>
             <a href="../config/sair.php">Sair</a>
         </div>
@@ -74,7 +74,7 @@
                     <p class="heading">Cadastrar Cliente</p>
                 </div>
             </a>
-            <a href="">
+            <a href="../pages/cadastrar-veiculo.php">
                 <div class="card">
                     <img src="../image/carro.png" alt="icone de carro" class="img-card-especifica">
                     <p class="heading">Cadastrar Veículos</p>

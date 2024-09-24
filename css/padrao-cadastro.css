@@ -30,6 +30,12 @@
 
 }
 
+.funcionario{
+  display: grid;
+  grid-template-columns: repeat(2, 300px);
+  gap: 20px;
+}
+
 .endereco{
   display: grid;
     gap: 20px;

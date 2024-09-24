@@ -69,7 +69,7 @@
     
     
         
-        <form action="../config/processa_dados.php" method="POST" enctype="multipart/form-data">
+        <form action="../config/processa-cadastro-funci.php" method="POST" enctype="multipart/form-data">
             
                 
 
@@ -205,6 +205,23 @@
                     </div>
                         
                     <br>
+
+                    <div class="funcionario">
+                        <h2>Funcionario</h2>
+                        <br>
+                        <div class="input-container">
+                            <label for="cargo">Cargo:</label>
+                            <input id="cargo" name="cargo" placeholder="Digite o Cargo" type="text" class="input">
+                            <!-- <div class="underline"></div>  -->
+                        </div>
+                        <div class="input-container">
+                            <label for="funcao">Função:</label>
+                            <input id="funcao" name="funcao" placeholder="Digite a Função" type="text" class="input">
+                            <!-- <div class="underline"></div>  -->
+                        </div>
+                    </div>
+
+                    <br>
                     
                     <div class="endereco">
                     <h2>Endereço</h2>
@@ -267,14 +284,14 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Sucesso!',
-                text: 'Cadastro de pessoa física realizado com sucesso!',
+                text: 'Cadastro de funcionário com dados físicos realizado com sucesso!',
                 confirmButtonText: 'OK'
             });
         <?php elseif (isset($_GET['sucesso_juridica']) && $_GET['sucesso_juridica'] == 'true'): ?>
             Swal.fire({
                 icon: 'success',
                 title: 'Sucesso!',
-                text: 'Cadastro de pessoa jurídica realizado com sucesso!',
+                text: 'Cadastro de funcionário com dados jurídicos realizado com sucesso!',
                 confirmButtonText: 'OK'
             });
         <?php elseif (isset($_GET['senha_incorreta']) && $_GET['senha_incorreta'] == 'true'): ?>
