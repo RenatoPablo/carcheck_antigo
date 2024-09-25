@@ -1,39 +1,13 @@
-<?php
-    session_start();
-    // print_r($_SESSION);
-    if(!isset($_SESSION) OR $_SESSION['logado'] != true):
-		header("location: ../config/sair.php");		
-	else:
-?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-bt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Veículo</title>
+    <title>Cadastro de Serviços</title>
     <link rel="stylesheet" href="../css/style.css">
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/popup-not.css">
-    <link rel="stylesheet" href="../css/cadastrar-veiculo.css">
-    <style>
-        /* Estilo básico para a lista de sugestões */
-        .suggestions {
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-            position: absolute;
-            background-color: white;
-            width: 100%;
-            z-index: 100;
-        }
-        .suggestions li {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .suggestions li:hover {
-            background-color: #f0f0f0;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/cadastro-servico.css">
 </head>
 <body>
     <header>
@@ -76,46 +50,26 @@
             <div class="bar bar--middle"></div>
             <div class="bar bar--bottom"></div>
         </label>
-
-
     </header>
 
-        <form action="../config/processa-cadastro-veiculo.php" method="post">
-            <div class="cadastro-veiculo">
+        <form action="" method="post">
+            <div class="servicos">
                 <div>
-                    <label for="prop">Proprietário</label>
-                    <input id="prop" type="text" name="proprietario" onkeyup="buscarProprietarios()" autocomplete="off">
-                    <ul id="sugestoes" class="suggestions"></ul>
+                    <label for="nome">Nome serviço:</label>
+                    <input type="text" name="nome" id="nome">
                 </div>
                 <div>
-                    <label for="placa">Placa</label>
-                    <input id="placa" type="text" name="placa" oninput="mascaraPlacaVeiculo(this)">
+                    <label for="descr">Descrição serviço:</label>
+                    <input type="text" name="descr" id="descr">
                 </div>
                 <div>
-                    <label for="cor">Cor</label>
-                    <input id="cor" name="cor" type="text">
+                    <label for="valor">Valor:</label>
+                    <input type="number" name="valor" id="valor">
                 </div>
-                <div>
-                    <label for="tipo">Tipo Veículo</label>
-                    <input id="tipo" name="tipo" type="text">
-                </div>
-                <div>
-                    <label for="modelo">Modelo</label>
-                    <input id="modelo" name="modelo" type="text">
-                </div>
-                <div>
-                    <label for="marca">Marca</label>
-                    <input id="marca" name="marca" type="text">
-                </div>
-                <button type="submit">Enviar</button>
             </div>
-
         </form>
 
     <script src="../js/script.js"></script>
     <script src="../js/popup-not.js"></script>
-    <script src="../js/buscarProprietario.js"></script>
-    <script src="../js/mascaras.js"></script>
 </body>
 </html>
-<?php endif ?>

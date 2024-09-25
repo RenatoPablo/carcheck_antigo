@@ -63,7 +63,13 @@
     </header>
 
     <div class="div-inicial">
-        <h2>Olá, Malaria Gorda!</h2>
+        <h2>
+            <?php
+                if (isset($_SESSION['nomeUsuario'])) {
+                    echo "Ola, seja bem vindo " . htmlspecialchars($_SESSION['nomeUsuario']);
+                }
+            ?>
+        </h2>
         <p class="div-inicial-p">O que você deseja fazer? Selecione uma das opções:</p>
         
         <div class="container-acesso">

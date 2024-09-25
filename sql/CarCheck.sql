@@ -206,13 +206,21 @@ CREATE TABLE marcas_servicos_produtos (
     nome_marca_produto VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE tipos_servicos_produtos (
+    id_tipo_servico_produto INT AUTO_INCREMENT PRIMARY,
+    tipo_servico_produto varchar(50) NOT NULL,
+);
+
 CREATE TABLE servicos_produtos (
     id_servico_produto INT AUTO_INCREMENT PRIMARY KEY,
     nome_servico_produto varchar(150) NOT NULL,
     descricao TEXT,
     valor_servico_produto FLOAT NOT NULL,
+
     fk_id_marca_produto INT,
-    FOREIGN KEY (fk_id_marca_produto) REFERENCES marcas_servicos_produtos(id_marca_produto) ON UPDATE CASCADE ON DELETE SET NULL
+    fk_id_tipo_servico INT,
+    FOREIGN KEY (fk_id_marca_produto) REFERENCES marcas_servicos_produtos(id_marca_produto) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_tipo_servico) REFERENCES tipos_servicos_produtos(id_tipo_servico_produto) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE itens_manutencoes_servicos (
