@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    // print_r($_SESSION);
+    if(!isset($_SESSION) OR $_SESSION['logado'] != true):
+		header("location: ../config/sair.php");		
+	else:
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,23 +16,6 @@
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/cadastrar-veiculo.css">
     <style>
-        /* Estilo básico para a lista de sugestões */
-        .suggestions {
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-            position: absolute;
-            background-color: white;
-            width: 100%;
-            z-index: 100;
-        }
-        .suggestions li {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .suggestions li:hover {
-            background-color: #f0f0f0;
-        }
     </style>
 </head>
 <body>
@@ -111,3 +101,4 @@
     <script src="../js/mascaras.js"></script>
 </body>
 </html>
+<?php endif; ?>

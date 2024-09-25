@@ -74,7 +74,7 @@
                     <p class="heading">Cadastrar Cliente</p>
                 </div>
             </a>
-            <a href="">
+            <a href="cadastrar-veiculo.php">
                 <div class="card">
                     <img src="../image/carro.png" alt="icone de carro" class="img-card-especifica">
                     <p class="heading">Cadastrar Veículos</p>
