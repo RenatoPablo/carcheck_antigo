@@ -16,23 +16,6 @@
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/cadastrar-veiculo.css">
     <style>
-        /* Estilo básico para a lista de sugestões */
-        .suggestions {
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-            position: absolute;
-            background-color: white;
-            width: 100%;
-            z-index: 100;
-        }
-        .suggestions li {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .suggestions li:hover {
-            background-color: #f0f0f0;
-        }
     </style>
 </head>
 <body>
