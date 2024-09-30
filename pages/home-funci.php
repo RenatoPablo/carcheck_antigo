@@ -1,5 +1,8 @@
 <?php
     session_start();
+
+
+
     // print_r($_SESSION);
     if(!isset($_SESSION) OR $_SESSION['logado'] != true):
 		header("location: ../config/sair.php");		

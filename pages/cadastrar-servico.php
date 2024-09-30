@@ -4,6 +4,8 @@
     if(!isset($_SESSION) OR $_SESSION['logado'] != true):
 		header("location: ../config/sair.php");		
 	else:
+
+    $permissao = $_SESSION['permissaoUsuario'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-bt">
@@ -48,7 +50,13 @@
 
             <!-- <a href="pages/notificacao.html"><i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></a> -->
 
-            <a href="pages/home.html"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
+            <?php if($permissao == 2 || $permissao == 3) : ?>
+                <a href="../pages/home-funci.php"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
+            <?php endif; ?>
+
+            <?php if($permissao == 1) : ?>
+                <a href="../pages/home-cliente.php"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
+            <?php endif; ?>
             <a href="../pages/perfil.php"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
         </div>
         <input type="checkbox" id="checkbox" onclick="toggleSidebar()">

@@ -10,6 +10,7 @@ if(!isset($_POST) OR empty($_POST['endereco_email']) OR empty($_POST['senha'])) 
     // Captura os dados enviados pelo formulário
     $email = $_POST['endereco_email'];
     $senha_digitada = $_POST['senha'];
+    
 
     // Consulta apenas o hash da senha associado ao email
     $sql = "SELECT *
@@ -38,8 +39,10 @@ if(!isset($_POST) OR empty($_POST['endereco_email']) OR empty($_POST['senha'])) 
 
                 // Redireciona o usuário de acordo com o nível de permissão
                 if ($_SESSION['permissaoUsuario'] == 3 || $_SESSION['permissaoUsuario'] == 2) {
+                    $permissao = "funci";
                     header('location: ../pages/home-funci.php');
                 } elseif ($_SESSION['permissaoUsuario'] == 1) {
+                    $permissao = "cliente";
                     header('location: ../pages/home-cliente.php');
                 }
             } else {
