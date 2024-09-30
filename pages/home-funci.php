@@ -101,7 +101,7 @@
                     <p class="heading">Cadastrar Serviços</p>
                 </div>
             </a>
-            <a href="">
+            <a href="../pages/gerenciar-estoque.php">
                 <div class="card">
                 <img src="../image/iconeGerenciarEstoque.png" alt="Gerenciar Estoque" class="img-card">
                     <p class="heading">Gerenciar Estoque</p>

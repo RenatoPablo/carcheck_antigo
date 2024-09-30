@@ -12,11 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/home-cliente.css">
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/card-itens.css">
     <title>CarCheck</title>
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/popup-not.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     
@@ -51,7 +51,7 @@
 
             <!-- <a href="pages/notificacao.html"><i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></a> -->
 
-            <a href="pages/home.html"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
+            <a href="../pages/home-cliente.php"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
             <a href="../pages/perfil.php"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
         </div>
         <input type="checkbox" id="checkbox" onclick="toggleSidebar()">
