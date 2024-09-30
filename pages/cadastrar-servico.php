@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    // print_r($_SESSION);
+    if(!isset($_SESSION) OR $_SESSION['logado'] != true):
+		header("location: ../config/sair.php");		
+	else:
+?>
 <!DOCTYPE html>
 <html lang="pt-bt">
 <head>
@@ -42,7 +49,7 @@
             <!-- <a href="pages/notificacao.html"><i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></a> -->
 
             <a href="pages/home.html"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
-            <a href="perfil.php"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
+            <a href="../pages/perfil.php"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
         </div>
         <input type="checkbox" id="checkbox" onclick="toggleSidebar()">
         <label for="checkbox" class="toggle">
@@ -52,7 +59,7 @@
         </label>
     </header>
 
-        <form action="" method="post">
+        <form action="../config/processa-cadastro-servico.php" method="post">
             <div class="servicos">
                 <div>
                     <label for="nome">Nome serviço:</label>
@@ -66,10 +73,24 @@
                     <label for="valor">Valor:</label>
                     <input type="number" name="valor" id="valor">
                 </div>
+                <div>
+                    <label for="tipo">Tipo: </label>
+                    <select name="tipo" id="tipo">
+                        <option selected="">Selecione</option>
+                        <option value="1">Serviço</option>
+                        <option value="2">Peças</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="marca">Marca: </label>
+                    <input type="text" id="marca" name="marca">
+                </div>
             </div>
+            <button type="submit">Enviar</button>
         </form>
 
     <script src="../js/script.js"></script>
     <script src="../js/popup-not.js"></script>
 </body>
 </html>
+<?php endif ?>

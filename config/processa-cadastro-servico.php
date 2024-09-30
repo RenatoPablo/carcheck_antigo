@@ -10,11 +10,34 @@ require '../function/funcoes-cadastro-servico-produto.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        if (!empty($_POST['nome'])
+        if (!empty($_POST['nome']) &&
+            !empty($_POST['descr']) &&
+            !empty($_POST['valor']) &&
+            !empty($_POST['tipo'])
+        ) {
+            $nomeServico = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
+            $descrServico = htmlspecialchars($_POST['descr'], ENT_QUOTES, 'UTF-8');
+            $valor = floatval($_POST['valor']);
             
-        )
-    } catch (\Throwable $th) {
-        //throw $th;
+            $idTipo = intval($_POST['tipo']);
+            
+            //cadastrar serviço
+            if ($idTipo === 1) {
+                $id_servico = cadastrarServico($pdo, $nomeServico, $descrServico, $valor, $idTipo);
+            } elseif ($idTipo === 2 && !empty($_POST['marca'])) {
+                $nomeMarca = htmlspecialchars($_POST['marca'], ENT_QUOTES, 'UTF-8');
+
+                //inserir marca
+                $id_marca = cadastrarMarca($pdo, $nomeMarca);
+
+                //inserir produto
+                $id_produto = cadastrarProduto($pdo, $nomeServico, $descrServico, $valor, $idTipo, $id_marca);
+            }
+        } else {
+            echo "Preencha todos os campos.";
+        }
+    } catch (PDOException $e) {
+        echo "Erro: " . $e->getMessage();
     }
 }
 ?>
