@@ -7,38 +7,9 @@
     else:
 
     require '../config/config.php';
+    require '../config/busca-perfil.php';
 
-    try{
-        //preparar consulta
-        $sql = "
-        SELECT nome_pessoa, endereco_email
-        FROM pessoas
-        WHERE nome_pessoa = :nome";
-        $stmt = $pdo->prepare($sql);
-
-        //executar consulta
-        $stmt->execute([':nome' => $_SESSION['nomeUsuario']]);
-
-        //pega todos os resultados em um array associado
-        $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // if ($resultados) {
-        //     foreach($resultados as $linhas) {
-        //         //exibir nome e email de casa usuario
-        //         echo "<p>Nome: ". htmlspecialchars($linhas['nome_pessoa']) . "</p>";
-        //         echo "<p>Email: " . htmlspecialchars($linhas['endereco_email']) . "</p>";
-        //         echo "<hr>";
-        //     }
-        // } else {
-        //     echo "<p>Nenhum usuario encontrado</p>";
-        // }
-
-
-
-    } catch(PDOException $e){
-        echo "ERRO: " . $e->getMessage();
-    }
-
+    
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -97,12 +68,74 @@
 
 </header>
 
-    <div class="dados_perfil">
-        <label>Nome: <?php echo $resultados['nome_pessoa'] ?></label>
+    
+    <div class="card-perfil">
+
+        <!-- para mostrar a foto -->
+        <?php if(!empty($foto)) :?>
+        <div>
+            <img src="<?php echo $foto; ?>" alt="Foto de perfil de <?php echo $nome; ?>">
+        </div>
+        <?php else: ?>
+        <p>Sem foto de perfil cadastrada</p>
+        <?php endif; ?>
+        
+        <label>Nome: <?php echo $nome ?></label>
+
         <br>
-        <label>Email: <?php echo $resultados['endereco_email']?></label>
+
+        <label>Email: <?php echo $email ?></label>
+
+        <br>
+
+        <label>Data nascimento: <?php echo $data_nasc ?></label>
+
+        <br>
+
+        <label>Telefone: <?php echo $telefone ?></label>
+
+        <br>
+
+        <label>CEP: <?php echo $cep ?></label>
+
+        <br>
+
+        <label>Rua: <?php echo $rua ?></label>
+
+        <br>
+
+        <label>Genero: <?php echo $sexo ?></label>
+
+        <br>
+
+        <label>Numero da casa: <?php echo $num_casa ?></label>
+
+        <br>
+
+        <label>Cidade: <?php echo $cidade ?></label>
+
+        <br>
+
+        <label>Bairro: <?php echo $bairro ?></label>
+
+        <br>
+
+        <?php if ($comple != null) : ?>
+        <label>Complemento: <?php echo $comple ?></label>
+        <?php else: ?>
+        <p>Sem complemento</p>
+        <?php endif; ?>
+        
+        <br>
+        
+        <?php if ($referencia != null) : ?>
+        <label>Ponto de referencia: <?php echo $referencia ?></label>
+        <?php else: ?>
+        <p>Sem ponto de referencia</p>
+        <?php endif; ?>
     </div>
 
+    <script src="../js/script.js"></script>
 </body>
 </html>
 <?php endif; ?>

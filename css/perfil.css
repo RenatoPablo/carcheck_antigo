@@ -1,4 +1,14 @@
-.dados_perfil{
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+.card-perfil{
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: Lora, serif;
     position: relative;
-    top: 200px;
+    top: 20%;
+
 }
+

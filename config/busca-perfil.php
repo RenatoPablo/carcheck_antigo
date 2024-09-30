@@ -29,6 +29,23 @@ session_start();
 
         //pega todos os resultados em um array associado
         $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($resultados) {
+            $nome = htmlspecialchars($resultados['nome_pessoa']);
+            $email = htmlspecialchars($resultados['endereco_email']);
+            $data_nasc = htmlspecialchars($resultados['data_nasc']);
+            $foto = htmlspecialchars($resultados['foto']);
+            $telefone = htmlspecialchars($resultados['numero_telefone']);
+            $cep = htmlspecialchars($resultados['numero_cep']);
+            $rua = htmlspecialchars($resultados['nome_rua']);
+            $sexo = htmlspecialchars($resultados['sexo']);
+            $num_casa = htmlspecialchars($resultados['numero_casa']);
+            $cidade = htmlspecialchars($resultados['nome_cidade']);
+            $bairro = htmlspecialchars($resultados['nome_bairro']);
+            $comple = htmlspecialchars($resultados['desc_complemento']);
+            $referencia = htmlspecialchars($resultados['desc_ponto_ref']);
+        }
+        var_dump($nome, $email, $data_nasc, $foto);
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
     }
