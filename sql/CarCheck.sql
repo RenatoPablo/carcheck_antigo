@@ -207,8 +207,8 @@ CREATE TABLE marcas_servicos_produtos (
 );
 
 CREATE TABLE tipos_servicos_produtos (
-    id_tipo_servico_produto INT AUTO_INCREMENT PRIMARY,
-    tipo_servico_produto varchar(50) NOT NULL,
+    id_tipo_servico_produto INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_servico_produto VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE servicos_produtos (
