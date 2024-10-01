@@ -16,6 +16,7 @@
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style-busca-estoque.css">
 </head>
 <body>
 <header>
@@ -60,37 +61,47 @@
 </label>
 </header>
 
-<form action="" class="form-busca">
-    <!-- barra de pesquisa -->
-    <div class="search">
-      <input placeholder="Buscar item do estoque" class="search__input" type="text" id="estoque" onkeyup="buscarEstoque()"/>
-      <button class="search__button">
-        <svg
-          viewBox="0 0 16 16"
-          class="bi bi-search"
-          fill="currentColor"
-          height="16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
-          ></path>
-        </svg>
-      </button>
-    </div>
+<div class="form-busca">
     
-    <!-- Checkboxes para tipo de produto -->
-    <label>
-        <input type="checkbox" name="tipo" value="1"> Serviço
-    </label>
-    <label>
-        <input type="checkbox" name="tipo" value="2"> Produto
-    </label>
+        <!-- barra de pesquisa -->
+        <div class="search">
+          <input placeholder="Buscar item do estoque" class="search__input" type="text" id="estoque" onkeyup="buscarEstoque()"/>
+          <button class="search__button">
+            <svg
+              viewBox="0 0 16 16"
+              class="bi bi-search"
+              fill="currentColor"
+              height="16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+              ></path>
+            </svg>
+          </button>
+        </div>
+    
+        <!-- Checkboxes para tipo de produto -->
+        <label>
+            <input type="radio" name="tipo" value="1"> Serviço
+        </label>
+        <label>
+            <input type="radio" name="tipo" value="2"> Produto
+        </label>
+    
+        <!-- Sugestões aparecerão aqui -->
+        <ul id="sugestoes"></ul>
+</div>
 
-    <!-- Sugestões aparecerão aqui -->
-    <ul id="sugestoes"></ul>
-</form>
+
+<!-- Modal (inicialmente oculto) -->
+<div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-text">Detalhes do produto/serviço...</p> <!-- Aqui serão exibidos detalhes do item -->
+        </div>
+</div>
 
 
 <script src="../js/buscar-estoque.js"></script>

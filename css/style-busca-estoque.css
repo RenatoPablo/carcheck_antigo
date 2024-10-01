@@ -1,0 +1,31 @@
+/* Estilos para a lista de sugestões (ul) */
+.sugestoes-lista {
+    list-style-type: none; /* Remove os marcadores padrão */
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto; /* Permite rolagem se a lista for muito longa */
+    background-color: white;
+    position: absolute; /* Para garantir que aparece abaixo do input */
+    width: 100%;
+    z-index: 1000; /* Para garantir que está acima de outros elementos */
+}
+
+/* Estilos para os itens da lista (li) */
+.sugestao-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Estilo ao passar o mouse sobre o item */
+.sugestao-item:hover {
+    background-color: #f0f0f0;
+}
+
+/* Último item sem borda */
+.sugestao-item:last-child {
+    border-bottom: none;
+}
