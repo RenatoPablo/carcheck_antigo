@@ -23,7 +23,6 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <a href="../pages/home-funci.php">Home</a>
             <a href="../pages/cadastrar-funci.php">Cadastrar Funcionário</a>
             <a href="#clients">Clients</a>
             <a href="../config/sair.php">Sair</a>

@@ -224,7 +224,6 @@ CREATE TABLE servicos_produtos (
 );
 
 CREATE TABLE itens_manutencoes_servicos (
-    id_itens_manutencao_servico INT AUTO_INCREMENT PRIMARY KEY,
     quantidade INT NOT NULL,
     valor_total FLOAT NOT NULL,
     fk_id_servico_produto INT,

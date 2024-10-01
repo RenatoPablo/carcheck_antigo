@@ -61,7 +61,7 @@
 </label>
 </header>
 
-<div class="form-busca">
+<div class="busca">
     
         <!-- barra de pesquisa -->
         <div class="search">
