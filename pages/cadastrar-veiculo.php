@@ -76,28 +76,28 @@
             <div class="cadastro-veiculo">
                 <div>
                     <label for="prop">Proprietário</label>
-                    <input id="prop" type="text" name="proprietario" onkeyup="buscarProprietarios()" autocomplete="off">
+                    <input id="prop" type="text" name="proprietario" class="input" onkeyup="buscarProprietarios()" autocomplete="off">
                     <ul id="sugestoes" class="suggestions"></ul>
                 </div>
                 <div>
                     <label for="placa">Placa</label>
-                    <input id="placa" type="text" name="placa" oninput="mascaraPlacaVeiculo(this)">
+                    <input id="placa" type="text" name="placa" class="input" oninput="mascaraPlacaVeiculo(this)">
                 </div>
                 <div>
                     <label for="cor">Cor</label>
-                    <input id="cor" name="cor" type="text">
+                    <input id="cor" name="cor" type="text" class="input">
                 </div>
                 <div>
                     <label for="tipo">Tipo Veículo</label>
-                    <input id="tipo" name="tipo" type="text">
+                    <input id="tipo" name="tipo" type="text" class="input">
                 </div>
                 <div>
                     <label for="modelo">Modelo</label>
-                    <input id="modelo" name="modelo" type="text">
+                    <input id="modelo" name="modelo" type="text" class="input">
                 </div>
                 <div>
                     <label for="marca">Marca</label>
-                    <input id="marca" name="marca" type="text">
+                    <input id="marca" name="marca" type="text" class="input">
                 </div>
                 <button type="submit">Enviar</button>
             </div>
