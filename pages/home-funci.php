@@ -107,7 +107,7 @@
                     <p class="heading">Gerenciar Estoque</p>
                 </div>
             </a>
-            <a href="">
+            <a href="../pages/emitir-ordem.php">
                 <div class="card">
                     <img src="../image/iconeEmetirOrdemServiço.png" alt="icone emetir ordem de serviço" class="img-card">
                     <p class="heading">Emitir Ordem de Serviço</p>
