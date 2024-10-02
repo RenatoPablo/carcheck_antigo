@@ -1,21 +1,57 @@
 /* From Uiverse.io by Yaseen549 */ 
 .card {
-    width: 250px;
-    height: 350px;
+    width: 450px;
+    height: 280px;
     border-radius: 30px;
     background: #0d3587;
-    box-shadow: 15px 15px 30px rgb(25, 25, 25),
-                -15px -15px 30px rgb(60, 60, 60);
+    box-shadow: 5px 5px 20px rgb(25, 25, 25),
+    -5px -5px 20px rgb(60, 60, 60);
+    
    }
    
 .campos {
-    width: 200px;
+    width: 100%;
     
     position: relative;
-    left: 37px;
-    top: 22px;
+    
+    display: grid;
+    grid-template-columns: repeat(2, 171px);
+    justify-content: center;
+    gap: 21px;
+    padding-top: 13px;
+}
+
+.button-submit {
+    width: 200px; /* Aumenta a largura do botão */
+    height: 40px; /* Aumenta a altura do botão */
+    background-color: #ffffff; /* Cor de fundo do botão */
+    color: #0d3587; /* Cor do texto do botão */
+    border: none; /* Remove a borda */
+    border-radius: 20px; /* Borda arredondada */
+    cursor: pointer;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; /* Centraliza horizontalmente */
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .label-campos {
     color: white;
+}
+
+.area-dados {
+    height: 700px;
+    
+    position: relative;
+    top: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.area-servico-produto {
+    
 }
