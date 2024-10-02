@@ -1,0 +1,21 @@
+/* From Uiverse.io by Yaseen549 */ 
+.card {
+    width: 250px;
+    height: 350px;
+    border-radius: 30px;
+    background: #0d3587;
+    box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                -15px -15px 30px rgb(60, 60, 60);
+   }
+   
+.campos {
+    width: 200px;
+    
+    position: relative;
+    left: 37px;
+    top: 22px;
+}
+
+.label-campos {
+    color: white;
+}
