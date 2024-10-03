@@ -1,112 +1,128 @@
-.cadastro-veiculo{
-    display: grid;
-    grid-template-columns: repeat(2, 300px);
-    position: relative;
-    top: 220px;
-    gap: 20px;
-    justify-content: center;
-}
- /* Estilo básico para a lista de sugestões */
- .suggestions {
-    max-height: 200px; /* Limita a altura máxima */
-    overflow-y: auto; /* Adiciona a barra de rolagem quando necessário */
-    border: 1px solid #ddd; /* Adiciona uma borda */
-    background-color: white; /* Fundo branco para as sugestões */
-    position: absolute; /* Posiciona a lista de sugestões */
-    z-index: 100; /* Para garantir que fique acima de outros elementos */
-    width: 100%; /* Garante que a lista tenha a mesma largura do input */
-    top: 100%; /* Posiciona a lista logo abaixo do input */
-    left: 0; /* Alinha a lista com o campo de input */
-    box-sizing: border-box; /* Para incluir bordas dentro da largura total */
-}
-.suggestions li {
-    padding: 10px;
-    cursor: pointer;
-}
-.suggestions li:hover {
-    background-color: #f0f0f0;
-}
-.prop {
-    position: relative; /* Necessário para o posicionamento correto da lista */
+/* Centralização do conteúdo principal */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
 }
 
-.input-container {
-    position: flex;
-    margin: auto;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-top: 50px;
+}
+
+/* Título centralizado acima do formulário */
+.titulo-formulario {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Formulário responsivo */
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  position: relative; /* Adicionado para garantir que elementos absolutos fiquem dentro do form */
+}
+
+/* Ajuste para centralizar os itens */
+form div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Readicionado para posicionar corretamente a lista de sugestões */
+.prop {
+  position: relative; /* Necessário para o posicionamento correto da lista */
+}
+
+/* Estilização dos labels e inputs */
+label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1.5px solid lightgrey;
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input:hover {
+  border-color: #888;
+}
+
+/* Botão de Enviar */
+button[type="submit"] {
+  grid-column: 1 / span 2;
+  padding: 10px 0;
+  font-size: 16px;
+  color: white;
+  background-color: #002775;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #333;
+}
+
+/* Estilos para lista de sugestões */
+.suggestions {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  background-color: white;
+  position: absolute;
+  z-index: 1000; /* Aumentado para garantir que fique acima de outros elementos */
+  width: 100%;
+  top: 100%;
+  left: 0;
+  box-sizing: border-box;
+  display: none; /* Inicialmente escondido */
+}
+
+.suggestions.visible {
+  display: block; /* Mostrar quando tiver sugestões */
+}
+
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.suggestions li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  form {
+      grid-template-columns: 1fr;
   }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .underline {
-    position: relative;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #301ef5 0%, #00dbde 100%);
-    transition: width 0.3s;
-  }
-  
-  .input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1.5px solid lightgrey;
-    border-radius: 12px;
-    background-color: white;
-    color: #333;
-    width: 220px;
-    outline: none;
-    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-  
-  }
-  .input:hover {
-    border: 1px solid lightgrey;
-    box-shadow: 0px 0px 10px -7px;
-  }
-  
-  .input:focus + .underline {
-    display: flex;
-    left: 10px;
-    width: 235px;
-    justify-content: center;
-    
-  }
-  
-  @keyframes floating-label {
-    0% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-25px);
-      opacity: 0;
-    }
-  }
-  
-  .input:placeholder-shown + label {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    font-size: 14px;
-    color: #777;
-    pointer-events: none;
-    transition: transform 0.3s, font-size 0.3s, color 0.3s;
-  }
-  
-  .input:focus:not(:placeholder-shown) + label {
-    transform: translateY(-25px);
-    font-size: 12px;
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-    animation: floating-label 0.3s forwards;
-  }
-  
+}
