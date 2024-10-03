@@ -22,10 +22,7 @@
 
     <!-- adicionando para teste apenas -->
      <style>
-        .area-dados {
-            position: relative;
-            top: 200px;
-        };
+        
         .ul-temporaria{
             list-style-type: none; /* Remove os marcadores da lista */
             padding: 0; /* Remove o padding padrão */
@@ -88,49 +85,52 @@
             <div class="area-dados">
                 
                     <div class="card">
-                        <div class="campos">
-                            <label for="time-inicio" class="label-campos">Hora de entrada:</label>
-                            <input type="datetime" name="time-inicio" id="time-inicio">
-                            <br>
-                            <label class="label-campos" for="time-final">Hora de saída:</label>
-                            <input type="datetime" name="time-final" id="time-final">
-                            <script>
-                                function definirHoraAtualTime() {
-                                    const agora = new Date();
-                                    // Formata a hora e os minutos
-                                    const horas = agora.getHours().toString().padStart(2, '0');
-                                    const minutos = agora.getMinutes().toString().padStart(2, '0');
-                                    // Define o valor do input
-                                    document.getElementById('time-final').value = `${horas}:${minutos}`;
-                                }
-                                // Define a hora ao carregar a página
-                                window.onload = definirHoraAtualTime;
-                            </script>
-                            <br>
-                            <label class="label-campos" for="km">KM:</label>
-                            <br>
-                            <input type="number" name="km" id="km">
-                            <br>
-                            <label class="label-campos" for="defeito">Defeito observado:</label>
-                            <br>
-                            <input type="text" name="defeito" id="defeito">
-                            <br>
-                            <label class="label-campos" for="veiculo">Carro:</label>
-                            <br>
-                            <input type="text" name="veiculo" id="veiculo">
-                            <br>
-                            <label class="label-campos" for="placa">Placa:</label>
-                            <br>
-                            <input type="text" name="placa" id="placa" oninput="mascaraPlacaVeiculo(this)"
-                            onkeyup="buscarVeiculo()">
-                            <br>
-                            <label class="label-campos" for="prop">Proprietário do veiculo</label>
-                            <br>
-                            <input id="prop" type="text" name="proprietario" class="input" onkeyup="buscarProprietarios()" autocomplete="off">
-                                <ul id="sugestoes" class="suggestions"></ul>
-                        </div>
+                        <form action="">
+                            <div class="campos">
+                            
+                                <div class="dados">
+                                    <label class="label-campos" for="time-final">Hora de saída:</label>
+                                    <br>
+                                    <input type="datetime" name="time-final" id="time-final">
+                                </div>
+                            
+                            
+                                <div class="dados">
+                                    <label class="label-campos" for="km">KM:</label>
+                                    <br>
+                                    <input type="number" name="km" id="km">
+                                </div>
+                            
+                                <div class="dados">
+                                    <label class="label-campos" for="defeito">Defeito observado:</label>
+                                    <br>
+                                    <input type="text" name="defeito" id="defeito">
+                                </div>
+                            
+                                <div class="dados">
+                                    <label class="label-campos" for="veiculo">Carro:</label>
+                                    <br>
+                                    <input type="text" name="veiculo" id="veiculo">
+                                </div>
+                            
+                                <div class="dados">
+                                    <label class="label-campos" for="placa">Placa:</label>
+                                    <br>
+                                    <input type="text" name="placa" id="placa" oninput="mascaraPlacaVeiculo(this)"
+                                    onkeyup="buscarVeiculo()">
+                                </div>
+                            
+                                <div class="dados">
+                                    <label class="label-campos" for="prop">Proprietário do veiculo</label>
+                                    <br>
+                                    <input id="prop" type="text" name="proprietario" class="input" onkeyup="buscarProprietarios()" autocomplete="off">
+                                        <ul id="sugestoes" class="suggestions"></ul>
+                                </div>
+                            </div>
+                            <button class="button-submit" type="submit">Adicionar dados de manutenção</button>
+                        </form>
                     </div>
-                    <div>
+                    <div class="area-servico-produto">
                         <h2>Area para adicionar serviços e peças</h2>
                         <label for="servico">Adicionar serviços</label>
                         <input placeholder="Buscar item do estoque" type="text" id="estoqueServico"  name="servico" onkeyup="buscarEstoqueServico()"/>
@@ -165,7 +165,20 @@
                         <input type="hidden" id="hiddenItemListProduto" name="itemListProduto"> <!-- Campo oculto para enviar os itens -->
                         <button type="submit">Enviar</button>
                     </form>
-                </div>
+            </div>
+
+        <script>
+            function definirHoraAtualTime() {
+                const agora = new Date();
+                // Formata a hora e os minutos
+                const horas = agora.getHours().toString().padStart(2, '0');
+                const minutos = agora.getMinutes().toString().padStart(2, '0');
+                // Define o valor do input
+                document.getElementById('time-final').value = `${horas}:${minutos}`;
+            }
+            // Define a hora ao carregar a página
+            window.onload = definirHoraAtualTime;
+        </script>        
 
     <script src="../js/adicionar-lista.js"></script>
     <script src="../js/buscar-estoque.js"></script>
