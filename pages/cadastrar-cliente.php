@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styleCadastro.css">
     <link href="../fontawesome/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/padrao-cadastro.css">
+    <link rel="stylesheet" href="../css/cadastrar-cliente.css">
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/popup-cadastro.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

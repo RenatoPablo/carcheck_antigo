@@ -1,0 +1,294 @@
+/* From Uiverse.io by PriyanshuGupta28 */ 
+
+.imgCadastroPessoa{
+    display: flex;
+    align-content: center;
+    margin: 0 auto;
+    size: 35px;
+}
+
+.cadastrar-cliente{
+  display: flex;
+  flex-direction: column;
+  
+  justify-content: center; 
+  /* align-content: end; */
+  
+  
+  
+}
+
+.dados-pessoais{
+  display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, 300px);
+    left: 10%;
+    top: 52px;
+    /* align-content: end; */
+    
+
+
+}
+
+.funcionario{
+  display: grid;
+  grid-template-columns: repeat(2, 300px);
+  gap: 20px;
+}
+
+.endereco{
+  display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, 300px);
+    left: 40%;
+    /* align-content: end; */
+    margin-bottom: 50px;
+    
+    
+
+}
+
+
+.botao-submit{
+  position: relative;
+  height: 38.13px;
+  top: -1px;
+  left: 472px;
+  width: 100px;
+  display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #0D3587;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px;
+    
+
+
+}
+.botao-back{
+  position: relative;
+  height: 38.13px;
+  width: 100px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #0D3587;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
+  top: 76px;
+  right: -8px;
+  
+
+}
+
+.input-container {
+  position: flex;
+  margin: auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.underline {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #301ef5 0%, #00dbde 100%);
+  transition: width 0.3s;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1.5px solid lightgrey;
+  border-radius: 12px;
+  background-color: white;
+  color: #333;
+  width: 220px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+
+}
+.input:hover {
+  border: 1px solid lightgrey;
+  box-shadow: 0px 0px 10px -7px;
+}
+
+.input:focus + .underline {
+  display: flex;
+  left: 10px;
+  width: 235px;
+  justify-content: center;
+  
+}
+
+@keyframes floating-label {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-25px);
+    opacity: 0;
+  }
+}
+
+.input:placeholder-shown + label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #777;
+  pointer-events: none;
+  transition: transform 0.3s, font-size 0.3s, color 0.3s;
+}
+
+.input:focus:not(:placeholder-shown) + label {
+  transform: translateY(-25px);
+  font-size: 12px;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  animation: floating-label 0.3s forwards;
+}
+
+/* Estilização do campo select com a classe escolha-genero */
+.escolha-genero {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #333;
+  width: 220px;
+  height: 38.91px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: linear-gradient(43deg, #301ef5 0%, #00dbde 100%), 
+                    linear-gradient(135deg, #f0f0f0 50%, transparent 50%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.escolha-genero:hover {
+  background-color: #e0e0e0;
+}
+
+.escolha-genero:focus {
+  border-color: #301ef5;
+}
+
+.escolha-genero.select-arrow {
+  position: relative;
+  top: -5px;
+  right: -10px;
+  pointer-events: none;
+}
+
+/* Estilização das opções do select com a classe escolha-genero */
+.escolha-genero option {
+  color: #333;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.escolha-genero option:hover {
+  background-color: #e0e0e0;
+}
+
+.escolha-genero option:checked {
+  background-color: #4158D0;
+  color: white;
+}
+
+/* Estilização do container ao redor do select */
+.input-container .escolha-genero {
+  padding: 10px;
+  font-size: 16px;
+  border: 1.5px solid lightgrey;
+  border-radius: 12px;
+  color: #333;
+  width: 242px;
+  height:40px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  background-image: linear-gradient(43deg, #ffffff 0%, #ffffff 100%), 
+                    linear-gradient(to right, #fff, #fff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.input-container .escolha-genero:focus + .underline {
+  width: 100%;
+}
+.ls-custom-select {
+  position: relative;
+  margin: auto;
+}
+
+.especifico {
+  display: none; /* Inicialmente, escondemos os campos */
+  position: flex;
+  margin: auto;
+}
+
+/* Esconde o input de arquivo original */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Estilo para o botão de upload personalizado */
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #0D3587;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #0A2A6E;
+        }
+
+        /* Estilo para a área de visualização da imagem */
+        .image-preview {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #0D3587;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #999;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz a imagem se ajustar ao tamanho da div sem distorcer */
+        }
