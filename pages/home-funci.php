@@ -69,7 +69,7 @@
         <h2>
             <?php
                 if (isset($_SESSION['nomeUsuario'])) {
-                    echo "Ola, seja bem-vindo " . htmlspecialchars($_SESSION['nomeUsuario']);
+                    echo "Olá, " . htmlspecialchars($_SESSION['nomeUsuario']);
                 }
             ?>
         </h2>
