@@ -66,6 +66,7 @@
         </label>
     </header>
 
+    <div class="form-container">
         <form action="../config/processa-cadastro-servico.php" method="post">
             <div class="servicos">
                 <div>
@@ -95,6 +96,7 @@
             </div>
             <button type="submit">Enviar</button>
         </form>
+    </div>
 
     <script src="../js/script.js"></script>
     <script src="../js/popup-not.js"></script>
