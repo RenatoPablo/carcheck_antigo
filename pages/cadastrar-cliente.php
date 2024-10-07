@@ -72,10 +72,10 @@ else:
 
             <!-- Upload de foto -->
             <div class="input-container" style="grid-column: span 2;">
-                <label for="foto" class="custom-file-upload">Selecione uma foto</label>
+                <label for="foto" class="custom-file-upload">SELECIONE UMA FOTO</label>
                 <input type="file" id="foto" name="foto" accept="image/*" onchange="previewImage(event)">
                 <div class="image-preview" id="imagePreview">
-                    <span>Nenhuma imagem selecionada</span>
+                    <span>Imagem Pendente</span>
                 </div>
             </div>
 

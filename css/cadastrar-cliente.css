@@ -46,14 +46,18 @@
 /* Customização do botão de upload */
 .custom-file-upload {
   display: inline-block;
+  grid-template-columns: 1fr;
   padding: 10px 20px;
   cursor: pointer;
   background-color: #0D3587;
   color: white;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 12px;
+  font-weight: bold;
   transition: background-color 0.3s ease;
   border: none;
+  width:20%;
+  align-items: center;
 }
 
 .custom-file-upload:hover {
