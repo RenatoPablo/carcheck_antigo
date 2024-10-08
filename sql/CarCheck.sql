@@ -179,19 +179,21 @@ CREATE TABLE veiculos (
 
 CREATE TABLE formas_pagamento (
     id_forma_pagamento INT AUTO_INCREMENT PRIMARY KEY,
-    tipo_pagamento VARCHAR(50) NOT NULL
+    tipo_pagamento VARCHAR(50) NOT NULL,
+    num_parcela INT
 );
 
 CREATE TABLE pagamentos (
     id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
     valor_pagamento FLOAT NOT NULL,
     fk_id_forma_pagamento INT,
+    data_pagamento DATE NOT NULL,
+    situacao BOOLEAN NOT NULL,
     FOREIGN KEY (fk_id_forma_pagamento) REFERENCES formas_pagamento(id_forma_pagamento) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE manutencoes (
-    id_manutencao INT AUTO_INCREMENT PRIMARY KEY,
-    time_inicio TIMESTAMP NULL,
+    id_manutencao INT AUTO_INCREMENT PRIMARY KEY,       
     time_saida TIMESTAMP NULL,
     km VARCHAR(10) NOT NULL,
     defeito VARCHAR(500),

@@ -67,3 +67,5 @@ VALUES
     ('Joâo Pedro Gonçalves Pinheirinho ', '17997713350', 'trove.eu69@gmail.com', '$2y$10$H4ZkVAC3yoXb7EGLxMkQGOeKFfGq.ALhIM4PMA9Ps6d6pIMH6BE.6', '2002-10-07', 2, 1, 3, 3, 3, 1, 3, 1, 1);
 
 INSERT INTO tipos_servicos_produtos(tipo_servico_produto) VALUES ('serviço'), ('peca');
+
+INSERT INTO formas_pagamento(tipo_pagamento) VALUES ('dinheiro'), ('pix'), ('cartao');

@@ -126,6 +126,10 @@
                                     <input id="prop" type="text" name="proprietario" class="input" onkeyup="buscarProprietarios()" autocomplete="off">
                                         <ul id="sugestoes" class="suggestions"></ul>
                                 </div>
+
+                                <div>
+                                    <label for=""></label>
+                                </div>
                             </div>
                             <button class="button-submit" type="submit">Adicionar dados de manutenção</button>
                         </form>
