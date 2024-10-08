@@ -19,12 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $descrServico = htmlspecialchars($_POST['descr'], ENT_QUOTES, 'UTF-8');
             $valor = floatval($_POST['valor']);
             
-            $idTipo = intval($_POST['tipo']);
             
-            //cadastrar serviço
-            if ($idTipo === 1) {
+            
+            if (isset($_POST['option'])) {
+                $selectOptions = $_POST['option'];
+            
+            if ($selectOptions === 1) {
+                
+                $idTipo = 1;
+
                 $id_servico = cadastrarServico($pdo, $nomeServico, $descrServico, $valor, $idTipo);
-            } elseif ($idTipo === 2 && !empty($_POST['marca'])) {
+            } elseif ($selectOptions === 2 && !empty($_POST['marca'])) {
+                $idTipo = 2;
                 $nomeMarca = htmlspecialchars($_POST['marca'], ENT_QUOTES, 'UTF-8');
 
                 //inserir marca
@@ -33,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 //inserir produto
                 $id_produto = cadastrarProduto($pdo, $nomeServico, $descrServico, $valor, $idTipo, $id_marca);
             }
+        }
         } else {
             echo "Preencha todos os campos.";
         }

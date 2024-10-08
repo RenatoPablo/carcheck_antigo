@@ -68,33 +68,49 @@
         <form action="../config/processa-cadastro-servico.php" method="post">
 
             <div class="servicos">
+                <input type="radio" name="option" id="radio1" value="1">
+
                 <div class="input-container">
-                    <label for="nome">Nome do Serviço</label>
-                    <input type="text" name="nome" id="nome" class="input">
+                    <label for="nomeServico">Nome do Serviço</label>
+                    <input type="text" name="nomeServico" id="nomeServico" class="input">
                 </div>
 
                 <div class="input-container">
-                    <label for="descr">Descrição do Serviço</label>
-                    <input type="text" name="descr" id="descr" class="input">
+                    <label for="descrServico">Descrição do Serviço</label>
+                    <input type="text" name="descrServico" id="descrServico" class="input">
                 </div>
 
                 <div class="input-container">
-                    <label for="valor">Valor</label>
-                    <input type="number" name="valor" id="valor" class="input">
+                    <label for="valorServico">Valor</label>
+                    <input type="number" name="valorServico" id="valorServico" class="input">
+                </div>
+
+                
+
+                
+            </div>
+
+            <div class="produtos">
+                <input type="radio" name="option" id="radio2" value="2">
+
+                <div class="input-container">
+                    <label for="nomeProduto">Nome do Produto</label>
+                    <input type="text" name="nomeProduto" id="nomeProduto" class="input">
                 </div>
 
                 <div class="input-container">
-                    <label for="tipo">Tipo</label>
-                    <select name="tipo" id="tipo" class="input">
-                        <option selected="">Selecione</option>
-                        <option value="1">Serviço</option>
-                        <option value="2">Peças</option>
-                    </select>
+                    <label for="descrProduto">Descrição do Produto</label>
+                    <input type="text" name="descrProduto" id="descrProduto" class="input">
                 </div>
 
                 <div class="input-container">
-                    <label for="marca">Marca</label>
-                    <input type="text" id="marca" name="marca" class="input">
+                    <label for="valorProduto">Valor</label>
+                    <input type="number" name="valorProduto" id="valorProduto" class="input">
+                </div>
+
+                <div class="input-container">
+                    <label for="marcaProduto">Marca</label>
+                    <input type="text" id="marcaProduto" name="marcaProduto" class="input">
                 </div>
             </div>
 
