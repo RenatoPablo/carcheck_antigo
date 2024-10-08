@@ -65,10 +65,10 @@
 
     <main>
         <h2 class="titulo-formulario">Cadastro de Serviços</h2>
-        <form action="../config/processa-cadastro-servico.php" method="post">
+        <form action="../config/processa-cadastro-servico.php" method="post" >
 
             <div class="servicos">
-                <input type="radio" name="option" id="radio1" value="1">
+                <input type="radio" name="option" id="radio1" value="1" onclick="tornarProdutoReadOnly(); removerServicoReadOnly()">
 
                 <div class="input-container">
                     <label for="nomeServico">Nome do Serviço</label>
@@ -91,7 +91,7 @@
             </div>
 
             <div class="produtos">
-                <input type="radio" name="option" id="radio2" value="2">
+                <input type="radio" name="option" id="radio2" value="2" onclick="removerProdutoReadOnly(); tornarServicoReadOnly();">
 
                 <div class="input-container">
                     <label for="nomeProduto">Nome do Produto</label>
@@ -118,6 +118,8 @@
         </form>
     </main>
 
+    
+    <script src="../js/readOnly-servico-produto.js"></script>
     <script src="../js/script.js"></script>
     <script src="../js/popup-not.js"></script>
 
