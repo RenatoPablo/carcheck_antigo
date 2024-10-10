@@ -119,7 +119,7 @@
     </main>
 
     
-    <script src="../js/readOnly-servico-produto.js"></script>
+    <script src="../js/readOnly-servico-produto.js "></script>
     <script src="../js/script.js"></script>
     <script src="../js/popup-not.js"></script>
 

@@ -10,10 +10,30 @@ require '../function/funcoes-cadastro-servico-produto.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        if (isset($_POST['option'])) {
+            $idTipo = $_POST['option'];
+            
+            if ($idTipo === 1) {
+                if (!empty($_POST['nomeServico']) &&
+                    !empty($_POST['descrServico']) &&
+                    !empty($_POST['valorServico']) &&
+                    !empty($_POST['option'])) {
+
+                $nomeServico = htmlspecialchars($_POST['nomeServikco'], ENT_QUOTES, 'UTF-8');
+                $descrServico = htmlspecialchars($_POST['descr'], ENT_QUOTES, 'UTF-8');
+                $valorServico = floatval($_POST['valorServico']);
+                
+                
+                $id_servico = cadastrarServico($pdo, $nomeServico, $descrServico, $valorServico, $idTipo);
+            } else {
+                //mostrar o popup sobre oq esta faltando
+            }
+            }
+        }
         if (!empty($_POST['nome']) &&
             !empty($_POST['descr']) &&
             !empty($_POST['valor']) &&
-            !empty($_POST['tipo'])
+            !empty($_POST['option'])
         ) {
             $nomeServico = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
             $descrServico = htmlspecialchars($_POST['descr'], ENT_QUOTES, 'UTF-8');

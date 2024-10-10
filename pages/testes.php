@@ -1,89 +1,33 @@
 <?php
-    session_start();
-    // print_r($_SESSION);
-    if(!isset($_SESSION) OR $_SESSION['logado'] != true):
-		header("location: ../config/sair.php");		
-	else:
-?>
-<!DOCTYPE html>
-<html lang="pt-bt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testes</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        .form-teste{
-            position: relative;
-            top: 200px;
-        }
-    </style>
-</head>
-<body>
-<header>
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#clients">Clients</a>
-            <a href="../config/sair.php">Sair</a>
-        </div>
-    
-        <div class="container-header">
-            <img src="../image/logo-carcheck.png" alt="Logo CarCheck" title="CarCheck">
-            <h1>CarCheck</h1>
-        </div>
-    
-        <div class="icons">
-            <!-- Botão para mostrar a notificação -->
-            <button onclick="showNotification()" class="icons-not">
-            <i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></button>
 
-            <!-- Popup de notificação -->
-            <div id="notification" class="notification">
-                <span id="notification-text">Este é um alerta de notificação!</span>
-                <span class="close-btn" onclick="closeNotification()">&times;</span>
-            </div>
+if (!empty($_POST['nomeServico']) &&
+   !empty($_POST['descrServico']) &&
+   !empty($_POST['valorServico']) &&
+   !empty($_POST['option'])) {
 
-            <!-- <a href="pages/notificacao.html"><i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></a> -->
-
-            <a href="pages/home.html"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
-            <a href="pages/perfil.html"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
-        </div>
+        $nomeServico = htmlspecialchars($_POST['nomeServikco'], ENT_QUOTES, 'UTF-8');
+        $descrServico = htmlspecialchars($_POST['descr'], ENT_QUOTES, 'UTF-8');
+        $valorServico = floatval($_POST['valorServico']);
         
-        <!-- botao hamburguer side bar -->
-        <input type="checkbox" id="checkbox" onclick="toggleSidebar()">
-        <label for="checkbox" class="toggle">
-            <div class="bar bar--top"></div>
-            <div class="bar bar--middle"></div>
-            <div class="bar bar--bottom"></div>
-        </label>
+        
+        $id_servico = cadastrarServico($pdo, $nomeServico, $descrServico, $valorServico, $idTipo);
+   } else {
+    //mostrar o popup sobre oq esta faltando
+   }
 
-        <!-- Botão para abrir a sidebar -->
-        <!-- <button class="open-btn" onclick="toggleSidebar()">☰</button> -->
-    </header>
+if (!empty($_POST['nomeServico']) &&
+    !empty($_POST['descrServico']) &&
+    !empty($_POST['valorServico']) &&
+    !empty($_POST['marcaProduto']) &&
+    !empty($_POST['option'])) {
+        $nomeProduto = htmlspecialchars($_POST['nomeProduto'], ENT_QUOTES, 'UTF-8');
+        $descrProduto = htmlspecialchars($_POST['descrProduto'], ENT_QUOTES, 'UTF-8');
+        $valorProduto = floatval($_POST['valorProduto']);
+        $marcaProduto = htmlspecialchars($_POST['marcaProduto'], ENT_QUOTES, 'UTF-8');
 
-    <form action="../config/logica_teste.php" method="post" class="form-teste">
-        <!-- <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome">
+        $id_marca = cadastrarMarca($pdo, $marcaProduto);
+        $id_produto = cadastrarProduto($pdo, $nomeProduto, $descrProduto, $valorProduto, $idTipo, $id_marca);
+    }
 
-        <label for="telefone">Telefone:</label>
-        <input type="tel" name="telefone" id="telefone">
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email">
-
-        <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha">
-
-        <label for="estado">Estado:</label>
-        <input id="estado" name="estado" type="text"> -->
-
-        <label for="cep">CEP</label>
-        <input type="text" name="cep" id="cep">
-        <button type="submit">Enviar</button>
-    </form>
-</body>
-</html>
-
-<?php endif; ?>
+?>
