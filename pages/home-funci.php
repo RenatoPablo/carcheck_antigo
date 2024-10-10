@@ -27,6 +27,7 @@
         <div class="sidebar">
             <a href="#home">Home</a>
             <a href="../pages/cadastrar-funci.php">Cadastrar Funcionário</a>
+            <a href="../pages/cadastrar-fornecedor.php">Cadastrar Fornecedor</a>
             <a href="#clients">Clients</a>
             <a href="../config/sair.php">Sair</a>
         </div>
