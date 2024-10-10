@@ -34,6 +34,11 @@
         
             // Remove qualquer coisa que não seja número
             cnpj = cnpj.replace(/\D/g, "");
+            
+            // Limita o CNPJ a no máximo 14 dígitos
+            if (cnpj.length > 14) {
+                cnpj = cnpj.substring(0, 14);
+            }
         
             // Adiciona pontos, barra e traço no formato: 00.000.000/0000-00
             cnpj = cnpj.replace(/^(\d{2})(\d)/, "$1.$2");

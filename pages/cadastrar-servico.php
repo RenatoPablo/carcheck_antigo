@@ -112,13 +112,18 @@
                     <label for="marcaProduto">Marca</label>
                     <input type="text" id="marcaProduto" name="marcaProduto" class="input">
                 </div>
+                <div class="input-container">
+                    <label for="cnpjFornecedor">CNPJ do Fornecedor</label>
+                    <input type="text" name="cnpjFornecedor" id="cnpjFornecedor" class="input" oninput="mascaraCNPJ(this)">
+                    <ul id="sugestoes" class="suggestions"></ul>
+                </div>
             </div>
 
             <button type="submit" class="botao-submit">Enviar</button>
         </form>
     </main>
 
-    
+    <script src="../js/mascaras.js"></script>
     <script src="../js/readOnly-servico-produto.js "></script>
     <script src="../js/script.js"></script>
     <script src="../js/popup-not.js"></script>
