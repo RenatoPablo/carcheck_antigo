@@ -85,7 +85,7 @@
             <div class="area-dados">
                 
                     <div class="card">
-                        <form action="">
+                        <form action="../config/adicionar-manutencao.php" method="POST">
                             <div class="campos">
                             
                                 <div class="dados">
@@ -108,32 +108,33 @@
                                 </div>
                             
                                 <div class="dados">
-                                    <label class="label-campos" for="veiculo">Carro:</label>
-                                    <br>
-                                    <input type="text" name="veiculo" id="veiculo">
-                                </div>
-                            
-                                <div class="dados">
                                     <label class="label-campos" for="placa">Placa:</label>
                                     <br>
                                     <input type="text" name="placa" id="placa" oninput="mascaraPlacaVeiculo(this)"
                                     onkeyup="buscarVeiculo()">
                                 </div>
-                            
+
+                                <div class="dados">
+                                    <label class="label-campos" for="veiculo">Carro:</label>
+                                    <br>
+                                    <input type="text" name="veiculo" id="veiculo">
+                                </div>                          
+
+                                
                                 <div class="dados">
                                     <label class="label-campos" for="prop">Proprietário do veiculo</label>
                                     <br>
                                     <input id="prop" type="text" name="proprietario" class="input" onkeyup="buscarProprietarios()" autocomplete="off">
-                                        <ul id="sugestoes" class="suggestions"></ul>
+                                    <ul id="sugestoes" class="suggestions"></ul>
                                 </div>
-
+                                
                                 <div>
                                     <label for=""></label>
                                 </div>
                             </div>
                             <button class="button-submit" type="submit">Adicionar dados de manutenção</button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                     <div class="area-servico-produto">
                         <h2>Area para adicionar serviços e peças</h2>
                         <label for="servico">Adicionar serviços</label>

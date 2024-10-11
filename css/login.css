@@ -5,7 +5,7 @@
 .container-direito {
     height: 100%; /* Alinha-se à altura total da tela */
     width: 40vw;  /* Ocupa 40% da largura da tela */
-    background-color: #E2FBFF;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
