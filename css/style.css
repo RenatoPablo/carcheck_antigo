@@ -2,217 +2,177 @@
 
 /* Estilos gerais do body */
 body {
-    font-family: Lora, serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Evita rolagem horizontal */
-    /* overflow-y: hidden;  Evita rolagem vertical */
-     overflow-y: scroll; /* Evita rolagem vertical */
-    background-color: #ffffff; /* Adicionado para consistência */
+  font-family: Lora, serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita rolagem horizontal */
+  overflow-y: scroll; /* Evita rolagem vertical */
+  background-color: #ffffff; /* Adicionado para consistência */
 }
-
 
 /* Estilos gerais do header */
 header {
-    background-color: #002775;
-    color: white;
-    height: 100px;
-    padding: 0 20px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
+  background-color: #002775;
+  color: white;
+  height: 100px;
+  padding: 0 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
-/* Estilo para o título no header */
-header h1 {
-    margin: 0;
-    font-size: 50px; /* Ajustado para maior tamanho */
-}
-
-/* Container para o botão e ícones no header */
+/* Estilo para o título e logo no header */
 .container-header {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
+/* Estilo para o título */
+header h1 {
+  margin: 0;
+  font-size: 50px;
+}
 
-
-/* Estilo dos ícones na barra superior */
+/* Alinhamento dos ícones na barra superior */
 .icons {
-    display: flex;
-    gap: 37px;
-    position: relative;
-    top: 0px;
-    right: 100px;
-    align-items: center;
-    transition: margin-left 0.5s; /* Transição suave */
-    
+  display: flex;
+  gap: 20px; /* Espaçamento entre os ícones */
+  margin-left: auto; /* Empurra os ícones para o lado direito */
+  align-items: center;
+  transition: transform 0.5s ease;
+  padding-right: 60px; /* Ajuste de espaço para que não colidam com o hamburguer */
 }
 
-.icons-not{
-        display: flex;
-        gap: 37px;
-        position: relative;
-        top: 0px;
-        right: 0px;
-        align-items: center;
-        transition: margin-left 0.5s; /* Transição suave */
-        background: none;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.3 ease;
+/* Ícone de notificação */
+.icons-not {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.icons-not i{
-    font-size: 30px;
+.icons-not i {
+  font-size: 30px;
 }
 
 /* Ajuste dos ícones quando a sidebar está aberta */
 .sidebar.open ~ .icons {
-    margin-left: 210px; /* Empurra os ícones para a direita */
+  transform: translateX(-150px); /* Move os ícones para a esquerda quando a sidebar está aberta */
 }
-
-/* Botão para abrir a sidebar */
 
 /* Estilos da sidebar */
 .sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    right: 0;
-    background-color: #0d3587;
-    overflow-x: hidden;
-    transition: width 0.5s;
-    padding-top: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    box-sizing: border-box;
-    
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  background-color: #0d3587;
+  overflow-x: hidden;
+  transition: width 0.5s ease;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  box-sizing: border-box;
 }
 
 /* Sidebar aberta */
 .sidebar.open {
-    width: 210px; /* Largura quando aberta */
-    border-left: 10px solid transparent;
-    border-image: linear-gradient(45deg, #00dbde, #301ef5) 1;
+  width: 210px;
+  border-left: 10px solid transparent;
+  border-image: linear-gradient(45deg, #00dbde, #301ef5) 1;
 }
 
 /* Links dentro da sidebar */
 .sidebar a {
-    padding: 10px 15px;
-    text-decoration: none;
-    font-size: 18px;
-    color: white;
-    display: block;
-    transition: background-color 0.3s;
-}
-
-/* Estilo do primeiro link na sidebar */
-.sidebar a:first-child {
-    margin-top: 50px;
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+  transition: background-color 0.3s;
+  position: relative;
+    top: 32px;
 }
 
 /* Hover effect para os links da sidebar */
 .sidebar a:hover {
-    background-color: #575757;
-    
+  background-color: #575757;
 }
 
-/* Conteúdo principal */
-main {
-    padding: 30px;
-    margin-top: 80px; /* Ajustado para caber o header fixo */
-    transition: margin-left 0.5s;
-}
-
-/*  botao antigo de hamburguer 
-
-.open-btn {
-    font-size: 30px;
-    cursor: pointer;
-    background-color: #0d3587; /* Cor da sidebar 
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    position: fixed; /* Fixo na tela 
-    top: 10px;
-    right: 20px;  Ajuste a posição conforme necessário 
-    z-index: 1100; /* Deve estar sobre a sidebar 
-    transition: 0.3s;
-} */
-
-/* From Uiverse.io by vk-uiux */ 
+/* Botão hamburguer */
 #checkbox {
-    display: none;
-  }
-  
-  .toggle {
-    position: fixed;
-    width: 38px;
-    cursor: pointer;
-    margin: auto;
-    display: flex;
-    right: 40px;
-    height: calc(4px * 3 + 10px * 2);
-    z-index: 1001;
-  }
-  
-  .bar {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 4px;
-    border-radius: calc(4px / 2);
-    background: #ffffff;
-    color: inherit;
-    opacity: 1;
-    transition: none 0.35s cubic-bezier(.5,-0.35,.35,1.5) 0s;
-  }
-  
-  /***** Spin Animation *****/
-  
-  .bar--top {
-    bottom: calc(50% + 11px + 4px/ 2);
-    transition-property: bottom,transform;
-    transition-delay: calc(0s + 0.35s),0s;
-  }
-  
-  .bar--middle {
-    top: calc(50% - 4px/ 2);
-    transition-property: opacity;
-    transition-delay: calc(0s + 0.35s);
-  }
-  
-  .bar--bottom {
-    top: calc(50% + 11px + 4px/ 2);
-    transition-property: top,transform;
-    transition-delay: calc(0s + 0.35s),0s;
-  }
-  
-  #checkbox:checked + .toggle .bar--top {
-    bottom: calc(50% - 4px/ 2);
-    transform: rotate(135deg);
-    transition-delay: 0s,calc(0s + 0.35s);
-  }
-  
-  #checkbox:checked + .toggle .bar--middle {
-    opacity: 0;
-    transition-duration: 0s;
-    transition-delay: calc(0s + 0.35s);
-  }
-  
-  #checkbox:checked + .toggle .bar--bottom {
-    top: calc(50% - 4px/ 2);
-    transform: rotate(225deg);
-    transition-delay: 0s,calc(0s + 0.35s);
-  }
+  display: none;
+}
+
+.toggle {
+  position: absolute;
+  width: 37px; /* Aumenta a área clicável */
+  height: 32px; /* Aumenta a área clicável */
+  cursor: pointer; /* Garante que o cursor de ponteiro seja exibido ao passar sobre o bloco */
+  right: 20px; /* Posiciona o botão hamburguer mais à direita */
+  top: 35px; /* Alinha verticalmente no centro do header */
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza as barrinhas dentro da área */
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  width: 100%; /* Define que as barras ocupam toda a largura do botão */
+  border-radius: calc(4px / 2);
+  background: #ffffff;
+  opacity: 1;
+  transition: none 0.35s cubic-bezier(.5,-0.35,.35,1.5) 0s;
+}
+
+/***** Spin Animation para o hamburguer *****/
+.bar--top {
+  bottom: calc(50% + 11px + 4px / 2);
+  transition-property: bottom, transform;
+  transition-delay: calc(0s + 0.35s), 0s;
+}
+
+.bar--middle {
+  top: calc(50% - 4px / 2);
+  transition-property: opacity;
+  transition-delay: calc(0s + 0.35s);
+}
+
+.bar--bottom {
+  top: calc(50% + 11px + 4px / 2);
+  transition-property: top, transform;
+  transition-delay: calc(0s + 0.35s), 0s;
+}
+
+#checkbox:checked + .toggle .bar--top {
+  bottom: calc(50% - 4px / 2);
+  transform: rotate(135deg);
+  transition-delay: 0s, calc(0s + 0.35s);
+}
+
+#checkbox:checked + .toggle .bar--middle {
+  opacity: 0;
+  transition-duration: 0s;
+  transition-delay: calc(0s + 0.35s);
+}
+
+#checkbox:checked + .toggle .bar--bottom {
+  top: calc(50% - 4px / 2);
+  transform: rotate(225deg);
+  transition-delay: 0s, calc(0s + 0.35s);
+}
+
