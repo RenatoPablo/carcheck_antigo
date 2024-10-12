@@ -62,4 +62,34 @@ function cadastrarProduto($pdo, $nomeProduto, $descrProduto, $valor, $idTipo, $i
     ]);
     return $pdo->lastInsertId();
 }
+
+function cadastrarCompras($pdo, $valorCompra, $idFornecedor) {
+    $sql = 'INSERT INTO compras (data_compra, valor_compra, fk_id_fornecedor) VALUES (NOW(), :valor_total, :id_fornecedor)';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':valor_total' => $valorCompra,
+        ':id_fornecedor' => $idFornecedor
+    ]);
+    return $pdo->lastInsertId();
+}
+
+function cadastrarItensCompra($pdo, $quantidade, $valorUnitario, $idProduto, $idCompra) {
+    $sql = 'INSERT INTO itens_compras_produtos (quantidade, valor_unitario, fk_id_servico_produto, fk_id_compra) VALUES (:quantidade, :valor_unitario, :id_produto, :id_compra)';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execeute([
+        ':quantidade' => $quantidade,
+        ':valor_unitario' => $valorUnitario,
+        ':id_produto' => $idProduto,
+        ':id_compra' => $idCompra
+    ]);
+    return $pdo->lasInsertId();
+}
+
+function buscaFornecedor($pdo, $cnpj) {
+    $sql = 'SELECT id_fornecedor FROM fornecedores WHERE cnpj = :cnpj';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':cnpj' => $cnpj]);
+    $fornecedor = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $fornecedor['id_fornecedor'];
+}
 ?>

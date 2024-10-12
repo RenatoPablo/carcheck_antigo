@@ -8,12 +8,13 @@ if (!isset($_SESSION) OR $_SESSION['logado'] != true) {
 require '../config/config.php';
 require '../function/funcoes-cadastro-servico-produto.php';
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         if (isset($_POST['option'])) {
-            $idTipo = $_POST['option'];
+            $selectOptions = $_POST['option'];
             
-            if ($idTipo === 1) {
+            if ($selectOptions === 1) {
                 if (!empty($_POST['nomeServico']) &&
                     !empty($_POST['descrServico']) &&
                     !empty($_POST['valorServico']) &&
@@ -29,42 +30,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 //mostrar o popup sobre oq esta faltando
             }
             }
-        }
-        if (!empty($_POST['nome']) &&
-            !empty($_POST['descr']) &&
-            !empty($_POST['valor']) &&
-            !empty($_POST['option'])
+            
+    if ($selectOptions === 2 && !empty($_POST['marcaProduto'])) {
+        
+        
+        if (!empty($_POST['nomeProduto']) &&
+            !empty($_POST['descrProduto']) &&
+            !empty($_POST['valorProduto']) &&
+            !empty($_POST['cnpjFornecedor']) &&
+            !empty($_POST['quantidadeProduto'])
+            
         ) {
             $nomeServico = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
             $descrServico = htmlspecialchars($_POST['descr'], ENT_QUOTES, 'UTF-8');
-            $valor = floatval($_POST['valor']);
-            
-            
-            
-            if (isset($_POST['option'])) {
-                $selectOptions = $_POST['option'];
-            
-            if ($selectOptions === 1) {
-                
-                $idTipo = 1;
+            $valorUni = floatval($_POST['valor']);
+            $cnpj = htmlspecialchars($_POST['cnpjFornecedor'], ENT_QUOTES, 'UFT-8');
+            $quantidade = intval($_POST['quantidade']);
 
-                $id_servico = cadastrarServico($pdo, $nomeServico, $descrServico, $valor, $idTipo);
-            } elseif ($selectOptions === 2 && !empty($_POST['marca'])) {
-                $idTipo = 2;
+            $idFornecedor = buscaFornecedor($pdo, $cnpj);
+
+            $valorTotal = $valorUni * $quantidade;
+            
+            
+            
+                
                 $nomeMarca = htmlspecialchars($_POST['marca'], ENT_QUOTES, 'UTF-8');
 
                 //inserir marca
                 $id_marca = cadastrarMarca($pdo, $nomeMarca);
 
                 //inserir produto
-                $id_produto = cadastrarProduto($pdo, $nomeServico, $descrServico, $valor, $idTipo, $id_marca);
-            }
-        }
-        } else {
+                $id_produto = cadastrarProduto($pdo, $nomeServico, $descrServico, $valorUni, $idTipo, $id_marca);
+
+                $id_compra = cadastrarCompras($pdo, $valorTotal, $idFornecedor);
+
+                $id_itens_compras = cadastrarItensCompra($pdo, $quantidade, $valorUni, $id_produto, $id_compra);
+            }  else {
             echo "Preencha todos os campos.";
-        }
-    } catch (PDOException $e) {
-        echo "Erro: " . $e->getMessage();
-    }
+        } }
+    
+}
+} catch (PDOException $e) {
+    echo "Erro: " . $e->getMessage();
+}
 }
 ?>

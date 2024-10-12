@@ -97,9 +97,9 @@ else:
             <button class="botao-submit" type="submit">ENVIAR</button>
         </div>
     </form>
-
+                                                
     <!-- Formulário de Endereço -->
-    <form action="../config/processa_endereco.php" method="POST">
+    <form action="../config/processa-cadastro-cliente.php" method="POST">
         <div class="form-card">
             <h2>Endereço</h2>
             <div class="endereco">
