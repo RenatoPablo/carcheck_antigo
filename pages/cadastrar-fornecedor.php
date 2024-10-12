@@ -14,6 +14,12 @@
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/style.css">
     <title>Cadastro de Fornecedor</title>
+    <style>
+        .campos-forncedor{
+            position: relative;
+            top: 150px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -58,11 +64,27 @@
         </label>
     </header>
 
-        <div>
-            <div>
-                <label for=""></label>
+        <form action="../config/processa-cadastro-fornecedor.php" method="POST">
+            <div class="campos-forncedor">
+                <div class="input-container">
+                    <label for="nome_fantasia">Nome da empresa</label>
+                    <input type="text" name="nome_fantasia" id="nome_fantasia" class="input">
+                </div>
+                <div class="input-container">
+                    <label for="razao_social">Razão social</label>
+                    <input type="text" name="razao_social" id="razao_social" class="input">
+                </div>
+                <div class="input-container">
+                    <label for="ie">IE</label>
+                    <input type="text" name="ie" id="ie" class="input">
+                </div>
+                <div class="input-container">
+                    <label for="cnpj">CNPJ</label>
+                    <input type="text" name="cnpj" id="cnpj" class="input">
+                </div>
+                <button type="submit">Enviar</button>
             </div>
-        </div>
+        </form>
 
 </body>
 </html>

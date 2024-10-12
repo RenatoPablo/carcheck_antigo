@@ -183,16 +183,6 @@ CREATE TABLE formas_pagamento (
     num_parcela INT
 );
 
-CREATE TABLE pagamentos (
-    id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
-    valor_pagamento FLOAT NOT NULL,
-    fk_id_forma_pagamento INT,
-    data_pagamento DATE NOT NULL,
-    situacao BOOLEAN NOT NULL,
-    fk_id_manutencao INT,
-    FOREIGN KEY (fk_id_manutencao) REFERENCES manutencoes(id_manutencao) ON UPDATE CASCADEON DELETE SET NULL,
-    FOREIGN KEY (fk_id_forma_pagamento) REFERENCES formas_pagamento(id_forma_pagamento) ON UPDATE CASCADE ON DELETE SET NULL
-);
 
 CREATE TABLE manutencoes (
     id_manutencao INT AUTO_INCREMENT PRIMARY KEY,       
@@ -203,6 +193,17 @@ CREATE TABLE manutencoes (
     fk_id_veiculo INT NOT NULL,
     FOREIGN KEY (fk_id_veiculo) REFERENCES veiculos(id_veiculo) ON UPDATE CASCADE ON DELETE CASCADE
     
+);
+
+CREATE TABLE pagamentos (
+    id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
+    valor_pagamento FLOAT NOT NULL,
+    fk_id_forma_pagamento INT,
+    data_pagamento DATE NOT NULL,
+    situacao BOOLEAN NOT NULL,
+    fk_id_manutencao INT,
+    FOREIGN KEY (fk_id_manutencao) REFERENCES manutencoes(id_manutencao) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_forma_pagamento) REFERENCES formas_pagamento(id_forma_pagamento) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE marcas_servicos_produtos (
@@ -240,8 +241,10 @@ CREATE TABLE itens_manutencoes_servicos (
 
 CREATE TABLE fornecedores (
     id_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
-    fk_id_pessoa INT,
-    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE CASCADE
+    nome_fantasia VARCHAR(150) NOT NULL,
+    razao_social VARCHAR(200) NOT NULL,
+    ie VARCHAR(20) NOT NULL,
+    cnpj VARCHAR(18) NOT NULL
 );
 
 CREATE TABLE compras (
