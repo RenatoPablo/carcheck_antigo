@@ -33,7 +33,7 @@ function cadastrarMarca($pdo, $nomeMarca) {
 
     if ($stmtCheck->rowCount() > 0) {
         $marca = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-        return $marca['id_marca'];
+        return $marca['id_marca_produto'];
     }
 
     $sqlInsert = "INSERT INTO marcas_servicos_produtos(nome_marca_produto) VALUES (:marca)";
@@ -76,13 +76,13 @@ function cadastrarCompras($pdo, $valorCompra, $idFornecedor) {
 function cadastrarItensCompra($pdo, $quantidade, $valorUnitario, $idProduto, $idCompra) {
     $sql = 'INSERT INTO itens_compras_produtos (quantidade, valor_unitario, fk_id_servico_produto, fk_id_compra) VALUES (:quantidade, :valor_unitario, :id_produto, :id_compra)';
     $stmt = $pdo->prepare($sql);
-    $stmt->execeute([
+    $stmt->execute([
         ':quantidade' => $quantidade,
         ':valor_unitario' => $valorUnitario,
         ':id_produto' => $idProduto,
         ':id_compra' => $idCompra
     ]);
-    return $pdo->lasInsertId();
+    return $pdo->lastInsertId();
 }
 
 function buscaFornecedor($pdo, $cnpj) {
