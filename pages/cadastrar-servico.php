@@ -55,19 +55,19 @@
                 <!-- Campo para o nome do produto -->
                 <div class="input-container">
                     <label for="nomeProduto">Nome do Produto</label>
-                    <input type="text" name="nomeProduto" id="nomeProduto" class="input" required>
+                    <input type="text" name="nomeProduto" id="nomeProduto" class="input" >
                 </div>
 
                 <!-- Campo para a descrição do produto -->
                 <div class="input-container">
                     <label for="descrProduto">Descrição do Produto</label>
-                    <input type="text" name="descrProduto" id="descrProduto" class="input" required>
+                    <input type="text" name="descrProduto" id="descrProduto" class="input" >
                 </div>
 
                 <!-- Campo para o valor do produto -->
                 <div class="input-container">
                     <label for="valorProduto">Valor</label>
-                    <input type="number" step="0.01" name="valorProduto" id="valorProduto" class="input" required>
+                    <input type="number" step="0.01" name="valorProduto" id="valorProduto" class="input" >
                 </div>
 
                 <!-- Campo para a marca do produto -->
@@ -79,13 +79,13 @@
                 <!-- Campo para o CNPJ do fornecedor com sugestões -->
                 <div class="input-container">
                     <label for="cnpjFornecedor">CNPJ do Fornecedor</label>
-                    <input type="text" name="cnpjFornecedor" id="cnpjFornecedor" class="input" oninput="mascaraCNPJ(this)" onkeyup="buscarFornecedores()" required>
+                    <input type="text" name="cnpjFornecedor" id="cnpjFornecedor" class="input" oninput="mascaraCNPJ(this)" onkeyup="buscarFornecedores()" >
                     <ul id="sugestoes" class="suggestions"></ul>
                 </div>
 
                 <div class="input-container">
                     <label for="quantidadeProduto">Quantidade</label>
-                    <input type="number" name="quantidadeProduto" id="quantidadeProduto" class="input" required>
+                    <input type="number" name="quantidadeProduto" id="quantidadeProduto" class="input" >
                 </div>
 
             </div>

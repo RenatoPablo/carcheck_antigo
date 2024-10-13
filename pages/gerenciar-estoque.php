@@ -22,7 +22,14 @@
 <?php include '../includes/header-funci.php'; ?>
 
 <div class="busca">
-    
+  
+  <!-- Checkboxes para tipo de produto -->
+  <label>
+      <input type="radio" name="tipo" value="1"> Serviço
+  </label>
+  <label>
+      <input type="radio" name="tipo" value="2"> Produto
+  </label>
         <!-- barra de pesquisa -->
         <div class="search">
           <input placeholder="Buscar item do estoque" class="search__input" type="text" id="estoque" onkeyup="buscarEstoque()"/>
@@ -42,13 +49,6 @@
           </button>
         </div>
     
-        <!-- Checkboxes para tipo de produto -->
-        <label>
-            <input type="radio" name="tipo" value="1"> Serviço
-        </label>
-        <label>
-            <input type="radio" name="tipo" value="2"> Produto
-        </label>
     
         <!-- Sugestões aparecerão aqui -->
         <ul id="sugestoes"></ul>

@@ -21,4 +21,6 @@ function cadastrarManutencao($pdo, $time, $km, $defeito, $idVeiculo) {
     ]);
 }
 
+
+
 ?>

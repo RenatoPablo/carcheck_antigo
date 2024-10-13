@@ -2,33 +2,39 @@
 function buscarEstoque() {
     const input = document.getElementById('estoque'); // Campo de busca
     const sugestoes = document.getElementById('sugestoes'); // Elemento para sugestões
-    const query = input.value; // Valor do campo de busca
+    const query = input.value.trim(); // Valor do campo de busca
 
-    // Obtém o valor da checkbox selecionada para o tipo
+    // Obtém o valor do radio selecionado (1 para Serviço ou 2 para Produto)
     const tipoCheckbox = document.querySelector('input[name="tipo"]:checked');
-    const tipo = tipoCheckbox ? tipoCheckbox.value : ''; // Se houver checkbox marcada, pega o valor
+    const tipo = tipoCheckbox ? tipoCheckbox.value : ''; // Se houver radio marcado, pega o valor
 
-    // Limpar a lista de sugestões e ocultá-la se o campo estiver vazio
+    // Se o campo de busca estiver vazio, limpa e oculta a lista de sugestões
     if (query.length === 0) {
         sugestoes.innerHTML = '';
         sugestoes.style.display = 'none'; // Ocultar sugestões
         return;
     }
 
-    // Fazer a requisição AJAX para buscar no estoque
+    // Verifica se o tipo foi selecionado (Serviço ou Produto)
+    if (!tipo) {
+        alert('Por favor, selecione o tipo: Serviço ou Produto.');
+        return;
+    }
+
+    // Fazer a requisição AJAX para buscar itens de estoque
     const xhr = new XMLHttpRequest();
     xhr.open('GET', '../config/busca-estoque.php?query=' + encodeURIComponent(query) + '&tipo=' + encodeURIComponent(tipo), true);
-    
+
     xhr.onload = function() {
         if (xhr.status === 200) {
             const itens = JSON.parse(xhr.responseText); // Parseia o JSON retornado pelo servidor
             sugestoes.innerHTML = ''; // Limpa a lista de sugestões
 
-            // Se não houver sugestões, ocultar a lista
+            // Se não houver sugestões, oculta a lista
             if (itens.length === 0) {
                 sugestoes.style.display = 'none';
             } else {
-                sugestoes.style.display = 'block'; // Mostrar sugestões
+                sugestoes.style.display = 'block'; // Mostra sugestões
 
                 // Limitar a lista a no máximo 10 itens
                 const maxItens = Math.min(itens.length, 10);
@@ -46,7 +52,7 @@ function buscarEstoque() {
 
                     // Cria um botão para abrir o modal
                     const btn = document.createElement('button');
-                    btn.textContent = 'Editar   ';
+                    btn.textContent = 'Editar';
                     btn.classList.add('btn-modal');
                     btn.onclick = function() {
                         openModal(item); // Abre o modal com os detalhes do item
@@ -58,142 +64,11 @@ function buscarEstoque() {
                 }
                 sugestoes.classList.add('sugestoes-lista');
             }
+        } else {
+            console.error('Erro ao buscar estoque:', xhr.status);
         }
     };
-    
-    // Envia a requisição AJAX
-    xhr.send();
-}
 
-// Função para buscar os itens de estoque no banco de dados com AJAX
-function buscarEstoqueServico() {
-    const input = document.getElementById('estoqueServico'); // Campo de busca
-    const sugestoes = document.getElementById('sugestoesServico'); // Elemento para sugestões
-    const query = input.value; // Valor do campo de busca
-
-    const tipo = '1'; // Valor fixo para tipo
-
-    // Limpar a lista de sugestões e ocultá-la se o campo estiver vazio
-    if (query.length === 0) {
-        sugestoes.innerHTML = '';
-        sugestoes.style.display = 'none'; // Ocultar sugestões
-        return;
-    }
-
-    // Fazer a requisição AJAX para buscar no estoque
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '../config/busca-estoque.php?query=' + encodeURIComponent(query) + '&tipo=' + encodeURIComponent(tipo), true);
-    
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const itens = JSON.parse(xhr.responseText); // Parseia o JSON retornado pelo servidor
-            sugestoes.innerHTML = ''; // Limpa a lista de sugestões
-
-            // Se não houver sugestões, ocultar a lista
-            if (itens.length === 0) {
-                sugestoes.style.display = 'none';
-            } else {
-                sugestoes.style.display = 'block'; // Mostrar sugestões
-
-                // Limitar a lista a no máximo 10 itens
-                const maxItens = Math.min(itens.length, 10);
-                for (let i = 0; i < maxItens; i++) {
-                    const item = itens[i];
-                    const li = document.createElement('li');
-
-                    // Adiciona uma classe à <li> para estilização
-                    li.classList.add('sugestao-item');
-
-                    // Texto principal do item (nome)
-                    const itemName = document.createElement('span');
-                    itemName.textContent = item.nome_servico_produto;
-                    li.appendChild(itemName);
-
-                    // Adiciona evento de clique para preencher o campo com o nome do item
-                    li.onclick = function() {
-                        input.value = item.nome_servico_produto; // Preenche o campo de busca com o nome do item
-                        sugestoes.innerHTML = ''; // Limpa as sugestões
-                        sugestoes.style.display = 'none'; // Oculta a lista de sugestões
-                        
-                    };
-
-                    li.style.cursor = 'pointer';
-
-                    // Adiciona o item na lista de sugestões
-                    sugestoes.appendChild(li);
-                }
-                sugestoes.classList.add('sugestoes-lista');
-            }
-        }
-    };
-    
-    // Envia a requisição AJAX
-    xhr.send();
-}
-
-
-function buscarEstoqueProduto() {
-    const input = document.getElementById('estoqueProduto'); // Campo de busca
-    const sugestoes = document.getElementById('sugestoesProduto'); // Elemento para sugestões
-    const query = input.value; // Valor do campo de busca
-
-    
-    const tipo = '2';
-
-    // Limpar a lista de sugestões e ocultá-la se o campo estiver vazio
-    if (query.length === 0) {
-        sugestoes.innerHTML = '';
-        sugestoes.style.display = 'none'; // Ocultar sugestões
-        return;
-    }
-
-    // Fazer a requisição AJAX para buscar no estoque
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '../config/busca-estoque.php?query=' + encodeURIComponent(query) + '&tipo=' + encodeURIComponent(tipo), true);
-    
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const itens = JSON.parse(xhr.responseText); // Parseia o JSON retornado pelo servidor
-            sugestoes.innerHTML = ''; // Limpa a lista de sugestões
-
-            // Se não houver sugestões, ocultar a lista
-            if (itens.length === 0) {
-                sugestoes.style.display = 'none';
-            } else {
-                sugestoes.style.display = 'block'; // Mostrar sugestões
-
-                // Limitar a lista a no máximo 10 itens
-                const maxItens = Math.min(itens.length, 10);
-                for (let i = 0; i < maxItens; i++) {
-                    const item = itens[i];
-                    const li = document.createElement('li');
-
-                    // Adiciona uma classe à <li> para estilização
-                    li.classList.add('sugestao-item');
-
-                    // Texto principal do item (nome)
-                    const itemName = document.createElement('span');
-                    itemName.textContent = item.nome_servico_produto;
-                    li.appendChild(itemName);
-
-                    // Adiciona evento de clique para preencher o campo com o nome do item
-                    li.onclick = function() {
-                        input.value = item.nome_servico_produto; // Preenche o campo de busca com o nome do item
-                        sugestoes.innerHTML = ''; // Limpa as sugestões
-                        sugestoes.style.display = 'none'; // Oculta a lista de sugestões
-                        
-                    };
-
-                    li.style.cursor = 'pointer';
-
-                    // Adiciona o item na lista de sugestões
-                    sugestoes.appendChild(li);
-                }
-                sugestoes.classList.add('sugestoes-lista');
-            }
-        }
-    };
-    
     // Envia a requisição AJAX
     xhr.send();
 }
@@ -203,16 +78,15 @@ function openModal(item) {
     const modal = document.getElementById('myModal'); // Obtém o modal pelo ID
     const modalText = document.getElementById('modal-text'); // Obtém o elemento onde os detalhes serão exibidos
 
-    // Insere os detalhes do item no modal (por exemplo, o nome do item)
-    modalText.textContent = `Nome: ${item.nome_servico_produto}- Descrição: ${item.descricao} - Preço unitário: ${item.valor_servico_produto}`; // Exibe o nome e o preço (ou qualquer outro detalhe do item)
-
+    // Insere os detalhes do item no modal (nome, descrição, preço)
+    modalText.textContent = `Nome: ${item.nome_servico_produto} - Descrição: ${item.descricao} - Preço: ${item.valor_servico_produto}`;
     modal.style.display = 'block'; // Exibe o modal
 }
 
 // Função para fechar o modal ao clicar no botão de fechar
 document.querySelector('.close').onclick = function() {
     document.getElementById('myModal').style.display = 'none'; // Fecha o modal
-}
+};
 
 // Fecha o modal ao clicar fora da área de conteúdo
 window.onclick = function(event) {
@@ -220,4 +94,4 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = 'none'; // Fecha o modal
     }
-}
+};

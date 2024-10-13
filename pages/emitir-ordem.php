@@ -1,6 +1,5 @@
 <?php
     session_start();
-    // print_r($_SESSION);
     if(!isset($_SESSION) OR $_SESSION['logado'] != true):
 		header("location: ../config/sair.php");		
 	else:
@@ -18,134 +17,140 @@
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/emitir-ordem.css">
-
-
-    <!-- adicionando para teste apenas -->
-     <style>
-        
-        .ul-temporaria{
-            list-style-type: none; /* Remove os marcadores da lista */
-            padding: 0; /* Remove o padding padrão */
-            margin: 10px 0; /* Margem entre a lista de sugestões e a lista de itens */
-            border: 1px solid #ccc; /* Adiciona uma borda opcional */
-            background: #f9f9f9; /* Cor de fundo para a lista de itens */
-            max-height: 150px; /* Altura máxima da lista de itens */
-            overflow-y: auto; /* Adiciona rolagem se necessário */
+    
+    <style>
+        .ul-temporaria {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+            max-height: 150px;
+            overflow-y: auto;
         }
-     </style>
+        .quantidade-input {
+            width: 50px;
+            margin-left: 10px;
+        }
+        .suggestions {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .suggestions li {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .suggestions li:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
 <?php include '../includes/header-funci.php'; ?>
 
-            <div class="area-dados">
-                
-                    <div class="card">
-                        <form action="../config/adicionar-manutencao.php" method="POST">
-                            <div class="campos">
-                            
-                                <div class="dados">
-                                    <label class="label-campos" for="time-final">Hora de saída:</label>
-                                    <br>
-                                    <input type="datetime" name="time-final" id="time-final">
-                                </div>
-                            
-                            
-                                <div class="dados">
-                                    <label class="label-campos" for="km">KM:</label>
-                                    <br>
-                                    <input type="number" name="km" id="km">
-                                </div>
-                            
-                                <div class="dados">
-                                    <label class="label-campos" for="defeito">Defeito observado:</label>
-                                    <br>
-                                    <input type="text" name="defeito" id="defeito">
-                                </div>
-                            
-                                <div class="dados">
-                                    <label class="label-campos" for="placa">Placa:</label>
-                                    <br>
-                                    <input type="text" name="placa" id="placa" oninput="mascaraPlacaVeiculo(this)"
-                                    onkeyup="buscarVeiculo()">
-                                </div>
-
-                                <div class="dados">
-                                    <label class="label-campos" for="veiculo">Carro:</label>
-                                    <br>
-                                    <input type="text" name="veiculo" id="veiculo">
-                                </div>                          
-
-                                
-                                <div class="dados">
-                                    <label class="label-campos" for="prop">Proprietário do veiculo</label>
-                                    <br>
-                                    <input id="prop" type="text" name="proprietario" class="input" onkeyup="buscarProprietarios()" autocomplete="off">
-                                    <ul id="sugestoes" class="suggestions"></ul>
-                                </div>
-                                
-                                <div>
-                                    <label for=""></label>
-                                </div>
-                            </div>
-                            <button class="button-submit" type="submit">Adicionar dados de manutenção</button>
-                        </div>
-                    </form>
-                    <div class="area-servico-produto">
-                        <h2>Area para adicionar serviços e peças</h2>
-                        <label for="servico">Adicionar serviços</label>
-                        <input placeholder="Buscar item do estoque" type="text" id="estoqueServico"  name="servico" onkeyup="buscarEstoqueServico()"/>
-                
-                        <ul id="sugestoesServico"></ul>
-                        <!-- Lista temporária para exibir os itens adicionados -->
-                        <ul id="itemListServico" class="ul-temporaria"></ul>
-                
+    <div class="area-dados">
+        <div class="card">
+            <form action="../config/adicionar-manutencao.php" method="POST">
+                <div class="campos">
+                    <div class="dados">
+                        <label class="label-campos" for="time-final">Hora de saída:</label>
                         <br>
-                
-                        <!-- Botão de adicionar à lista -->
-                        <button id="addItemBtnServico" >Adicionar à lista</button>
-
-                        <br>
-                        <label for="produto">Adicionar peças</label>
-                        <input placeholder="Buscar item do estoque" type="text" id="estoqueProduto"  name="produto" onkeyup="buscarEstoqueProduto()"/>
-
-                        <ul id="sugestoesProduto"></ul>
-
-                        <!-- Lista temporária para exibir os itens adicionados -->
-                        <ul id="itemListProduto" class="ul-temporaria"></ul>
-                
-                        <br>
-                
-                        <!-- Botão de adicionar à lista -->
-                        <button id="addItemBtnProduto" >Adicionar à lista</button>
+                        <input type="datetime" name="time-final" id="time-final">
                     </div>
                 
-                    <!-- Formulário final -->
-                    <form id="finalForm" action="/submit-url" method="POST">
-                        <input type="hidden" id="hiddenItemListServico" name="itemListServico">
-                        <input type="hidden" id="hiddenItemListProduto" name="itemListProduto"> <!-- Campo oculto para enviar os itens -->
-                        <button type="submit">Enviar</button>
-                    </form>
-            </div>
+                    <div class="dados">
+                        <label class="label-campos" for="km">KM:</label>
+                        <br>
+                        <input type="number" name="km" id="km">
+                    </div>
+                
+                    <div class="dados">
+                        <label class="label-campos" for="defeito">Defeito observado:</label>
+                        <br>
+                        <input type="text" name="defeito" id="defeito">
+                    </div>
+                
+                    <div class="dados">
+                        <label class="label-campos" for="placa">Placa:</label>
+                        <br>
+                        <input type="text" name="placa" id="placa" oninput="mascaraPlacaVeiculo(this)" onkeyup="buscarVeiculo()">
+                    </div>
 
-        <script>
-            function definirHoraAtualTime() {
-                const agora = new Date();
-                // Formata a hora e os minutos
-                const horas = agora.getHours().toString().padStart(2, '0');
-                const minutos = agora.getMinutes().toString().padStart(2, '0');
-                // Define o valor do input
-                document.getElementById('time-final').value = `${horas}:${minutos}`;
-            }
-            // Define a hora ao carregar a página
-            window.onload = definirHoraAtualTime;
-        </script>        
+                    <div class="dados">
+                        <label class="label-campos" for="veiculo">Carro:</label>
+                        <br>
+                        <input type="text" name="veiculo" id="veiculo">
+                    </div>                          
+
+                    <div class="dados">
+                        <label class="label-campos" for="prop">Proprietário do veiculo</label>
+                        <br>
+                        <input id="prop" type="text" name="proprietario" class="input" onkeyup="buscarProprietarios()" autocomplete="off">
+                        <ul id="sugestoes" class="suggestions"></ul>
+                    </div>
+                </div>
+                <button class="button-submit" type="submit">Adicionar dados de manutenção</button>
+            </form>
+        </div>
+
+        <div class="area-servico-produto">
+            <h2>Área para adicionar serviços e peças</h2>
+
+            <!-- Adicionar Serviços -->
+            <label for="servico">Adicionar serviços</label>
+            <input placeholder="Buscar item do estoque" type="text" id="estoqueServico" name="servico" onkeyup="buscarEstoqueServico()"/>
+            <ul id="sugestoesServico" class="suggestions"></ul>
+
+            <!-- Campo de quantidade de serviços -->
+            <input type="number" id="quantidadeServico" class="quantidade-input" placeholder="Quantidade" style="display: none;"/>
+            <button id="addItemBtnServico" style="display: none;" onclick="adicionarItemServico()">Adicionar à lista</button>
+
+            <!-- Lista de serviços adicionados -->
+            <ul id="itemListServico" class="ul-temporaria"></ul>
+
+            <br>
+
+            <!-- Adicionar Peças -->
+            <label for="produto">Adicionar peças</label>
+            <input placeholder="Buscar item do estoque" type="text" id="estoqueProduto" name="produto" onkeyup="buscarEstoqueProduto()"/>
+            <ul id="sugestoesProduto" class="suggestions"></ul>
+
+            <!-- Campo de quantidade de peças -->
+            <input type="number" id="quantidadeProduto" class="quantidade-input" placeholder="Quantidade" style="display: none;"/>
+            <button id="addItemBtnProduto" style="display: none;" onclick="adicionarItemProduto()">Adicionar à lista</button>
+
+            <!-- Lista de peças adicionadas -->
+            <ul id="itemListProduto" class="ul-temporaria"></ul>
+        </div>
+
+        <!-- Formulário final -->
+        <form id="finalForm" action="/submit-url" method="POST">
+            <input type="hidden" id="hiddenItemListServico" name="itemListServico">
+            <input type="hidden" id="hiddenItemListProduto" name="itemListProduto">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        function definirHoraAtualTime() {
+            const agora = new Date();
+            const horas = agora.getHours().toString().padStart(2, '0');
+            const minutos = agora.getMinutes().toString().padStart(2, '0');
+            document.getElementById('time-final').value = `${horas}:${minutos}`;
+        }
+        window.onload = definirHoraAtualTime;
+    </script>
 
     <script src="../js/adicionar-lista.js"></script>
-    <script src="../js/buscar-estoque.js"></script>
+    
     <script src="../js/buscarProprietario.js"></script>
     <script src="../js/buscar-veiculo.js"></script>
     <script src="../js/mascaras.js"></script>
-    
 </body>
 </html>
 

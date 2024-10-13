@@ -15,7 +15,8 @@ try {
         $verificacao = false;
 
         if( !empty($_POST['km']) &&
-            !empty($_POST['placa'])) {
+            !empty($_POST['placa'])) 
+            {
                 $time = $_POST['time-final'];
                 $km = $_POST['km'];
                 $defeito = $_POST['defeito'];
