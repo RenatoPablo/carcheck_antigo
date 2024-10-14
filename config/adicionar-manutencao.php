@@ -11,8 +11,7 @@ require '../function/funcoes_notas.php';
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        //variavel para verificação se a nota foi cadastrada
-        $verificacao = false;
+        
 
         if( !empty($_POST['km']) &&
             !empty($_POST['placa'])) 
@@ -22,19 +21,41 @@ try {
                 $defeito = $_POST['defeito'];
                 $placa = $_POST['placa'];
 
+                $itensServico = json_decode($_POST['itemListServico'], true);
+
+                    if (!is_array($itensServico)) {
+                        $itensServico = [];
+                    } 
+
+                $itensProduto = json_decode($_POST['itemListProduto'], true);
+
+                    if (!is_array($itensProduto)) {
+                        $itensProduto = [];
+                    } 
+
+
+                //var_dump($itensServico, $itensProduto);
                 
 
                 $idVeiculo = obterIdVeiculo($pdo, $placa);
 
                 $idManutencao = cadastrarManutencao($pdo, $time, $km, $defeito, $idVeiculo);
 
+                foreach ($itensServico as $item) {
+                    cadastrarItensManutencao($pdo, $idManutencao, $item['id'], $item['valor']);
+                }
+
+                foreach ($itensProduto as $item) {
+                    cadastrarItensManutencao($pdo, $idManutencao, $item['id'], $item['valor'], $item['quantidade']);
+                }
+                echo "Manutenção cadastrada com sucesso!";
             } else {
                 echo "Preencha todos os campos.";
             }
         
     }
 } catch (PDOException $e) {
-    //throw $th;
+    echo "Erro: " . $e->getMessage();
 }
 
 ?>

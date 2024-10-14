@@ -3,7 +3,6 @@ let selectedItemsServico = [];
 let selectedItemsProduto = [];
 
 // Função para buscar itens de serviço no estoque e exibir sugestões
-// Função para buscar itens de serviço no estoque e exibir sugestões
 function buscarEstoqueServico() {
     const input = document.getElementById('estoqueServico');
     const sugestoes = document.getElementById('sugestoesServico');
@@ -29,12 +28,14 @@ function buscarEstoqueServico() {
             } else {
                 resultados.forEach(servico => {
                     const li = document.createElement('li');
-                    li.textContent = servico.nome_servico_produto;
+                    li.textContent = `${servico.nome_servico_produto} - Valor: ${servico.valor_servico_produto}`; // Mostra o valor unitário
                     li.onclick = function () {
                         input.value = servico.nome_servico_produto;
+                        input.dataset.valor = servico.valor_servico_produto;
+                        input.dataset.id = servico.id_servico_produto;
+                        // Armazena o valor no input
                         sugestoes.innerHTML = '';
                         sugestoes.style.display = 'none';
-                        
                         document.getElementById('addItemBtnServico').style.display = 'inline';
                     };
                     sugestoes.appendChild(li);
@@ -74,9 +75,12 @@ function buscarEstoqueProduto() {
             } else {
                 resultados.forEach(produto => {
                     const li = document.createElement('li');
-                    li.textContent = produto.nome_servico_produto;
+                    li.textContent = `${produto.nome_servico_produto} - Valor: ${produto.valor_servico_produto}`; // Mostra o valor unitário
                     li.onclick = function () {
                         input.value = produto.nome_servico_produto;
+                        input.dataset.valor = produto.valor_servico_produto;
+                        input.dataset.id = produto.id_servico_produto;
+                         // Armazena o valor no input
                         sugestoes.innerHTML = '';
                         sugestoes.style.display = 'none';
                         document.getElementById('quantidadeProduto').style.display = 'inline';
@@ -93,16 +97,23 @@ function buscarEstoqueProduto() {
     xhr.send();
 }
 
-
 // Função para adicionar o item de serviço à lista temporária (sem campo de quantidade)
 function adicionarItemServico(event) {
     event.preventDefault(); // Previne o comportamento padrão do botão
 
     const input = document.getElementById('estoqueServico');
+    const id = input.dataset.id;
     const itemValue = input.value;
+    const valor = input.dataset.valor;
+    // Captura o valor unitário armazenado no dataset
 
     if (itemValue !== '') {
-        selectedItemsServico.push({ item: itemValue }); // Adiciona apenas o nome do serviço
+        selectedItemsServico.push({ 
+            id: id,
+            item: itemValue, 
+            valor: valor
+
+        }); // Adiciona o nome do serviço e o valor
         atualizarListaVisualServico();
         input.value = ''; // Limpa o campo após adicionar
         document.getElementById('addItemBtnServico').style.display = 'none'; // Oculta o botão de adicionar
@@ -116,11 +127,11 @@ function atualizarListaVisualServico() {
 
     selectedItemsServico.forEach((item, index) => {
         const li = document.createElement('li');
-        li.textContent = `${item.item}`; // Exibe apenas o nome do serviço
+        li.textContent = `${item.item} - Valor: ${item.valor}`; // Exibe o nome do serviço e o valor
 
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remover';
-        removeBtn.onclick = function() {
+        removeBtn.onclick = function () {
             removerItemServico(index);
         };
 
@@ -131,26 +142,25 @@ function atualizarListaVisualServico() {
     document.getElementById('hiddenItemListServico').value = JSON.stringify(selectedItemsServico);
 }
 
-// Função para remover um item da lista de serviços
-function removerItemServico(index) {
-    selectedItemsServico.splice(index, 1);
-    atualizarListaVisualServico();
-}
-
-
-
-
 // Função para adicionar o item de produto à lista temporária
 function adicionarItemProduto(event) {
     event.preventDefault(); // Previne o comportamento padrão do botão
 
     const input = document.getElementById('estoqueProduto');
     const quantidadeInput = document.getElementById('quantidadeProduto');
+    const id = input.dataset.id;
     const itemValue = input.value;
     const quantidade = quantidadeInput.value;
+    const valor = input.dataset.valor;
+    // Captura o valor unitário armazenado no dataset
 
     if (itemValue !== '' && quantidade !== '') {
-        selectedItemsProduto.push({ item: itemValue, quantidade: quantidade });
+        selectedItemsProduto.push({ 
+            id: id,
+            item: itemValue, 
+            quantidade: quantidade, 
+            valor: valor 
+        }); // Adiciona o nome do produto, quantidade e valor
         atualizarListaVisualProduto();
         input.value = ''; // Limpa o campo após adicionar
         quantidadeInput.value = ''; // Limpa o campo de quantidade
@@ -166,11 +176,11 @@ function atualizarListaVisualProduto() {
 
     selectedItemsProduto.forEach((item, index) => {
         const li = document.createElement('li');
-        li.textContent = `${item.item} - Quantidade: ${item.quantidade}`;
+        li.textContent = `${item.item} - Quantidade: ${item.quantidade} - Valor: ${item.valor}`; // Exibe o nome do produto, a quantidade e o valor
 
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remover';
-        removeBtn.onclick = function() {
+        removeBtn.onclick = function () {
             removerItemProduto(index);
         };
 

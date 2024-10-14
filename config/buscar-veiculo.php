@@ -7,9 +7,9 @@ if (isset($_GET['placa'])) {
 
     // Consulta para buscar o veículo com base na placa
     $query = $pdo->prepare("
-    SELECT m.id_modelo, m.nome_modelo 
+    SELECT  m.nome_modelo 
     FROM veiculos v 
-    INNER JOIN modelos m ON v.fk_id_modelo = m.id_modelo
+    JOIN modelos m ON v.fk_id_modelo = m.id_modelo
     WHERE v.placa = :placa
     LIMIT 1");
     $query->bindParam(':placa', $placa, PDO::PARAM_STR);

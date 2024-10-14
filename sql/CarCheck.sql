@@ -229,9 +229,9 @@ CREATE TABLE servicos_produtos (
 );
 
 CREATE TABLE itens_manutencoes_servicos (
-    fk_id_servico_produto INT,
     fk_id_manutencao INT,
-    quantidade INT NOT NULL,
+    fk_id_servico_produto INT,
+    quantidade INT,
     valor_uni FLOAT NOT NULL,
     valor_total FLOAT NOT NULL,
 

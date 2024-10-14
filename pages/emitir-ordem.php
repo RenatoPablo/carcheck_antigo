@@ -55,7 +55,7 @@
 
     <div class="area-dados">
         <div class="card">
-            <form action="../config/adicionar-manutencao.php" method="POST">
+            <form id="finalForm" action="../config/adicionar-manutencao.php" method="POST">
                 <div class="campos">
                     <div class="dados">
                         <label class="label-campos" for="time-final">Hora de saída:</label>
@@ -94,8 +94,8 @@
                         <ul id="sugestoes" class="suggestions"></ul>
                     </div>
                 </div>
-                <button class="button-submit" type="submit">Adicionar dados de manutenção</button>
-            </form>
+                
+            
         </div>
 
         <div class="area-servico-produto">
@@ -128,10 +128,11 @@
             <ul id="itemListProduto" class="ul-temporaria"></ul>
         </div>
 
-        <!-- Formulário final -->
-        <form id="finalForm" action="/submit-url" method="POST">
+        
+            <!-- inputs para adicionar itens ao array -->
             <input type="hidden" id="hiddenItemListServico" name="itemListServico">
             <input type="hidden" id="hiddenItemListProduto" name="itemListProduto">
+
             <button type="submit">Enviar</button>
         </form>
     </div>
