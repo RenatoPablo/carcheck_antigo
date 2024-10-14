@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style-busca-estoque.css">
+    <link rel="stylesheet" href="../css/padraoformularios.css">
+
 </head>
 <body>
 <?php include '../includes/header-funci.php'; ?>
