@@ -42,7 +42,7 @@ function cadastrarMarca($pdo, $nomeMarca) {
     return $pdo->lastInsertId();
 }
 
-function cadastrarProduto($pdo, $nomeProduto, $descrProduto, $valor, $idTipo, $idMarca) {
+function cadastrarProduto($pdo, $nomeProduto, $descrProduto, $valor, $idTipo, $idMarca, $quantidade) {
     $sql = "SELECT id_servico_produto FROM servicos_produtos WHERE nome_servico_produto = :nome";
     $stmtCheck = $pdo->prepare($sql);
     $stmtCheck->execute([':nome' => $nomeProduto]);
@@ -51,14 +51,15 @@ function cadastrarProduto($pdo, $nomeProduto, $descrProduto, $valor, $idTipo, $i
         $produto = $stmtCheck->fetch(PDO::FETCH_ASSOC);
         return $produto['id_servico_produto'];
     }
-    $sqlInsert = "INSERT INTO servicos_produtos(nome_servico_produto, descricao, valor_servico_produto, fk_id_marca_produto, fk_id_tipo_servico) VALUES (:nome, :descr, :valor, :idMarca, :idTipo)";
+    $sqlInsert = "INSERT INTO servicos_produtos(nome_servico_produto, descricao, valor_servico_produto, fk_id_marca_produto, fk_id_tipo_servico, quantidade) VALUES (:nome, :descr, :valor, :idMarca, :idTipo, :quant)";
     $stmtInsert = $pdo->prepare($sqlInsert);
     $stmtInsert->execute([
         ':nome' => $nomeProduto,
         ':descr' => $descrProduto,
         ':valor' => $valor,
         ':idMarca' => $idMarca,
-        ':idTipo' => $idTipo
+        ':idTipo' => $idTipo,
+        ':quant' => $quantidade
     ]);
     return $pdo->lastInsertId();
 }

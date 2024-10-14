@@ -43,6 +43,40 @@ function cadastrarItensManutencao($pdo, $idManutencao, $idServicoProduto, $valor
     return $pdo->lastInsertId();
 }
 
+function atualizarEstoqueProduto($pdo, $idProduto, $quantidadeUtilizada) {
+    // Consulta para obter a quantidade atual do estoque
+    $sql = "SELECT quantidade FROM servicos_produtos WHERE id_servico_produto = :idProduto";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':idProduto' => $idProduto]);
+    $produto = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($produto && isset($produto['quantidade'])) {
+        // Calcula o novo valor de estoque
+        $novaQuantidade = $produto['quantidade'] - $quantidadeUtilizada;
+        
+        // Verifica se a quantidade nova não é negativa
+        if ($novaQuantidade < 0) {
+            throw new Exception("Quantidade insuficiente no estoque para o produto ID: $idProduto");
+        }
+
+        // Atualiza o estoque no banco de dados
+        $sqlUpdate = "UPDATE servicos_produtos SET quantidade = :novaQuantidade WHERE id_servico_produto = :idProduto";
+        $stmtUpdate = $pdo->prepare($sqlUpdate);
+        $stmtUpdate->execute([
+            ':novaQuantidade' => $novaQuantidade,
+            ':idProduto' => $idProduto
+        ]);
+    } else {
+        throw new Exception("Produto com ID: $idProduto não encontrado no estoque.");
+    }
+}
+
+
+
+
+
+
+
 
 
 ?>

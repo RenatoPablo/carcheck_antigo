@@ -1,6 +1,7 @@
 // Variáveis para armazenar os itens selecionados
 let selectedItemsServico = [];
 let selectedItemsProduto = [];
+let totalManutencao = 0; // Variável para armazenar o valor total da manutenção
 
 // Função para buscar itens de serviço no estoque e exibir sugestões
 function buscarEstoqueServico() {
@@ -104,20 +105,64 @@ function adicionarItemServico(event) {
     const input = document.getElementById('estoqueServico');
     const id = input.dataset.id;
     const itemValue = input.value;
-    const valor = input.dataset.valor;
-    // Captura o valor unitário armazenado no dataset
+    const valor = parseFloat(input.dataset.valor); // Converte o valor para número
 
     if (itemValue !== '') {
         selectedItemsServico.push({ 
             id: id,
             item: itemValue, 
             valor: valor
-
         }); // Adiciona o nome do serviço e o valor
         atualizarListaVisualServico();
         input.value = ''; // Limpa o campo após adicionar
         document.getElementById('addItemBtnServico').style.display = 'none'; // Oculta o botão de adicionar
+        atualizarValorTotal(); // Chama a função para atualizar o valor total
     }
+}
+
+// Função para adicionar o item de produto à lista temporária
+function adicionarItemProduto(event) {
+    event.preventDefault(); // Previne o comportamento padrão do botão
+
+    const input = document.getElementById('estoqueProduto');
+    const quantidadeInput = document.getElementById('quantidadeProduto');
+    const id = input.dataset.id;
+    const itemValue = input.value;
+    const quantidade = parseInt(quantidadeInput.value); // Converte a quantidade para número
+    const valor = parseFloat(input.dataset.valor); // Converte o valor para número
+
+    if (itemValue !== '' && quantidade > 0) {
+        selectedItemsProduto.push({ 
+            id: id,
+            item: itemValue, 
+            quantidade: quantidade, 
+            valor: valor 
+        }); // Adiciona o nome do produto, quantidade e valor
+        atualizarListaVisualProduto();
+        input.value = ''; // Limpa o campo após adicionar
+        quantidadeInput.value = ''; // Limpa o campo de quantidade
+        quantidadeInput.style.display = 'none'; // Oculta o campo de quantidade
+        document.getElementById('addItemBtnProduto').style.display = 'none'; // Oculta o botão de adicionar
+        atualizarValorTotal(); // Chama a função para atualizar o valor total
+    }
+}
+
+// Função para atualizar o valor total da manutenção
+function atualizarValorTotal() {
+    let total = 0;
+
+    // Soma o total de serviços
+    selectedItemsServico.forEach(servico => {
+        total += parseFloat(servico.valor);
+    });
+
+    // Soma o total de produtos multiplicando pelo valor e quantidade
+    selectedItemsProduto.forEach(produto => {
+        total += parseFloat(produto.valor) * parseInt(produto.quantidade);
+    });
+
+    // Atualiza o input com o valor total
+    document.getElementById('valorTotal').value = total.toFixed(2);
 }
 
 // Função para atualizar a lista visual de serviços
@@ -127,7 +172,7 @@ function atualizarListaVisualServico() {
 
     selectedItemsServico.forEach((item, index) => {
         const li = document.createElement('li');
-        li.textContent = `${item.item} - Valor: ${item.valor}`; // Exibe o nome do serviço e o valor
+        li.textContent = `${item.item} - Valor: ${item.valor.toFixed(2)}`; // Exibe o nome do serviço e o valor
 
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remover';
@@ -142,33 +187,6 @@ function atualizarListaVisualServico() {
     document.getElementById('hiddenItemListServico').value = JSON.stringify(selectedItemsServico);
 }
 
-// Função para adicionar o item de produto à lista temporária
-function adicionarItemProduto(event) {
-    event.preventDefault(); // Previne o comportamento padrão do botão
-
-    const input = document.getElementById('estoqueProduto');
-    const quantidadeInput = document.getElementById('quantidadeProduto');
-    const id = input.dataset.id;
-    const itemValue = input.value;
-    const quantidade = quantidadeInput.value;
-    const valor = input.dataset.valor;
-    // Captura o valor unitário armazenado no dataset
-
-    if (itemValue !== '' && quantidade !== '') {
-        selectedItemsProduto.push({ 
-            id: id,
-            item: itemValue, 
-            quantidade: quantidade, 
-            valor: valor 
-        }); // Adiciona o nome do produto, quantidade e valor
-        atualizarListaVisualProduto();
-        input.value = ''; // Limpa o campo após adicionar
-        quantidadeInput.value = ''; // Limpa o campo de quantidade
-        quantidadeInput.style.display = 'none'; // Oculta o campo de quantidade
-        document.getElementById('addItemBtnProduto').style.display = 'none'; // Oculta o botão de adicionar
-    }
-}
-
 // Função para atualizar a lista visual de produtos
 function atualizarListaVisualProduto() {
     const ul = document.getElementById('itemListProduto');
@@ -176,7 +194,7 @@ function atualizarListaVisualProduto() {
 
     selectedItemsProduto.forEach((item, index) => {
         const li = document.createElement('li');
-        li.textContent = `${item.item} - Quantidade: ${item.quantidade} - Valor: ${item.valor}`; // Exibe o nome do produto, a quantidade e o valor
+        li.textContent = `${item.item} - Quantidade: ${item.quantidade} - Valor: ${(item.valor * item.quantidade).toFixed(2)}`; // Exibe o nome do produto, a quantidade e o valor
 
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remover';
@@ -191,10 +209,18 @@ function atualizarListaVisualProduto() {
     document.getElementById('hiddenItemListProduto').value = JSON.stringify(selectedItemsProduto);
 }
 
+// Função para remover um item da lista de serviços
+function removerItemServico(index) {
+    selectedItemsServico.splice(index, 1);
+    atualizarListaVisualServico();
+    atualizarValorTotal(); // Atualiza o valor total após remover um serviço
+}
+
 // Função para remover um item da lista de produtos
 function removerItemProduto(index) {
     selectedItemsProduto.splice(index, 1);
     atualizarListaVisualProduto();
+    atualizarValorTotal(); // Atualiza o valor total após remover um produto
 }
 
 // Adicionar eventos de clique aos botões

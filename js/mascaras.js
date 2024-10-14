@@ -111,6 +111,14 @@
         
 
         }
+
+        function mascaraValor(input) {
+            let valor = input.value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+            valor = (valor / 100).toFixed(2) + ''; // Divide por 100 para simular o formato decimal
+            valor = valor.replace('.', ','); // Substitui ponto por vírgula
+            valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona os pontos como separadores de milhar
+            input.value = valor; // Atualiza o valor do input
+        }
         
         
         
