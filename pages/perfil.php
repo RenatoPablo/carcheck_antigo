@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/card-itens.css"><link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/perfil.css">
+
     <title>Meu Perfil</title>
 </head>
 <body>
