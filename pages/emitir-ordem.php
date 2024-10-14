@@ -5,6 +5,8 @@
 	else:
 
     $permissao = $_SESSION['permissaoUsuario'];
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -126,6 +128,9 @@
 
             <!-- Lista de peças adicionadas -->
             <ul id="itemListProduto" class="ul-temporaria"></ul>
+
+            <label for="valorTotal">Valor total da nota:</label>
+            <input type="text" name="valorTotal" id="valorTotal" readonly oninput="mascaraValor()">
         </div>
 
         

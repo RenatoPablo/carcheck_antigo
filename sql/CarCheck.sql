@@ -221,6 +221,7 @@ CREATE TABLE servicos_produtos (
     nome_servico_produto varchar(150) NOT NULL,
     descricao TEXT,
     valor_servico_produto FLOAT NOT NULL,
+    quantidade INT,
 
     fk_id_marca_produto INT,
     fk_id_tipo_servico INT,
@@ -250,6 +251,7 @@ CREATE TABLE fornecedores (
 CREATE TABLE compras (
     id_compra INT AUTO_INCREMENT PRIMARY KEY,
     data_compra TIMESTAMP NOT NULL,
+
     valor_compra FLOAT NOT NULL,
     fk_id_fornecedor INT,
     FOREIGN KEY (fk_id_fornecedor) REFERENCES fornecedores(id_fornecedor) ON UPDATE CASCADE ON DELETE SET NULL

@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $id_marca = cadastrarMarca($pdo, $nomeMarca);
 
                     //inserir produto
-                    $id_produto = cadastrarProduto($pdo, $nomeServico, $descrServico, $valorUni, $idTipo, $id_marca);
+                    $id_produto = cadastrarProduto($pdo, $nomeServico, $descrServico, $valorUni, $idTipo, $id_marca, $quantidade);
                     
                     //inserir compra
                     $id_compra = cadastrarCompras($pdo, $valorTotal, $idFornecedor);
