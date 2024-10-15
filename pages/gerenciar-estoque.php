@@ -57,16 +57,37 @@
 </div>
 
 
-<!-- Modal (inicialmente oculto) -->
+<!-- Modal -->
 <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p id="modal-text">Detalhes do produto/serviço...</p> <!-- Aqui serão exibidos detalhes do item -->
+            
+            <!-- Formulário do Modal -->
+            <form id="crudForm">
+                <input type="hidden" id="id_servico_produto" name="id_servico_produto">
+
+                <!-- Campos do item -->
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" readonly>
+
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" name="descricao">
+
+                <label for="valor">Valor:</label>
+                <input type="number" id="valor" name="valor">
+
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" name="quantidade">
+
+                <!-- Botões de ação -->
+                <button type="button" id="saveChangesBtn">Salvar Alterações</button>
+                <button type="button" id="deleteBtn">Excluir</button>
+            </form>
         </div>
-</div>
+    </div>
 
 
-<script src="../js/buscar-estoque.js"></script>
+<script src="../js/gerenciar-estoque.js"></script>
 
 </body>
 </html>
