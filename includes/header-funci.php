@@ -14,15 +14,15 @@
         </div>
     
         <div class="icons">
-            <!-- Botão para mostrar a notificação -->
+            <!-- Botão para mostrar a notificação
             <button onclick="showNotification()" class="icons-not">
             <i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></button>
 
-            <!-- Popup de notificação -->
+             Popup de notificação
             <div id="notification" class="notification">
                 <span id="notification-text">Este é um alerta de notificação!</span>
                 <span class="close-btn" onclick="closeNotification()">&times;</span>
-            </div>
+            </div> -->
 
             <!-- <a href="pages/notificacao.html"><i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></a> -->
 

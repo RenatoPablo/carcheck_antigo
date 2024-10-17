@@ -1,6 +1,6 @@
 <?php 
 
-session_start();
+
     // print_r($_SESSION);
     if(!isset($_SESSION) OR $_SESSION['logado'] != true):
         header("location: ../config/sair.php");		
@@ -45,7 +45,7 @@ session_start();
             $comple = htmlspecialchars($resultados['desc_complemento']);
             $referencia = htmlspecialchars($resultados['desc_ponto_ref']);
         }
-        var_dump($nome, $email, $data_nasc, $foto);
+        
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
     }
