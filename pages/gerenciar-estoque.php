@@ -23,8 +23,12 @@
 <body>
 <?php include '../includes/header-funci.php'; ?>
 
+<main>
+<h2 class="titulo-formulario">Gerenciamento de Estoque</h2>
+<h3>Pesquise por serviços ou produtos cadastrados</h3>
 <div class="busca">
-  
+<label for="">Selecione o Tipo</label>
+<br> <br>
   <!-- Checkboxes para tipo de produto -->
   <label>
       <input type="radio" name="tipo" value="1"> Serviço
@@ -67,24 +71,32 @@
                 <input type="hidden" id="id_servico_produto" name="id_servico_produto">
 
                 <!-- Campos do item -->
+                <div class="input-container">
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" readonly>
+                </div>
 
+                <div class="input-container">
                 <label for="descricao">Descrição:</label>
                 <input type="text" id="descricao" name="descricao">
+                </div>
 
+                <div class="input-container">
                 <label for="valor">Valor:</label>
                 <input type="number" id="valor" name="valor">
+                </div>
 
+                <div class="input-container">
                 <label for="quantidade">Quantidade:</label>
                 <input type="number" id="quantidade" name="quantidade">
-
+                </div>
                 <!-- Botões de ação -->
                 <button type="button" id="saveChangesBtn">Salvar Alterações</button>
                 <button type="button" id="deleteBtn">Excluir</button>
             </form>
         </div>
     </div>
+    </main>
 
 
 <script src="../js/gerenciar-estoque.js"></script>
