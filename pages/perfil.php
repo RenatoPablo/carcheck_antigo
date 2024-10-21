@@ -17,6 +17,46 @@
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/perfil.css"> 
     <title>Meu Perfil</title>
+    <style>
+        /* Estilo para a área de visualização da imagem de perfil */
+        .perfil-foto {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f8f8;
+        }
+
+        .perfil-foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #0d3587;
+            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn-upload {
+            margin-top: 10px;
+            padding: 6px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -25,7 +65,7 @@
 <main class="perfil-container">
     <section class="perfil-header">
         <!-- para mostrar a foto -->
-        <div class="perfil-foto">
+        <div class="perfil-foto" id="perfilFoto">
             <?php if(!empty($foto)) : ?>
                 <img src="<?php echo $foto; ?>" alt="Foto de perfil de <?php echo $nome; ?>">
             <?php else : ?>
@@ -47,8 +87,6 @@
             <p><?php echo $email ?></p>
         </div>
     </section>
-
-    <div class="image-preview" id="imagePreview"></div>
 
     <section class="perfil-detalhes">
         <!-- Informações de Contato -->
@@ -113,12 +151,30 @@
 
      <!-- Botão de sair -->
     <div class="logout-container">
-         <a href="../config/sair.php" class="logout-button">Sair</a>
+         <a href="" class="logout-button">Sair</a>
     </div>
 
 </main>
 
-<script src="../js/script.js"></script>
+<script>
+// Função para pré-visualizar a imagem diretamente no círculo de perfil
+function previewImage(event) {
+    const perfilFoto = document.getElementById('perfilFoto');
+    const file = event.target.files[0];
+    
+    // Verifica se um arquivo foi selecionado
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            perfilFoto.innerHTML = `<img src="${e.target.result}" alt="Pré-visualização da imagem">`;
+        };
+
+        reader.readAsDataURL(file); // Lê o arquivo como URL
+    }
+}
+</script>
+
 </body>
 </html>
 <?php endif; ?>

@@ -20,6 +20,7 @@ if (isset($_COOKIE['lembrar_me'])) {
         $_SESSION['nomeUsuario'] = $usuario->nome_pessoa;
         $_SESSION['emailUsuario'] = $usuario->endereco_email;
         $_SESSION['permissaoUsuario'] = $usuario->fk_id_permissao;
+        $_SESSION['id_pessoa'] = $usuario->id_pessoa; // Adiciona o id_pessoa na sessão
 
         // Redireciona o usuário de acordo com o nível de permissão
         if ($_SESSION['permissaoUsuario'] == 3 || $_SESSION['permissaoUsuario'] == 2) {

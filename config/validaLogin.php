@@ -33,6 +33,7 @@ try {
             $_SESSION['nomeUsuario'] = $usuario->nome_pessoa;
             $_SESSION['emailUsuario'] = $usuario->endereco_email;
             $_SESSION['permissaoUsuario'] = $usuario->fk_id_permissao;
+            $_SESSION['id_pessoa'] = $usuario->id_pessoa; // Adiciona o id_pessoa na sessão
 
             // Se a opção 'Lembrar-me' foi marcada, define um cookie com um token
             if ($lembrar_me) {
