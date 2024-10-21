@@ -75,6 +75,7 @@ CREATE TABLE pessoas (
     numero_telefone VARCHAR(20) NOT NULL UNIQUE,
     endereco_email VARCHAR(200) NOT NULL UNIQUE,
     senha VARCHAR(200) NOT NULL,
+    token_login VARCHAR(255),
     
     fk_id_permissao INT,
     fk_id_cep INT,

@@ -64,41 +64,76 @@
 </div>
 
 
-<!-- Modal -->
-<div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            
-            <!-- Formulário do Modal -->
-            <form id="crudForm">
-                <input type="hidden" id="id_servico_produto" name="id_servico_produto">
+<!-- Modal para Produtos -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        
+        <!-- Formulário do Modal para Produtos -->
+        <form id="productForm">
+            <input type="hidden" id="id_produto" name="id_produto">
 
-                <!-- Campos do item -->
-                <div class="input-container">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" readonly>
-                </div>
+            <!-- Campos do produto -->
+            <div class="input-container">
+                <label for="nome_produto">Nome:</label>
+                <input type="text" id="nome_produto" name="nome_produto" readonly>
+            </div>
 
-                <div class="input-container">
-                <label for="descricao">Descrição:</label>
-                <input type="text" id="descricao" name="descricao">
-                </div>
+            <div class="input-container">
+                <label for="descricao_produto">Descrição:</label>
+                <input type="text" id="descricao_produto" name="descricao_produto">
+            </div>
 
-                <div class="input-container">
-                <label for="valor">Valor:</label>
-                <input type="number" id="valor" name="valor">
-                </div>
+            <div class="input-container">
+                <label for="valor_produto">Valor:</label>
+                <input type="number" id="valor_produto" name="valor_produto">
+            </div>
 
-                <div class="input-container">
-                <label for="quantidade">Quantidade:</label>
-                <input type="number" id="quantidade" name="quantidade">
-                </div>
-                <!-- Botões de ação -->
-                <button type="button" id="saveChangesBtn">Salvar Alterações</button>
-                <button type="button" id="deleteBtn">Excluir</button>
-            </form>
-        </div>
+            <div class="input-container">
+                <label for="quantidade_produto">Quantidade:</label>
+                <input type="number" id="quantidade_produto" name="quantidade_produto">
+            </div>
+
+            <!-- Botões de ação -->
+            <button type="button" id="saveProductChangesBtn">Salvar Alterações</button>
+            <button type="button" id="deleteProductBtn">Excluir</button>
+        </form>
     </div>
+</div>
+
+<!-- Modal para Serviços -->
+<div id="serviceModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        
+        <!-- Formulário do Modal para Serviços -->
+        <form id="serviceForm">
+            <input type="hidden" id="id_servico" name="id_servico">
+
+            <!-- Campos do serviço -->
+            <div class="input-container">
+                <label for="nome_servico">Nome:</label>
+                <input type="text" id="nome_servico" name="nome_servico" readonly>
+            </div>
+
+            <div class="input-container">
+                <label for="descricao_servico">Descrição:</label>
+                <input type="text" id="descricao_servico" name="descricao_servico">
+            </div>
+
+            <div class="input-container">
+                <label for="valor_servico">Valor:</label>
+                <input type="number" id="valor_servico" name="valor_servico">
+            </div>
+
+            <!-- Botões de ação -->
+            <button type="button" id="saveServiceChangesBtn">Salvar Alterações</button>
+            <button type="button" id="deleteServiceBtn">Excluir</button>
+        </form>
+    </div>
+</div>
+
+
     </main>
 
 

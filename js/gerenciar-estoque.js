@@ -62,7 +62,7 @@ function buscarEstoque() {
                     btn.textContent = 'Editar';
                     btn.classList.add('btn-modal');
                     btn.onclick = function() {
-                        openModal(item); // Abre o modal com os detalhes do item
+                        openModal(item, tipo); // Passa o item e o tipo para a função openModal
                     };
                     li.appendChild(btn);
 
@@ -80,47 +80,72 @@ function buscarEstoque() {
     xhr.send();
 }
 
-
 // Função para abrir o modal com detalhes do item
-function openModal(item) {
-    const modal = document.getElementById('myModal'); // Obtém o modal pelo ID
-    const id = document.getElementById('id_servico_produto'); // Input escondido para armazenar o ID
-    const nome = document.getElementById('nome'); // Input do nome
-    const descricao = document.getElementById('descricao'); // Input da descrição
-    const valor = document.getElementById('valor'); // Input do valor
-    const quantidade = document.getElementById('quantidade'); // Input da quantidade (para produtos)
+function openModal(item, tipo) {
+    if (tipo === '2') {
+        // Abrir o modal de produto
+        const modal = document.getElementById('productModal'); // Obtém o modal de produto
+        const id = document.getElementById('id_produto'); // Input escondido para armazenar o ID
+        const nome = document.getElementById('nome_produto'); // Input do nome
+        const descricao = document.getElementById('descricao_produto'); // Input da descrição
+        const valor = document.getElementById('valor_produto'); // Input do valor
+        const quantidade = document.getElementById('quantidade_produto'); // Input da quantidade
 
-    // Preenche os campos com os dados do item
-    id.value = item.id_servico_produto;
-    nome.value = item.nome_servico_produto;
-    descricao.value = item.descricao;
-    valor.value = item.valor_servico_produto;
-    quantidade.value = item.quantidade || ''; // Se for um serviço, o campo pode estar vazio
+        // Preenche os campos com os dados do item
+        id.value = item.id_servico_produto;
+        nome.value = item.nome_servico_produto;
+        descricao.value = item.descricao;
+        valor.value = item.valor_servico_produto;
+        quantidade.value = item.quantidade || '';
 
-    // Exibe o modal
-    modal.style.display = 'block';
+        // Exibe o modal
+        modal.style.display = 'block';
+    } else if (tipo === '1') {
+        // Abrir o modal de serviço
+        const modal = document.getElementById('serviceModal'); // Obtém o modal de serviço
+        const id = document.getElementById('id_servico'); // Input escondido para armazenar o ID
+        const nome = document.getElementById('nome_servico'); // Input do nome
+        const descricao = document.getElementById('descricao_servico'); // Input da descrição
+        const valor = document.getElementById('valor_servico'); // Input do valor
+
+        // Preenche os campos com os dados do item
+        id.value = item.id_servico_produto;
+        nome.value = item.nome_servico_produto;
+        descricao.value = item.descricao;
+        valor.value = item.valor_servico_produto;
+
+        // Exibe o modal
+        modal.style.display = 'block';
+    }
 }
 
-// Função para fechar o modal ao clicar no botão de fechar
-document.querySelector('.close').onclick = function() {
-    document.getElementById('myModal').style.display = 'none'; // Fecha o modal
-};
+// Função para fechar os modais ao clicar no botão de fechar
+document.querySelectorAll('.close').forEach(closeBtn => {
+    closeBtn.onclick = function() {
+        document.getElementById('productModal').style.display = 'none';
+        document.getElementById('serviceModal').style.display = 'none';
+    };
+});
 
 // Fecha o modal ao clicar fora da área de conteúdo
 window.onclick = function(event) {
-    const modal = document.getElementById('myModal');
-    if (event.target == modal) {
-        modal.style.display = 'none'; // Fecha o modal
+    const productModal = document.getElementById('productModal');
+    const serviceModal = document.getElementById('serviceModal');
+    if (event.target === productModal) {
+        productModal.style.display = 'none';
+    }
+    if (event.target === serviceModal) {
+        serviceModal.style.display = 'none';
     }
 };
 
-// Função para salvar as alterações via AJAX
-document.getElementById('saveChangesBtn').onclick = function() {
-    const id = document.getElementById('id_servico_produto').value;
-    const nome = document.getElementById('nome').value;
-    const descricao = document.getElementById('descricao').value;
-    const valor = document.getElementById('valor').value;
-    const quantidade = document.getElementById('quantidade').value;
+// Função para salvar as alterações do produto via AJAX
+document.getElementById('saveProductChangesBtn').onclick = function() {
+    const id = document.getElementById('id_produto').value;
+    const nome = document.getElementById('nome_produto').value;
+    const descricao = document.getElementById('descricao_produto').value;
+    const valor = document.getElementById('valor_produto').value;
+    const quantidade = document.getElementById('quantidade_produto').value;
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '../config/crud-estoque/update.php', true);
@@ -128,32 +153,79 @@ document.getElementById('saveChangesBtn').onclick = function() {
     xhr.onload = function() {
         if (xhr.status === 200) {
             alert('Alterações salvas com sucesso!');
-            document.getElementById('myModal').style.display = 'none'; // Fecha o modal
+            document.getElementById('productModal').style.display = 'none'; // Fecha o modal
             buscarEstoque(); // Atualiza a lista de itens após salvar
         } else {
             alert('Erro ao salvar as alterações.');
         }
     };
 
-    const data = `id_servico_produto=${id}&nome=${nome}&descricao=${descricao}&valor=${valor}&quantidade=${quantidade}`;
+    const data = `id_servico_produto=${id}&nome=${encodeURIComponent(nome)}&descricao=${encodeURIComponent(descricao)}&valor=${encodeURIComponent(valor)}&quantidade=${encodeURIComponent(quantidade)}`;
     xhr.send(data);
 };
 
-// Função para excluir o item via AJAX
-document.getElementById('deleteBtn').onclick = function() {
-    const id = document.getElementById('id_servico_produto').value;
+// Função para salvar as alterações do serviço via AJAX
+document.getElementById('saveServiceChangesBtn').onclick = function() {
+    const id = document.getElementById('id_servico').value;
+    const nome = document.getElementById('nome_servico').value;
+    const descricao = document.getElementById('descricao_servico').value;
+    const valor = document.getElementById('valor_servico').value;
 
-    if (confirm('Tem certeza que deseja excluir este item?')) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '../config/crud-estoque/update.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            alert('Alterações salvas com sucesso!');
+            document.getElementById('serviceModal').style.display = 'none'; // Fecha o modal
+            buscarEstoque(); // Atualiza a lista de itens após salvar
+        } else {
+            alert('Erro ao salvar as alterações.');
+        }
+    };
+
+    const data = `id_servico_produto=${id}&nome=${encodeURIComponent(nome)}&descricao=${encodeURIComponent(descricao)}&valor=${encodeURIComponent(valor)}`;
+    xhr.send(data);
+};
+
+// Função para excluir o produto via AJAX
+document.getElementById('deleteProductBtn').onclick = function() {
+    const id = document.getElementById('id_produto').value;
+
+    if (confirm('Tem certeza que deseja excluir este produto?')) {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '../config/crud-estoque/delete.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
             if (xhr.status === 200) {
-                alert('Item excluído com sucesso!');
-                document.getElementById('myModal').style.display = 'none'; // Fecha o modal
+                alert('Produto excluído com sucesso!');
+                document.getElementById('productModal').style.display = 'none'; // Fecha o modal
                 buscarEstoque(); // Atualiza a lista de itens após exclusão
             } else {
-                alert('Erro ao excluir o item.');
+                alert('Erro ao excluir o produto.');
+            }
+        };
+
+        const data = `id_servico_produto=${id}`;
+        xhr.send(data);
+    }
+};
+
+// Função para excluir o serviço via AJAX
+document.getElementById('deleteServiceBtn').onclick = function() {
+    const id = document.getElementById('id_servico').value;
+
+    if (confirm('Tem certeza que deseja excluir este serviço?')) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '../config/crud-estoque/delete.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Serviço excluído com sucesso!');
+                document.getElementById('serviceModal').style.display = 'none'; // Fecha o modal
+                buscarEstoque(); // Atualiza a lista de itens após exclusão
+            } else {
+                alert('Erro ao excluir o serviço.');
             }
         };
 

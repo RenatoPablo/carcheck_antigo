@@ -1,66 +1,71 @@
 <?php
 session_start();
+include('config.php');
 
-if(!isset($_POST) OR empty($_POST['endereco_email']) OR empty($_POST['senha'])) {
+
+
+// Verifica se o formulário foi enviado corretamente
+if (!isset($_POST) OR empty($_POST['endereco_email']) OR empty($_POST['senha'])) {
     header("location: sair.php");
     exit();
-} else {    
-    include('config.php');
+}
 
-    // Captura os dados enviados pelo formulário
-    $email = $_POST['endereco_email'];
-    $senha_digitada = $_POST['senha'];
-    
+// Captura os dados enviados pelo formulário
+$email = $_POST['endereco_email'];
+$senha_digitada = $_POST['senha'];
+$lembrar_me = isset($_POST['lembrar_me']) ? $_POST['lembrar_me'] : 0; // Verifica se a opção 'Lembrar-me' foi marcada
 
-    // Consulta apenas o hash da senha associado ao email
-    $sql = "SELECT *
-            FROM pessoas
-            WHERE endereco_email = :email";
+// Consulta SQL para buscar o usuário pelo email
+$sql = "SELECT * FROM pessoas WHERE endereco_email = :email";
 
-    try {
-        $pdo->beginTransaction();
-        
-        $consulta = $pdo->prepare($sql);
-        $consulta->execute(['email' => $email]);
+try {
+    $consulta = $pdo->prepare($sql);
+    $consulta->execute(['email' => $email]);
 
-        $count = $consulta->rowCount();
+    // Verifica se encontrou algum usuário com o email fornecido
+    if ($consulta->rowCount() > 0) {
+        $usuario = $consulta->fetch(PDO::FETCH_OBJ);
 
-        if ($count != 0) {
-            // Busca os dados do usuário
-            $linha = $consulta->fetch(PDO::FETCH_OBJ);
+        // Verifica se a senha digitada corresponde ao hash no banco de dados
+        if (password_verify($senha_digitada, $usuario->senha)) {
+            // Define as variáveis de sessão após o login bem-sucedido
+            $_SESSION['logado'] = true;
+            $_SESSION['nomeUsuario'] = $usuario->nome_pessoa;
+            $_SESSION['emailUsuario'] = $usuario->endereco_email;
+            $_SESSION['permissaoUsuario'] = $usuario->fk_id_permissao;
 
-            // Verifica se a senha digitada corresponde ao hash no banco de dados
-            if (password_verify($senha_digitada, $linha->senha)) {
-                // Se a senha estiver correta, cria a sessão
-                $_SESSION['logado'] = true;
-                $_SESSION['nomeUsuario'] = $linha->nome_pessoa;
-                $_SESSION['emailUsuario'] = $linha->endereco_email;
-                $_SESSION['permissaoUsuario'] = $linha->fk_id_permissao;
+            // Se a opção 'Lembrar-me' foi marcada, define um cookie com um token
+            if ($lembrar_me) {
+                $token = bin2hex(random_bytes(32)); // Gera um token seguro
+                $expira = time() + (86400 * 30); // O cookie expira em 30 dias
 
-                // Redireciona o usuário de acordo com o nível de permissão
-                if ($_SESSION['permissaoUsuario'] == 3 || $_SESSION['permissaoUsuario'] == 2) {
-                    $permissao = "funci";
-                    header('location: ../pages/home-funci.php');
-                } elseif ($_SESSION['permissaoUsuario'] == 1) {
-                    $permissao = "cliente";
-                    header('location: ../pages/home-cliente.php');
-                }
-            } else {
-                // Senha incorreta
-                echo "Usuário ou senha incorretos!<br>";
-                echo "<a href='sair.php'>Voltar</a>";
+                // Salva o token no banco de dados
+                $sqlToken = "UPDATE pessoas SET token_login = :token WHERE endereco_email = :email";
+                $stmtToken = $pdo->prepare($sqlToken);
+                $stmtToken->execute(['token' => $token, 'email' => $email]);
+
+                // Define o cookie com o token e o tempo de expiração
+                setcookie('lembrar_me', $token, $expira, "/", "", false, true); // O cookie é seguro com o flag HttpOnly
             }
+
+            // Redireciona o usuário de acordo com o nível de permissão
+            if ($_SESSION['permissaoUsuario'] == 3 || $_SESSION['permissaoUsuario'] == 2) {
+                header('location: ../pages/home-funci.php');
+            } elseif ($_SESSION['permissaoUsuario'] == 1) {
+                header('location: ../pages/home-cliente.php');
+            }
+            exit();
         } else {
-            // Caso o email não exista
+            // Senha incorreta
             echo "Usuário ou senha incorretos!<br>";
             echo "<a href='sair.php'>Voltar</a>";
         }
-
-        $pdo->commit();
-    } catch (PDOException $e) {
-        $pdo->rollback();
-        $erro = $e->getMessage();
-        echo "ERRO: {$erro}";
+    } else {
+        // Se o email não foi encontrado
+        echo "Usuário ou senha incorretos!<br>";
+        echo "<a href='sair.php'>Voltar</a>";
     }
+} catch (PDOException $e) {
+    // Captura e exibe qualquer erro de banco de dados
+    echo "Erro ao realizar login: " . $e->getMessage();
 }
-?>
