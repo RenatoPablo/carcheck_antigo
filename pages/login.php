@@ -36,7 +36,7 @@
                 <input class="input" type="password"  name="senha" required placeholder="Digite sua Senha">
                 
                 <label class="label-lembrar-me">
-                    <input type="checkbox" name="opcao1" value="valor1">
+                    <input type="checkbox" name="lembrar_me" value="1">
                     <p>Lembrar-me</p>
                     <a href="">
                         <p class="p-esqueci">Esqueci minha senha</p>
