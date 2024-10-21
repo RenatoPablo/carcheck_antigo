@@ -25,10 +25,13 @@
 
 <main>
 <h2 class="titulo-formulario">Gerenciamento de Estoque</h2>
-<h3>Pesquise por serviços ou produtos cadastrados</h3>
+<h3 class="subtitulo-formulario">Pesquise por serviços ou produtos cadastrados</h3>
 <div class="busca">
-<label for="">Selecione o Tipo</label>
-<br> <br>
+<br>
+<label for="selecione-tipo">Selecione o que deseja procurar:</label>
+<br>
+<br>
+<br>
   <!-- Checkboxes para tipo de produto -->
   <label>
       <input type="radio" name="tipo" value="1"> Serviço
