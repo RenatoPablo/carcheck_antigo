@@ -1,10 +1,36 @@
-<?php 
-    if(isset($_POST['submit'])) {
-        include_once('../config/config.php');
+<?php
+session_start();
+include('../config/config.php');
 
-        $email = $_POST['endereco_email'];
-        $senha = $_POST['senha'];
+// Verifica se o cookie de "lembrar_me" existe
+if (isset($_COOKIE['lembrar_me'])) {
+    // Obtém o token do cookie
+    $token = $_COOKIE['lembrar_me'];
+
+    // Busca o token no banco de dados
+    $sql = "SELECT * FROM pessoas WHERE token_login = :token";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['token' => $token]);
+    $usuario = $stmt->fetch(PDO::FETCH_OBJ);
+
+    // Se o token for válido, loga o usuário automaticamente
+    if ($usuario) {
+        // Define as variáveis de sessão
+        $_SESSION['logado'] = true;
+        $_SESSION['nomeUsuario'] = $usuario->nome_pessoa;
+        $_SESSION['emailUsuario'] = $usuario->endereco_email;
+        $_SESSION['permissaoUsuario'] = $usuario->fk_id_permissao;
+
+        // Redireciona o usuário de acordo com o nível de permissão
+        if ($_SESSION['permissaoUsuario'] == 3 || $_SESSION['permissaoUsuario'] == 2) {
+            header('location: ../pages/home-funci.php');
+            exit();
+        } elseif ($_SESSION['permissaoUsuario'] == 1) {
+            header('location: ../pages/home-cliente.php');
+            exit();
+        }
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,13 +64,11 @@
                 <label class="label-lembrar-me">
                     <input type="checkbox" name="lembrar_me" value="1">
                     <p>Lembrar-me</p>
-                    <a href="">
+                    <a href="esqueci_senha.php">
                         <p class="p-esqueci">Esqueci minha senha</p>
                     </a>
                 </label>
                 
-                
-
                 <button type="submit" name="submit">
                     Entrar
                     <div class="arrow-wrapper">
@@ -52,11 +76,8 @@
                     </div>
                 </button>
 
-                
             </form>
         </div>
     </div>
-    
 </body>
 </html>
-

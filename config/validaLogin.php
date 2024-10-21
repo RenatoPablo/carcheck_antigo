@@ -1,12 +1,14 @@
 <?php
 session_start();
+include('config.php');
 
-if(!isset($_POST) OR empty($_POST['endereco_email']) OR empty($_POST['senha'])) {
+
+
+// Verifica se o formulário foi enviado corretamente
+if (!isset($_POST) OR empty($_POST['endereco_email']) OR empty($_POST['senha'])) {
     header("location: sair.php");
     exit();
-} 
-
-include('config.php');
+}
 
 // Captura os dados enviados pelo formulário
 $email = $_POST['endereco_email'];
@@ -37,7 +39,7 @@ try {
                 $token = bin2hex(random_bytes(32)); // Gera um token seguro
                 $expira = time() + (86400 * 30); // O cookie expira em 30 dias
 
-                // Salva o token no banco de dados (na tabela de usuários ou uma tabela específica de tokens)
+                // Salva o token no banco de dados
                 $sqlToken = "UPDATE pessoas SET token_login = :token WHERE endereco_email = :email";
                 $stmtToken = $pdo->prepare($sqlToken);
                 $stmtToken->execute(['token' => $token, 'email' => $email]);
@@ -46,7 +48,7 @@ try {
                 setcookie('lembrar_me', $token, $expira, "/", "", false, true); // O cookie é seguro com o flag HttpOnly
             }
 
-            // Redireciona com base na permissão do usuário
+            // Redireciona o usuário de acordo com o nível de permissão
             if ($_SESSION['permissaoUsuario'] == 3 || $_SESSION['permissaoUsuario'] == 2) {
                 header('location: ../pages/home-funci.php');
             } elseif ($_SESSION['permissaoUsuario'] == 1) {
