@@ -1,69 +1,271 @@
-exemplo para criar paginas novas 
-<?php
-session_start();
-// print_r($_SESSION);
-if(!isset($_SESSION) OR $_SESSION['logado'] != true):
-    header("location: ../config/sair.php");		
-else:
-?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerenciar estoque</title>
-<link href="../fontawesome/css/all.css" rel="stylesheet">
-<link rel="stylesheet" href="../css/popup-not.css">
-<link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-<header>
+BANCO SEM CORREÇAO
+CREATE TABLE ruas (
+    id_rua INT AUTO_INCREMENT PRIMARY KEY,
+    nome_rua VARCHAR(200) NOT NULL
+);
 
-<!-- Sidebar -->
-<div class="sidebar">
-<a href="../pages/home-cliente.php">Home</a>
-<a href="../pages/cadastrar-funci.php">Cadastrar Funcionário</a>
-<a href="#clients">Clients</a>
-<a href="../config/sair.php">Sair</a>
-</div>
+CREATE TABLE estados (
+    id_estado INT AUTO_INCREMENT PRIMARY KEY,
+    nome_estado VARCHAR(50) NOT NULL
 
-<div class="container-header">
+    
+);
 
-<img src="../image/logo-carcheck.png" alt="Logo CarCheck" title="CarCheck">
-<h1>CarCheck</h1>
+CREATE TABLE ufs (
+    id_uf INT AUTO_INCREMENT PRIMARY KEY,
+    sigla CHAR(2) UNIQUE NOT NULL,
 
+    fk_id_estado INT,
+    FOREIGN KEY (fk_id_estado) REFERENCES estados(id_estado) ON UPDATE CASCADE ON DELETE SET NULL
+);
 
-</div>
+CREATE TABLE cidades (
+    id_cidade INT AUTO_INCREMENT PRIMARY KEY,
+    nome_cidade VARCHAR(150) NOT NULL,
 
-<div class="icons">
-<!-- Botão para mostrar a notificação -->
-<button onclick="showNotification()" class="icons-not">
-<i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></button>
+    fk_id_uf INT,
+    FOREIGN KEY (fk_id_uf) REFERENCES ufs(id_uf) ON UPDATE CASCADE ON DELETE SET NULL
+);
 
-<!-- Popup de notificação -->
-<div id="notification" class="notification">
-    <span id="notification-text">Este é um alerta de notificação!</span>
-    <span class="close-btn" onclick="closeNotification()">&times;</span>
-</div>
+CREATE TABLE ceps (
+    id_cep INT AUTO_INCREMENT PRIMARY KEY,
+    numero_cep VARCHAR(20) NOT NULL,
 
-<!-- <a href="pages/notificacao.html"><i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;"></i></a> -->
-
-<a href="../pages/home-funci.php"><i class="fa-solid fa-house-chimney fa-2xl casa" style="color: #ffffff;"></i></a>
-<a href="../pages/perfil.php"><i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i></a>
-</div>
-<input type="checkbox" id="checkbox" onclick="toggleSidebar()">
-<label for="checkbox" class="toggle">
-<div class="bar bar--top"></div>
-<div class="bar bar--middle"></div>
-<div class="bar bar--bottom"></div>
-</label>
-</header>
+    fk_id_cidade INT,
+    FOREIGN KEY (fk_id_cidade) REFERENCES cidades(id_cidade) ON UPDATE CASCADE ON DELETE SET NULL
+);
 
 
+CREATE TABLE complementos (
+    id_complemento INT AUTO_INCREMENT PRIMARY KEY,
+    desc_complemento TEXT NOT NULL
+);
+
+CREATE TABLE pontos_referencias (
+    id_ponto_ref INT AUTO_INCREMENT PRIMARY KEY,
+    desc_ponto_ref TEXT NOT NULL
+);
+
+CREATE TABLE numeros_casas (
+    id_numero_casa INT AUTO_INCREMENT PRIMARY KEY,
+    numero_casa VARCHAR(10) NOT NULL
+);
 
 
-<script src="../js/script.js"></script>
-<script src="../js/popup-not.js"></script>
-</body>
-</html>
-<?php endif; ?>
+CREATE TABLE bairros (
+    id_bairro INT AUTO_INCREMENT PRIMARY KEY,
+    nome_bairro VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE generos (
+    id_genero INT AUTO_INCREMENT PRIMARY KEY,
+    sexo VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE permissoes (
+    id_permissao INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_permissao VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE pessoas (  
+    id_pessoa INT AUTO_INCREMENT PRIMARY KEY,
+    nome_pessoa VARCHAR(200) NOT NULL,
+    data_nasc DATE,
+    foto BLOB,
+    numero_telefone VARCHAR(20) NOT NULL UNIQUE,
+    endereco_email VARCHAR(200) NOT NULL UNIQUE,
+    senha VARCHAR(200) NOT NULL,
+    token_login VARCHAR(255),
+    
+    fk_id_permissao INT,
+    fk_id_cep INT,
+    
+    fk_id_rua INT,
+    fk_id_genero INT,
+    
+    fk_id_numero_casa INT,
+    fk_id_cidade INT,
+    fk_id_bairro INT,
+    fk_id_complemento INT,
+    fk_id_ponto_ref INT,
+
+    FOREIGN KEY (fk_id_permissao) REFERENCES permissoes(id_permissao) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_complemento) REFERENCES complementos(id_complemento) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_ponto_ref) REFERENCES pontos_referencias(id_ponto_ref) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_cep) REFERENCES ceps(id_cep) ON UPDATE CASCADE ON DELETE SET NULL,
+    
+    FOREIGN KEY (fk_id_rua) REFERENCES ruas(id_rua) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_genero) REFERENCES generos(id_genero) ON UPDATE CASCADE ON DELETE SET NULL,
+    
+    FOREIGN KEY (fk_id_numero_casa) REFERENCES numeros_casas(id_numero_casa) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_cidade) REFERENCES cidades(id_cidade) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_bairro) REFERENCES bairros(id_bairro) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+CREATE TABLE pessoas_fisicas(
+    id_pessoa_fisi INT AUTO_INCREMENT PRIMARY KEY,
+    cpf varchar(14) NOT NULL UNIQUE,
+    rg varchar(20) NOT NULL UNIQUE,
+    fk_id_pessoa INT,
+
+    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+CREATE TABLE pessoas_juridicas(
+    id_pessoa_juri INT AUTO_INCREMENT PRIMARY KEY,
+    cnpj VARCHAR(18) NOT NULL UNIQUE,
+    ie VARCHAR(20) NOT NULL UNIQUE,
+    razao_social VARCHAR(200),
+    nome_fantasia VARCHAR(150),
+    fk_id_pessoa INT,
+
+    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+CREATE TABLE cargos (
+    id_cargo INT AUTO_INCREMENT PRIMARY KEY,
+    nome_cargo VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE funcoes (
+    id_funcao INT AUTO_INCREMENT PRIMARY KEY,
+    nome_funcao VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE funcionarios (
+    id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    fk_id_cargo INT,
+    fk_id_funcao INT,
+    fk_id_pessoa INT,
+    FOREIGN KEY (fk_id_cargo) REFERENCES cargos(id_cargo) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_funcao) REFERENCES funcoes(id_funcao) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE cores (
+    id_cor INT AUTO_INCREMENT PRIMARY KEY,
+    nome_cor VARCHAR(15) NOT NULL
+);
+
+CREATE TABLE modelos (
+    id_modelo INT AUTO_INCREMENT PRIMARY KEY,
+    nome_modelo VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE marcas (
+    id_marca INT AUTO_INCREMENT PRIMARY KEY,
+    nome_marca VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE tipos_veiculos (
+    id_tipo_veiculo INT AUTO_INCREMENT PRIMARY KEY,
+    nome_tipo_veiculo VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE veiculos (
+    id_veiculo INT AUTO_INCREMENT PRIMARY KEY,
+    fk_id_pessoa INT,
+    placa VARCHAR(8) NOT NULL UNIQUE,
+    status BOOLEAN,
+    fk_id_cor INT,
+    fk_id_tipo_veiculo INT,
+    fk_id_modelo INT,
+    fk_id_marca INT,
+    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (fk_id_cor) REFERENCES cores(id_cor) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_tipo_veiculo) REFERENCES tipos_veiculos(id_tipo_veiculo) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_modelo) REFERENCES modelos(id_modelo) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_marca) REFERENCES marcas(id_marca) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+CREATE TABLE formas_pagamento (
+    id_forma_pagamento INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_pagamento VARCHAR(50) NOT NULL,
+    
+);
+
+
+CREATE TABLE manutencoes (
+    id_manutencao INT AUTO_INCREMENT PRIMARY KEY,       
+    time_saida TIMESTAMP NULL,
+    km VARCHAR(10) NOT NULL,
+    defeito VARCHAR(500),
+    valor_total FLOAT,
+    fk_id_veiculo INT NOT NULL,
+    FOREIGN KEY (fk_id_veiculo) REFERENCES veiculos(id_veiculo) ON UPDATE CASCADE ON DELETE CASCADE
+    
+);
+
+CREATE TABLE pagamentos (
+    id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
+    valor_pagamento FLOAT NOT NULL,
+    fk_id_forma_pagamento INT,
+    data_pagamento DATE NOT NULL,
+    situacao BOOLEAN NOT NULL,
+    fk_id_manutencao INT,
+
+    FOREIGN KEY (fk_id_manutencao) REFERENCES manutencoes(id_manutencao) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_forma_pagamento) REFERENCES formas_pagamento(id_forma_pagamento) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+CREATE TABLE marcas_servicos_produtos (
+    id_marca_produto INT AUTO_INCREMENT PRIMARY KEY,
+    nome_marca_produto VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE tipos_servicos_produtos (
+    id_tipo_servico_produto INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_servico_produto VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE servicos_produtos (
+    id_servico_produto INT AUTO_INCREMENT PRIMARY KEY,
+    nome_servico_produto varchar(150) NOT NULL,
+    descricao TEXT,
+    valor_servico_produto FLOAT NOT NULL,
+    quantidade INT,
+
+    fk_id_marca_produto INT,
+    fk_id_tipo_servico INT,
+    FOREIGN KEY (fk_id_marca_produto) REFERENCES marcas_servicos_produtos(id_marca_produto) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (fk_id_tipo_servico) REFERENCES tipos_servicos_produtos(id_tipo_servico_produto) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+CREATE TABLE itens_manutencoes_servicos (
+    fk_id_manutencao INT,
+    fk_id_servico_produto INT,
+    quantidade INT,
+    valor_uni FLOAT NOT NULL,
+    valor_total FLOAT NOT NULL,
+
+    FOREIGN KEY (fk_id_servico_produto) REFERENCES servicos_produtos(id_servico_produto) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (fk_id_manutencao) REFERENCES manutencoes(id_manutencao) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE fornecedores (
+    id_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
+    nome_fantasia VARCHAR(150) NOT NULL,
+    razao_social VARCHAR(200) NOT NULL,
+    ie VARCHAR(20) NOT NULL,
+    cnpj VARCHAR(18) NOT NULL
+);
+
+CREATE TABLE compras (
+    id_compra INT AUTO_INCREMENT PRIMARY KEY,
+    data_compra TIMESTAMP NOT NULL,
+
+    valor_compra FLOAT NOT NULL,
+    fk_id_fornecedor INT,
+    FOREIGN KEY (fk_id_fornecedor) REFERENCES fornecedores(id_fornecedor) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+CREATE TABLE itens_compras_produtos (
+    id_itens_compra_produto INT AUTO_INCREMENT PRIMARY KEY,
+    quantidade INT NOT NULL,
+    valor_unitario FLOAT NOT NULL,
+    fk_id_servico_produto INT,
+    fk_id_compra INT,
+    FOREIGN KEY (fk_id_servico_produto) REFERENCES servicos_produtos(id_servico_produto) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (fk_id_compra) REFERENCES compras(id_compra) ON UPDATE CASCADE ON DELETE CASCADE
+);

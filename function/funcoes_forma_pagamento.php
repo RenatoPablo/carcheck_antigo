@@ -16,4 +16,8 @@ function cadastrarForma($pdo, $forma) {
     return $pdo->lastInsertId();
 }
 
+function updateForma($pdo, $edita, $idForma) {
+    $sql = "UPDATE "
+}
+
 ?>

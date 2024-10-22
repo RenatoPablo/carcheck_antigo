@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../css/popup-not.css">
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
 
     <title>Forma Pagamento</title>
 
@@ -135,19 +136,17 @@
 <button id="openModal" class="btn-cadastrar">Cadastrar Forma de Pagamento</button>
 
 <!-- Modal para cadastro de forma de pagamento -->
-<div id="cadastroFormaPagamentoModal" class="modal-forma-pagamento">
-    <div class="modal-content-forma">
+<div id="cadastroModal" class="modal-forma-pagamento">
+    <div class="modal-content-forma"> <!-- Corrigido aqui -->
         <span class="modal-close">&times;</span>
         <h2>Cadastrar Forma de Pagamento</h2>
         
         <!-- Formulário de cadastro -->
-        <form id="cadastroFormaPagamentoForm" method="POST" action="../config/forma-pagamento/adicionar-forma-pagamento.php">
+        <form id="cadastroForm" method="POST" action="../config/forma-pagamento/adicionar-forma-pagamento.php">
             <div class="input-container-forma">
                 <label for="formaPagamento">Forma de Pagamento:</label>
-                <input type="text" id="formaPagamento" name="formaPagamento" required>
+                <input type="text" id="cadastroInput" name="formaPagamento" required>
             </div>
-
-            
 
             <button type="submit" class="btn-salvar">Salvar</button>
         </form>
@@ -199,7 +198,7 @@
                 <form id="updateForm" class="d-none">
                     <div class="mb-3">
                         <label for="formaPagamento" class="form-label">Nome da Forma de Pagamento</label>
-                        <input type="text" class="form-control" id="formaPagamento" value="">
+                        <input type="text" class="form-control" id="updateInput" value="">
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                 </form>

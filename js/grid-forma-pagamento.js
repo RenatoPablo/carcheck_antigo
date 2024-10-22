@@ -1,16 +1,16 @@
 // Função para abrir o modal
 document.getElementById('openModal').onclick = function() {
-    document.getElementById('cadastroFormaPagamentoModal').style.display = 'block';
+    document.getElementById('cadastroModal').style.display = 'block';
 }
 
 // Função para fechar o modal
 document.querySelector('.modal-close').onclick = function() {
-    document.getElementById('cadastroFormaPagamentoModal').style.display = 'none';
+    document.getElementById('cadastroModal').style.display = 'none';
 }
 
 // Fecha o modal ao clicar fora da área de conteúdo
 window.onclick = function(event) {
-    const modal = document.getElementById('cadastroFormaPagamentoModal');
+    const modal = document.getElementById('cadastroModal');
     if (event.target == modal) {
         modal.style.display = 'none';
     }
@@ -28,11 +28,11 @@ function openModal(action, paymentMethod) {
     deleteConfirmBtn.classList.add('d-none');
 
     if (action === 'update') {
-        document.getElementById('formaPagamento').value = paymentMethod;
-        modalMessage.textContent = `Editar a forma de pagamento: ${paymentMethod}`;
+        document.getElementById('updateInput').value = paymentMethod;
+        modalMessage.textContent = `Editar: ${paymentMethod}`;
         updateForm.classList.remove('d-none'); // Mostra o formulário de update
     } else if (action === 'delete') {
-        modalMessage.textContent = `Tem certeza que deseja excluir a forma de pagamento: ${paymentMethod}?`;
+        modalMessage.textContent = `Tem certeza que deseja excluir: ${paymentMethod}?`;
         deleteConfirmBtn.classList.remove('d-none'); // Mostra o botão de exclusão
     }
 

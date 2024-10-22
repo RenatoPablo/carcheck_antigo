@@ -180,7 +180,7 @@ CREATE TABLE veiculos (
 
 CREATE TABLE formas_pagamento (
     id_forma_pagamento INT AUTO_INCREMENT PRIMARY KEY,
-    tipo_pagamento VARCHAR(50) NOT NULL,
+    tipo_pagamento VARCHAR(50) NOT NULL
     
 );
 
@@ -268,3 +268,4 @@ CREATE TABLE itens_compras_produtos (
     FOREIGN KEY (fk_id_servico_produto) REFERENCES servicos_produtos(id_servico_produto) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (fk_id_compra) REFERENCES compras(id_compra) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
