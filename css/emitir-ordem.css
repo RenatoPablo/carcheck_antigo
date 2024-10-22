@@ -1,5 +1,5 @@
 /* From Uiverse.io by Yaseen549 */ 
-.card {
+/* .card {
     width: 450px;
     height: 280px;
     border-radius: 30px;
@@ -19,21 +19,21 @@
     justify-content: center;
     gap: 21px;
     padding-top: 13px;
-}
-
-.button-submit {
-    width: 200px; /* Aumenta a largura do botão */
-    height: 40px; /* Aumenta a altura do botão */
-    background-color: #ffffff; /* Cor de fundo do botão */
-    color: #0d3587; /* Cor do texto do botão */
-    border: none; /* Remove a borda */
-    border-radius: 20px; /* Borda arredondada */
-    cursor: pointer;
+} */
+/* 
+.button-submit { */
+    /* width: 200px; Aumenta a largura do botão */
+    /* height: 40px; Aumenta a altura do botão */
+    /* background-color: #ffffff; Cor de fundo do botão */
+    /* color: #0d3587; Cor do texto do botão */
+    /* border: none; Remove a borda */
+    /* border-radius: 20px; Borda arredondada */
+    /* cursor: pointer;
     margin-top: 20px;
     display: block;
     margin-left: auto;
-    margin-right: auto; /* Centraliza horizontalmente */
-    text-align: center;
+    margin-right: auto; Centraliza horizontalmente */
+    /* text-align: center;
     font-size: 16px;
     font-weight: bold;
 }
@@ -54,4 +54,46 @@
 
 .area-servico-produto {
     
+} */
+ /* Formulário responsivo */
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Adicionado para garantir que elementos absolutos fiquem dentro do form */
+  }
+  .ul-temporaria {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    max-height: 150px;
+    overflow-y: auto;
 }
+.quantidade-input {
+    width: 50px;
+    margin-left: 10px;
+}
+.suggestions {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+}
+.suggestions li {
+    padding: 8px;
+    cursor: pointer;
+}
+.suggestions li:hover {
+    background-color: #ddd;
+}  

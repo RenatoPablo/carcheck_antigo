@@ -19,38 +19,10 @@
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/emitir-ordem.css">
+    <link rel="stylesheet" href="../css/padraoformularios.css">
+
     
-    <style>
-        .ul-temporaria {
-            list-style-type: none;
-            padding: 0;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            background: #f9f9f9;
-            max-height: 150px;
-            overflow-y: auto;
-        }
-        .quantidade-input {
-            width: 50px;
-            margin-left: 10px;
-        }
-        .suggestions {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            background-color: white;
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-        }
-        .suggestions li {
-            padding: 8px;
-            cursor: pointer;
-        }
-        .suggestions li:hover {
-            background-color: #ddd;
-        }
-    </style>
+
 </head>
 <body>
 <?php include '../includes/header-funci.php'; ?>

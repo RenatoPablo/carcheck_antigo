@@ -96,24 +96,24 @@ input[type="radio"] {
     margin-top: 10px;
 }
 
-#saveChangesBtn {
+#saveServiceChangesBtn {
     background-color: #0D6EFD;
     color: white;
     margin-left: 10px;
 
 }
 
-#saveChangesBtn:hover {
+#saveServiceChangesBtn:hover {
     background-color: #0056b3;
 }
 
-#deleteBtn {
+#deleteServiceBtn {
     background-color: #DC3545;
     color: white;
     margin-left: 10px;
 }
 
-#deleteBtn:hover {
+#deleteServiceBtn:hover {
     background-color: #b30000;
 }
 
