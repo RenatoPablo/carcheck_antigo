@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="../css/cadastrar-funcionario.css">
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/popup-cadastro.css">
+    <link rel="stylesheet" href="../css/padraoformularios.css">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <title>Cadastro Cliente</title>

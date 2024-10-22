@@ -2,14 +2,13 @@
 
 /* Estilos gerais do body */
 body {
-    font-family: Lora, serif;
+
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* Evita rolagem horizontal */
      overflow-y: scroll; /* Evita rolagem vertical */
     background-color: #ffffff; /* Adicionado para consistência */
     display: flex;
-    justify-content: center;
     position: relative;
     top: 180px;
 }

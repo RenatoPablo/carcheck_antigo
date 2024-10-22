@@ -13,17 +13,16 @@
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/popup-not.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/padraoformularios.css">
+    <link rel="stylesheet" href="../css/cadastrar-fornecedor.css">
+
     <title>Cadastro de Fornecedor</title>
-    <style>
-        .campos-forncedor{
-            position: relative;
-            top: 150px;
-        }
-    </style>
 </head>
 <body>
 <?php include '../includes/header-funci.php'; ?>
-
+<main>
+    <h2 class="titulo-formulario">Cadastro de Fornecedor</h2>
+</main>
         <form action="../config/processa-cadastro-fornecedor.php" method="POST">
             <div class="campos-forncedor">
                 <div class="input-container">
