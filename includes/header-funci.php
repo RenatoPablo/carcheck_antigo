@@ -1,18 +1,59 @@
+<style>
+    /* Estilos para o modal (oculto por padrão) */
+.modalFormaPagamento {
+  display: none; /* Oculta o modal */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro */
+}
+
+/* Estilos para o conteúdo do modal */
+.modalFormaContent {
+  background-color: white;
+  color: black;
+  margin: 15% auto; /* Alinha no centro da tela */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px; /* Largura máxima do modal */
+}
+
+/* Estilos para o botão de fechar */
+.closeFormaPaga {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closeFormaPaga:hover,
+.closeFormaPaga:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+</style>
+
 <header>
         <!-- Sidebar -->
         <div class="sidebar">
             
-            <a href="../pages/cadastrar-funci.php">Cadastrar Funcionário</a>
-            <a href="../pages/cadastrar-fornecedor.php">Cadastrar Fornecedor</a>
-            <a href="#clients">Clients</a>
+            <a href="../pages/cadastrar-funci.php">Cadastrar funcionário</a>
+            <a href="../pages/cadastrar-fornecedor.php">Cadastrar fornecedor</a>
+            <a href="../pages/forma-pagamento.php">Forma de pagamento</a>
             <a href="../config/sair.php">Sair</a>
         </div>
 
         
         
         
-        <div class="container-header" onclick="window.history.back();">
-            <button class="button">
+        <div class="container-header" >
+            <button class="button" onclick="window.history.back();">
             <div class="button-box">
                 <span class="button-elem">
                 <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +102,21 @@
 
         <!-- Botão para abrir a sidebar -->
         <!-- <button class="open-btn" onclick="toggleSidebar()">☰</button> -->
+        
+        <!-- modal para forma de pagamento -->
+        <div class="modalFormaPagamento" id="modalFormaPaga">
+            <div class="modalFormaContent">
+                <span class="closeFormaPaga">&times;</span>
+                <h2>Cadatrar forma de pagamento</h2>
+                <label for="forma">Forma de pagamento:</label>
+                <input type="text" name="forma" id="formaPagamento">
+
+                <button type="submit">Salvar</button>
+
+            </div>
+        </div>
 </header>
 
+<script src="../js/abrir-modal.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/popup-not.js"></script>
