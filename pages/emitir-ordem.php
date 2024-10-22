@@ -110,7 +110,15 @@
             <input type="hidden" id="hiddenItemListServico" name="itemListServico">
             <input type="hidden" id="hiddenItemListProduto" name="itemListProduto">
 
-            <button type="submit">Enviar</button>
+            <button type="submit">Finalizar nota</button>
+        </form>
+
+        <form action="" method="post">
+            <label for="formaPagamento">Forma de Pagamento</label>
+            <select name="formaPagamento" id="formaPagamento">
+                <option value="">Selecione forma de pagamento</option>
+                <option value="1"></option>
+            </select>
         </form>
     </div>
 
@@ -124,8 +132,8 @@
         window.onload = definirHoraAtualTime;
     </script>
 
-    <script src="../js/adicionar-lista.js"></script>
     
+    <script src="../js/adicionar-lista.js"></script>    
     <script src="../js/buscarProprietario.js"></script>
     <script src="../js/buscar-veiculo.js"></script>
     <script src="../js/mascaras.js"></script>

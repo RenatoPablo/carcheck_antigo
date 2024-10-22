@@ -181,7 +181,7 @@ CREATE TABLE veiculos (
 CREATE TABLE formas_pagamento (
     id_forma_pagamento INT AUTO_INCREMENT PRIMARY KEY,
     tipo_pagamento VARCHAR(50) NOT NULL,
-    num_parcela INT
+    
 );
 
 
@@ -203,6 +203,7 @@ CREATE TABLE pagamentos (
     data_pagamento DATE NOT NULL,
     situacao BOOLEAN NOT NULL,
     fk_id_manutencao INT,
+
     FOREIGN KEY (fk_id_manutencao) REFERENCES manutencoes(id_manutencao) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (fk_id_forma_pagamento) REFERENCES formas_pagamento(id_forma_pagamento) ON UPDATE CASCADE ON DELETE SET NULL
 );

@@ -68,4 +68,3 @@ VALUES
 
 INSERT INTO tipos_servicos_produtos(tipo_servico_produto) VALUES ('servico'), ('peca');
 
-INSERT INTO formas_pagamento(tipo_pagamento) VALUES ('dinheiro'), ('pix'), ('cartao');
