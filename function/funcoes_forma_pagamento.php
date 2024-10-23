@@ -17,7 +17,31 @@ function cadastrarForma($pdo, $forma) {
 }
 
 function updateForma($pdo, $edita, $idForma) {
-    $sql = "UPDATE "
+    $sql = "UPDATE formas_pagamento
+            SET tipo_pagamento = :edita
+            WHERE id_forma_pagamento = :idForma";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':edita' => $edita,
+        ':idForma' => $idForma
+    ]);
+}
+
+function deleteForma($pdo, $idForma) {
+    $sql = "ALTER TABLE formas_pagamento
+            DROP COLUMN tipo_pagamento
+            WHERE id_forma_pagamento = :idForma";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':idForma' => $idForma]);
+}
+
+function readForma($pdo, $tipo) {
+    $sql = "SELECT * FROM formas_pagamento WHERE tipo_pagamento LIKE :tipo";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':tipo' => $tipo]);
+
+    
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 ?>
