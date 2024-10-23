@@ -145,10 +145,6 @@
         }
 
     </style>
-=======
-
-    <title>Forma Pagamento</title>
->>>>>>> Stashed changes
 </head>
 <body>
 <?php include '../includes/header-funci.php'; ?>
