@@ -34,7 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "Preencha todos os campos do serviço.";
             }
         } 
-        elseif ($selectOptions === "2") {      
+        else{
+            echo "Nenhuma opção selecionada.";
+        }
+        if ($selectOptions === "2") {      
             if (!empty($_POST['nomeProduto']) &&
                 !empty($_POST['descrProduto']) &&
                 !empty($_POST['valorProduto']) &&

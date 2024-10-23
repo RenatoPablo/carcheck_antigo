@@ -1,0 +1,204 @@
+body{
+    padding-top:115px;
+
+}
+/* Estilizando o container principal */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título da página de formas de pagamento */
+.container h2 {
+    font-size: 28px;
+    color: #0D3587;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Estilo para o botão de cadastrar */
+.btn-cadastrar {
+    background-color: #0D3587;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+
+}
+
+.btn-cadastrar:hover {
+    background-color: #0a2c6b;
+}
+
+/* Estilizando a tabela */
+.table-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table-list th, .table-list td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.table-list th {
+    background-color: #0D3587;
+    color: white;
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+}
+
+.table-list td {
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    padding: 12px;
+}
+
+.table-list tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-list tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo para alinhamento dos botões de ação */
+.actions {
+    display: flex;
+    justify-content: flex-end; /* Move os botões para a direita */
+    gap: 10px;
+}
+
+/* Botões de ação (Editar, Excluir) */
+.btn-primary {
+    background-color: #0066cc;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #004da3;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* Modal estilo */
+.modal-forma-pagamento {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-forma {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Estilo do botão de fechar o modal */
+.modal-close {
+    color: #999;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: black;
+}
+
+/* Estilo do formulário dentro do modal */
+.modal-forma-pagamento form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container de inputs no modal */
+.input-container-forma {
+    margin-bottom: 20px;
+}
+
+.input-container-forma label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-container-forma input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo do botão de salvar */
+.btn-salvar {
+    background-color: #0D3587;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-salvar:hover {
+    background-color: #0a2c6b;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .modal-content-forma {
+        width: 90%;
+    }
+
+    .table-list th, .table-list td {
+        font-size: 14px;
+    }
+}

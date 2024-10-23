@@ -6,6 +6,7 @@
 
     $permissao = $_SESSION['permissaoUsuario'];
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,8 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/popup-not.css">
+    <link rel="stylesheet" href="../css/forma-pagamento.css">
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<<<<<<< Updated upstream
     <title>Gerenciamento de Itens</title>
 
     <style>
@@ -143,10 +146,15 @@
         }
 
     </style>
+=======
+
+    <title>Forma Pagamento</title>
+>>>>>>> Stashed changes
 </head>
 <body>
 <?php include '../includes/header-funci.php'; ?>
 
+<<<<<<< Updated upstream
 <div class="position">
     <h2>Gerenciamento de Itens</h2>
 
@@ -175,8 +183,59 @@
                 <button type="submit" class="btn-salvar">Salvar</button>
             </form>
         </div>
+=======
+<div class="container mt-4">
+    <h2>Formas de Pagamento</h2>
+    
+    <!-- Botão para abrir o modal -->
+    <button id="openModal" class="btn-cadastrar">Cadastrar Forma de Pagamento</button>
+
+    <!-- Tabela para listar as formas de pagamento -->
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th>Nome da Forma de Pagamento</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Cartão de Crédito</td>
+                <td class="actions">
+                    <button class="btn btn-primary btn-sm" onclick="openModal('update', 'Cartão de Crédito')">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="openModal('delete', 'Cartão de Crédito')">Excluir</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Boleto Bancário</td>
+                <td class="actions">
+                    <button class="btn btn-primary btn-sm" onclick="openModal('update', 'Boleto Bancário')">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="openModal('delete', 'Boleto Bancário')">Excluir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal para cadastro -->
+<div class="modal-forma-pagamento" id="cadastroModal">
+    <div class="modal-content-forma">
+        <span class="modal-close">&times;</span>
+        <h2>Cadastrar Forma de Pagamento</h2>
+        
+        <!-- Formulário de cadastro -->
+        <form id="cadastroForm" method="POST" action="../config/forma-pagamento/adicionar-forma-pagamento.php">
+            <div class="input-container-forma">
+                <label for="formaPagamento">Forma de Pagamento:</label>
+                <input type="text" id="cadastroInput" name="formaPagamento" required>
+            </div>
+
+            <button type="submit" class="btn-salvar">Salvar</button>
+        </form>
+>>>>>>> Stashed changes
     </div>
 
+<<<<<<< Updated upstream
     <div class="container mt-4">
         <h2>Lista de Itens</h2>
         <div class="row">
@@ -189,6 +248,8 @@
     </div>
 </div>
 
+=======
+>>>>>>> Stashed changes
 <!-- Modal para Update e Delete -->
 <div class="modal fade" id="modalAcao" tabindex="-1" aria-labelledby="modalTituloAcao" aria-hidden="true">
     <div class="modal-dialog">
@@ -212,10 +273,14 @@
     </div>
 </div>
 
+<<<<<<< Updated upstream
 <script>
 
 
 </script>
+=======
+<script src="../js/grid-forma-pagamento.js"></script>
+>>>>>>> Stashed changes
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/grid-forma-pagamento.js"></script>
 
