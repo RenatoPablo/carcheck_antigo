@@ -90,6 +90,33 @@ function openModal(acao, id) {
 
     modalAcao.show();
 }
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById("modalCadastro");
+    var btnAbrirModal = document.getElementById("btnAbrirModalCadastro");
+    var btnFecharModal = document.querySelector(".modal-close");
+
+    // Verifica se os elementos existem antes de adicionar os eventos
+    if (btnAbrirModal) {
+        // Abrir o modal ao clicar no botão "Cadastrar Novo Item"
+        btnAbrirModal.addEventListener("click", function() {
+            modal.style.display = "flex"; // Mostrar o modal ao clicar no botão
+        });
+    }
+
+    if (btnFecharModal) {
+        // Fechar o modal ao clicar no botão "X"
+        btnFecharModal.addEventListener("click", function() {
+            modal.style.display = "none"; // Esconder o modal ao clicar no "X"
+        });
+    }
+
+    // Fechar o modal ao clicar fora da área de conteúdo
+    window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none"; // Esconde o modal se clicar fora dele
+        }
+    });
+});
 
 // Carrega os itens ao abrir a página
 carregarItens();
