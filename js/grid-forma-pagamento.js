@@ -35,7 +35,7 @@ document.getElementById('inputBusca').addEventListener('keyup', function () {
 // Função para atualizar a grid
 function atualizarGrid(resultados) {
     const container = document.getElementById('gridResultadoBusca');
-    container.innerHTML = '';
+    container.innerHTML = ''; // Limpa a grid antes de atualizar
 
     resultados.forEach(item => {
         const row = document.createElement('div');
@@ -53,7 +53,7 @@ function atualizarGrid(resultados) {
         editarBtn.classList.add('btn', 'btn-primary', 'btn-sm');
         editarBtn.textContent = 'Editar';
         editarBtn.onclick = function () {
-            openModal('update', item.id_forma_pagamento);
+            openModal('update', item.id_forma_pagamento, item.tipo_pagamento); // Passando também o nome para o modal
         };
         acoesColuna.appendChild(editarBtn);
 
@@ -70,18 +70,30 @@ function atualizarGrid(resultados) {
     });
 }
 
-
 // Função para abrir os modais de update ou delete
-function openModal(acao, id) {
+function openModal(acao, id, nome = null) {
     const modalAcao = new bootstrap.Modal(document.getElementById('modalAcao'));
     const mensagemModalAcao = document.getElementById('mensagemModalAcao');
     const formUpdate = document.getElementById('formUpdate');
     const btnConfirmarDelete = document.getElementById('btnConfirmarDelete');
+    const inputIdItem = document.getElementById('inputIdItem');
+    const inputUpdateNome = document.getElementById('inputUpdateNome');
 
     if (acao === 'update') {
         mensagemModalAcao.textContent = 'Editar Item';
         formUpdate.classList.remove('d-none');
         btnConfirmarDelete.classList.add('d-none');
+        
+        // Definir o ID no campo hidden
+        if (inputIdItem) {
+            inputIdItem.value = id;
+        }
+
+        // Preencher o campo de nome diretamente
+        if (inputUpdateNome && nome) {
+            inputUpdateNome.value = nome;
+        }
+
     } else if (acao === 'delete') {
         mensagemModalAcao.textContent = 'Tem certeza que deseja excluir este item?';
         formUpdate.classList.add('d-none');
@@ -117,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 
 // Carrega os itens ao abrir a página
 carregarItens();
