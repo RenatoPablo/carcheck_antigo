@@ -1,7 +1,7 @@
 body{
     padding-top:115px;
-
 }
+
 /* Estilizando o container principal */
 .container {
     max-width: 900px;
@@ -36,7 +36,6 @@ body{
     text-align: center;
     transition: background-color 0.3s ease;
     margin-top: 10px;
-
 }
 
 .btn-cadastrar:hover {
