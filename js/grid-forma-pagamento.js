@@ -76,20 +76,20 @@ function openModal(acao, id, nome = null) {
     const mensagemModalAcao = document.getElementById('mensagemModalAcao');
     const formUpdate = document.getElementById('formUpdate');
     const btnConfirmarDelete = document.getElementById('btnConfirmarDelete');
-    const inputIdItem = document.getElementById('inputIdItem');
-    const inputUpdateNome = document.getElementById('inputUpdateNome');
+    const inputIdItem = document.getElementById('inputIdItem'); // Para o update
+    const inputUpdateNome = document.getElementById('inputUpdateNome'); // Para o update
+    const inputDeleteIdItem = document.getElementById('inputDeleteIdItem'); // Para o delete
+    const inputDeleteNome = document.getElementById('inputDeleteNome'); // Para o delete
 
     if (acao === 'update') {
         mensagemModalAcao.textContent = 'Editar Item';
         formUpdate.classList.remove('d-none');
         btnConfirmarDelete.classList.add('d-none');
         
-        // Definir o ID no campo hidden
+        // Preencher campos de update
         if (inputIdItem) {
             inputIdItem.value = id;
         }
-
-        // Preencher o campo de nome diretamente
         if (inputUpdateNome && nome) {
             inputUpdateNome.value = nome;
         }
@@ -98,10 +98,19 @@ function openModal(acao, id, nome = null) {
         mensagemModalAcao.textContent = 'Tem certeza que deseja excluir este item?';
         formUpdate.classList.add('d-none');
         btnConfirmarDelete.classList.remove('d-none');
+        
+        // Preencher campos de delete
+        if (inputDeleteIdItem) {
+            inputDeleteIdItem.value = id;
+        }
+        if (inputDeleteNome && nome) {
+            inputDeleteNome.value = nome;
+        }
     }
 
     modalAcao.show();
 }
+
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById("modalCadastro");
     var btnAbrirModal = document.getElementById("btnAbrirModalCadastro");

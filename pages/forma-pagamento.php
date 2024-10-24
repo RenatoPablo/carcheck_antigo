@@ -42,7 +42,7 @@
             <h2>Cadastrar Novo Item</h2>
             
             <!-- Formulário de cadastro -->
-            <form id="formCadastro" method="POST" action="../config/adicionar-item.php">
+            <form id="formCadastro" method="POST" action="../config/forma-pagamento/create.php">
                 <div class="input-container-forma">
                     <label for="inputNome">Nome do Item:</label>
                     <input type="text" id="inputNome" name="nomeItem" required>
@@ -52,6 +52,9 @@
             </form>
         </div>
     </div>
+
+    
+
 
     <!-- Lista de itens -->
     <div class="mt-4">
@@ -71,25 +74,43 @@
 </div>
 
 <!-- Modal para Update e Delete -->
-<div class="modal-forma-pagamento fade" id="modalAcao" tabindex="-1" aria-labelledby="modalTituloAcao" aria-hidden="true">
-    <div class="modal-content-forma">
-        <div class="modal-header">
-            <h5 class="modal-title" id="modalTituloAcao">Ação</h5>
-            <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <p id="mensagemModalAcao"></p>
-            <form id="formUpdate" class="d-none">
-                <div class="input-container-forma">
-                    <label for="inputUpdateNome">Nome do Item</label>
-                    <input type="text" id="inputUpdateNome" name="nomeItem" value="">
-                </div>
-                <button type="submit" class="btn-salvar">Salvar Alterações</button>
-            </form>
-            <button id="btnConfirmarDelete" class="btn-danger d-none">Confirmar Exclusão</button>
+<div class="modal fade" id="modalAcao" tabindex="-1" aria-labelledby="modalTituloAcao" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"> <!-- Estrutura correta do modal Bootstrap -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTituloAcao">Ação</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="mensagemModalAcao"></p>
+                <!-- Formulário para update -->
+                <form id="formUpdate" class="d-none" method="POST" action="../config/forma-pagamento/update.php">
+                    <!-- Campo oculto para armazenar o ID do item -->
+                    <input type="hidden" id="inputIdItem" name="id_item">
+                    
+                    <!-- Campo de texto para o nome do item -->
+                    <div class="input-container-forma mb-3">
+                        <label for="inputUpdateNome" class="form-label">Nome do Item</label>
+                        <input type="text" class="form-control" id="inputUpdateNome" name="nomeItem" value="">
+                    </div>
+
+                    <!-- Botão para salvar as alterações -->
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </form>
+
+                    <form action="../config/forma-pagamento/delete.php" method="POST">
+
+                        <input type="hidden" id="inputDeleteIdItem" name="id_item">
+                        <input type="hidden" id="inputDeleteNome" name="nomeItem" value="">
+                        <!-- Botão para confirmar exclusão -->
+                        <button id="btnConfirmarDelete" class="btn btn-danger d-none">Confirmar Exclusão</button>
+                    </form>
+            </div>
         </div>
     </div>
 </div>
+
+<?php include '../includes/popup-padrao.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/grid-forma-pagamento.js"></script>

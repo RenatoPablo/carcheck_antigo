@@ -28,9 +28,7 @@ function updateForma($pdo, $edita, $idForma) {
 }
 
 function deleteForma($pdo, $idForma) {
-    $sql = "ALTER TABLE formas_pagamento
-            DROP COLUMN tipo_pagamento
-            WHERE id_forma_pagamento = :idForma";
+    $sql = "DELETE FROM formas_pagamento WHERE id_forma_pagamento = :idForma";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':idForma' => $idForma]);
 }
