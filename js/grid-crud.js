@@ -1,21 +1,5 @@
 // Função para buscar os itens no banco e exibi-los na grid
-function carregarItens() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '../config/forma-pagamento/read.php', true); // Corrigir o caminho conforme necessário
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            try {
-                const resultados = JSON.parse(xhr.responseText);
-                atualizarGrid(resultados); // Exibe todos os resultados na grid
-            } catch (error) {
-                console.error("Erro ao processar os dados:", error);
-            }
-        } else {
-            console.error("Erro na requisição: " + xhr.status);
-        }
-    };
-    xhr.send();
-}
+
 
 // Função para filtrar a grid com base no valor digitado
 document.getElementById('inputBusca').addEventListener('keyup', function () {

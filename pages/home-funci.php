@@ -36,7 +36,7 @@
         
         <div class="container-acesso">
             <!-- Cartões de acesso rápido -->
-            <a href="cadastrar-cliente.php">
+            <a href="../pages/cliente.php">
                 <div class="card">
                 <img src="../image/iconeCadastrarCliente.png" alt="Cadastrar Cliente" class="img-card">
                     <p class="heading">Cadastrar Cliente</p>

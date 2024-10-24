@@ -224,7 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Redirecionar para o HTML com parâmetros de resultado
-        $url = "../pages/cadastrar-cliente.php?sucesso_fisica=" . ($sucesso_fisica ? 'true' : 'false') .
+        $url = "../pages/cliente.php?sucesso_fisica=" . ($sucesso_fisica ? 'true' : 'false') .
                "&sucesso_juridica=" . ($sucesso_juridica ? 'true' : 'false') .
                "&senha_incorreta=" . ($senha_incorreta ? 'true' : 'false') .
                "&verificar_campos=" . ($verificar_campos ? 'true' : 'false');
@@ -235,7 +235,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Erro: " . $e->getMessage();
     }
 } else {
-    header("Location: ../pages/cadastrar-cliente.php");
+    header("Location: ../pages/cliente.php");
     exit();
 }
 ?>

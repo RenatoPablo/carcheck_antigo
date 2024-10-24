@@ -1,5 +1,7 @@
 <?php
-require 'config.php';
+
+
+
 
 
 
@@ -89,120 +91,93 @@ function cadastrarPontoRef($pdo, $descPontoRef) {
 
 
 
-/////////////////////////pessoas/////////////////////////
 function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $id_genero, $id_complemento, $id_ponto_ref, $id_estado, $id_uf, $id_cidade, $id_cep, $id_rua, $id_numero_casa, $id_bairro, $comple_verif, $ponto_verif) {
-
+    
+    // Validação do email
     if (!filter_var($enderecoEmail, FILTER_VALIDATE_EMAIL)) {
         throw new Exception('Email inválido.');
     }
 
+    // Verifica se o email já está cadastrado
     $sqlCheck = "SELECT id_pessoa FROM pessoas WHERE endereco_email = :email";
     $stmtCheck = $pdo->prepare($sqlCheck);
     $stmtCheck->execute([':email' => $enderecoEmail]);
 
-    if ($pessoa = $stmtCheck->fetch(PDO::FETCH_ASSOC)) {        
-        
+    if ($pessoa = $stmtCheck->fetch(PDO::FETCH_ASSOC)) {
+        // Se a pessoa já está cadastrada, retorna o ID
         return $pessoa['id_pessoa'];
     }
 
+    // Gera o hash da senha
     $hashedSenha = password_hash($senha, PASSWORD_DEFAULT);
     $permissaCliente = 1;
 
     try {
+        // Verifica e cadastra os campos de chave estrangeira
+        $id_rua = cadastrarRua($pdo, $id_rua); // Função para verificar ou cadastrar rua
+        $id_numero_casa = cadastraNumeroCasa($pdo, $id_numero_casa); // Verifica ou cadastra o número da casa
+        $id_bairro = cadastrarBairro($pdo, $id_bairro); // Verifica ou cadastra o bairro
+        $id_cep = inserirCep($pdo, $id_cep, $id_cidade)['id_cep']; // Verifica ou cadastra o CEP
 
-    if ($comple_verif && $ponto_verif) {
-        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, 
-        data_nasc, 
-        numero_telefone, 
-        endereco_email, 
-        senha, 
-        fk_id_genero, 
-        fk_id_cidade, 
-        fk_id_cep, 
-        fk_id_rua, 
-        fk_id_numero_casa, 
-        fk_id_bairro, 
-        fk_id_complemento, 
-        fk_id_ponto_ref,
-        fk_id_permissao) 
-        VALUES 
-        (:nome, 
-        :dataNasc, 
-        :tele, 
-        :email, 
-        :senha, 
-        :genero, 
-        :cidade, 
-        :cep, 
-        :rua, 
-        :numeroCasa, 
-        :bairro, 
-        :complemento, 
-        :ponto,
-        :permissao)";
-    $stmtInsert = $pdo->prepare($sqlInsert);
-    $stmtInsert->execute([
-        ':nome' => $nomePessoa,
-        ':dataNasc' => $dataNasc,
-        ':tele' => $numTelefone,
-        ':email' => $enderecoEmail,
-        ':senha' => $hashedSenha,
-        ':genero' => $id_genero,
-        ':cidade' => $id_cidade,
-        ':cep' => $id_cep,
-        ':rua' => $id_rua,
-        ':numeroCasa' => $id_numero_casa,
-        ':bairro' => $id_bairro,
-        ':complemento' => $id_complemento,
-        ':ponto' => $id_ponto_ref,
-        ':permissao' => $permissaCliente
+        if ($comple_verif) {
+            $id_complemento = cadastrarComplemento($pdo, $id_complemento);
+        }
+        if ($ponto_verif) {
+            $id_ponto_ref = cadastrarPontoRef($pdo, $id_ponto_ref);
+        }
 
-    ]);
-    return $pdo->lastInsertId();
+        // Construção da query dinâmica para inclusão condicional dos campos
+        $sqlInsert = "INSERT INTO pessoas (
+            nome_pessoa, 
+            data_nasc, 
+            numero_telefone, 
+            endereco_email, 
+            senha, 
+            fk_id_genero, 
+            fk_id_cidade, 
+            fk_id_cep, 
+            fk_id_rua, 
+            fk_id_numero_casa, 
+            fk_id_bairro, 
+            fk_id_permissao";
 
-    } elseif ($ponto_verif) {
-        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_cidade, fk_id_cep, fk_id_rua, fk_id_numero_casa, fk_id_bairro, fk_id_ponto_ref, fk_id_permissao) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :cidade, :cep, :rua, :numeroCasa, :bairro, :ponto, :permissao)";
-    $stmtInsert = $pdo->prepare($sqlInsert);
-    $stmtInsert->execute([
-        ':nome' => $nomePessoa,
-        ':dataNasc' => $dataNasc,
-        ':tele' => $numTelefone,
-        ':email' => $enderecoEmail,
-        ':senha' => $hashedSenha,
-        ':genero' => $id_genero,
-        ':cidade' => $id_cidade,
-        ':cep' => $id_cep,
-        ':rua' => $id_rua,
-        ':numeroCasa' => $id_numero_casa,
-        ':bairro' => $id_bairro,
-        ':ponto' => $id_ponto_ref,
-        ':permissao' => $permissaCliente
-    ]);
-    return $pdo->lastInsertId();
-    } elseif ($comple_verif) {
-        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_cidade, fk_id_cep, fk_id_rua, fk_id_numero_casa, fk_id_bairro, fk_id_complemento, fk_id_permissao) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :cidade, :cep, :rua, :numeroCasa, :bairro, :complemento, :permissao)";
-    $stmtInsert = $pdo->prepare($sqlInsert);
-    $stmtInsert->execute([
-        ':nome' => $nomePessoa,
-        ':dataNasc' => $dataNasc,
-        ':tele' => $numTelefone,
-        ':email' => $enderecoEmail,
-        ':senha' => $hashedSenha,
-        ':genero' => $id_genero,
-        ':cidade' => $id_cidade,
-        ':cep' => $id_cep,
-        ':rua' => $id_rua,
-        ':numeroCasa' => $id_numero_casa,
-        ':bairro' => $id_bairro,
-        ':complemento' => $id_complemento,
-        ':permissao' => $permissaCliente
-        
-    ]);
-    return $pdo->lastInsertId();
-    } else {
-        $sqlInsert = "INSERT INTO pessoas(nome_pessoa, data_nasc, numero_telefone, endereco_email, senha, fk_id_genero, fk_id_cidade, fk_id_cep, fk_id_rua, fk_id_numero_casa, fk_id_bairro, fk_id_permissao) VALUES (:nome, :dataNasc, :tele, :email, :senha, :genero, :cidade, :cep, :rua, :numeroCasa, :bairro, :permissao)";
+        // Condicional para incluir complemento e ponto de referência
+        if ($comple_verif) {
+            $sqlInsert .= ", fk_id_complemento";
+        }
+        if ($ponto_verif) {
+            $sqlInsert .= ", fk_id_ponto_ref";
+        }
+
+        $sqlInsert .= ") VALUES (
+            :nome, 
+            :dataNasc, 
+            :tele, 
+            :email, 
+            :senha, 
+            :genero, 
+            :cidade, 
+            :cep, 
+            :rua, 
+            :numeroCasa, 
+            :bairro, 
+            :permissao";
+
+        // Condicional para incluir parâmetros de complemento e ponto de referência
+        if ($comple_verif) {
+            $sqlInsert .= ", :complemento";
+        }
+        if ($ponto_verif) {
+            $sqlInsert .= ", :ponto";
+        }
+
+        $sqlInsert .= ")";
+
+        // Preparar a query
         $stmtInsert = $pdo->prepare($sqlInsert);
-        $stmtInsert->execute([
+
+        // Definir os parâmetros comuns
+        $params = [
             ':nome' => $nomePessoa,
             ':dataNasc' => $dataNasc,
             ':tele' => $numTelefone,
@@ -215,19 +190,29 @@ function cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha
             ':numeroCasa' => $id_numero_casa,
             ':bairro' => $id_bairro,
             ':permissao' => $permissaCliente
+        ];
 
+        // Adicionar parâmetros opcionais, se aplicável
+        if ($comple_verif) {
+            $params[':complemento'] = $id_complemento;
+        }
+        if ($ponto_verif) {
+            $params[':ponto'] = $id_ponto_ref;
+        }
 
+        // Executar a query com os parâmetros
+        $stmtInsert->execute($params);
 
-
-        ]);
+        // Retornar o último ID inserido
         return $pdo->lastInsertId();
-
-    }
 
     } catch (PDOException $e) {
         throw new Exception('Erro ao cadastrar a pessoa: ' . $e->getMessage());
     }
 }
+
+
+
 
 function cadastrarPessoaFisica($pdo, $cpf, $rg, $pessoaId) {
     $sqlCheck = "SELECT id_pessoa_fisi FROM pessoas_fisicas WHERE cpf = :cpf";

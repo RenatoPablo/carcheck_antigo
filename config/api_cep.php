@@ -1,11 +1,10 @@
 <?php
 header('Content-Type: application/json');
 
-//conexao
+// Conexão
 require 'config.php';
 
-
-//funcao para buscar dados do cep na api viacep
+// Função para buscar dados do cep na API ViaCEP
 function buscarDadosCep($cep) {
     // Validar o formato do CEP (8 dígitos)
     if (!preg_match('/^[0-9]{8}$/', $cep)) {
@@ -40,7 +39,6 @@ function buscarDadosCep($cep) {
     return $dadosCep;
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // Captura o CEP enviado pelo formulário
@@ -56,18 +54,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();  // Para a execução após a mensagem de erro
             }
 
-            
             // Retorna a resposta em formato JSON
             echo json_encode([
                 'cidade' => $dadosCep['localidade'],
-                'estado' => $dadosCep['estado'],
-                
+                'estado' => $dadosCep['uf'],  // Corrigido para 'uf' que representa o estado
+                'bairro' => $dadosCep['bairro'], // Adicionado o bairro
                 'cep' => $cep,
                 'mensagem' => 'Dados do CEP retornados com sucesso!'
             ]);
 
-            //$json_response = ob_get_clean();
-            
         } else {
             // Caso o CEP não tenha sido informado
             echo json_encode(['success' => false, 'message' => 'CEP não informado']);
@@ -78,5 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => false, 'message' => 'Erro no servidor: ' . $e->getMessage()]);
     }
 }
+
 
 ?>

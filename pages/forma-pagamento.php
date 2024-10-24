@@ -110,10 +110,30 @@
     </div>
 </div>
 
+<script>
+    function carregarItens() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '../config/forma-pagamento/read.php', true); // Corrigir o caminho conforme necessário
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            try {
+                const resultados = JSON.parse(xhr.responseText);
+                atualizarGrid(resultados); // Exibe todos os resultados na grid
+            } catch (error) {
+                console.error("Erro ao processar os dados:", error);
+            }
+        } else {
+            console.error("Erro na requisição: " + xhr.status);
+        }
+    };
+    xhr.send();
+}
+</script>
+
 <?php include '../includes/popup-padrao.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/grid-forma-pagamento.js"></script>
+<script src="../js/grid-crud.js"></script>
 
 </body>
 </html>
