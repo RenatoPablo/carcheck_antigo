@@ -18,16 +18,234 @@ else:
     <link rel="stylesheet" href="../css/padraoformularios.css">
 
     <!-- uso temporario -->
-    <link rel="stylesheet" href="../css/forma-pagamento.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Cadastro Cliente</title>
+
+    <style>
+        body {
+    padding-top: 115px;
+    overflow-x: hidden; /* Evita rolagem horizontal */
+}
+
+/* Container principal */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.container h2 {
+    font-size: 28px;
+    color: #0D3587;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Botão Cadastrar */
+.btn-cadastrar {
+    background-color: #0D3587;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0 20px 0;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cadastrar:hover {
+    background-color: #0a2c6b;
+}
+
+/* Tabela de listagem */
+.table-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table-list th, .table-list td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.table-list th {
+    background-color: #0D3587;
+    color: white;
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+}
+
+.table-list td {
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    padding: 12px;
+}
+
+.table-list tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-list tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo para alinhamento dos botões de ação */
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Botões de ação */
+.btn-primary, .btn-danger {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #0066cc;
+}
+
+.btn-primary:hover {
+    background-color: #004da3;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* Modal estilo */
+.modal-forma-pagamento, .modal.fade {
+    display: none; /* Oculta inicialmente */
+    position: fixed;
+    z-index: 1100; /* Sobreposição alta */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+/* Conteúdo do modal */
+.modal-content-forma, .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative; /* Para que a posição do close funcione bem */
+}
+
+/* Botão de fechar o modal */
+.modal-close, .btn-close {
+    color: #999;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.modal-close:hover, .btn-close:hover {
+    color: black;
+}
+
+/* Formulário dentro do modal */
+.modal-forma-pagamento form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container de inputs no modal */
+.input-container-forma {
+    margin-bottom: 20px;
+}
+
+.input-container-forma label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-container-forma input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Botão de salvar */
+.btn-salvar {
+    background-color: #0D3587;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-salvar:hover {
+    background-color: #0a2c6b;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .modal-content-forma {
+        width: 90%;
+    }
+
+    .table-list th, .table-list td {
+        font-size: 14px;
+    }
+}
+
+    </style>
 </head>
 <body>
 
 <?php include '../includes/header-funci.php'; ?>
 
 <!-- Container dos dois formulários -->
+
+
+
 
 
 <div class="container mt-4">
@@ -219,7 +437,11 @@ else:
         <table class="table-list">
             <thead>
                 <tr>
-                    <th>Nome do Item</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Tipo pessoa</th>
+                    <th>CPF ou CNPJ</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -233,81 +455,43 @@ else:
 <!-- Modal para Update e Delete -->
 <div class="modal fade" id="modalAcao" tabindex="-1" aria-labelledby="modalTituloAcao" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content"> <!-- Estrutura correta do modal Bootstrap -->
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTituloAcao">Ação</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p id="mensagemModalAcao"></p>
-                
-                -- area para formulario de cadastro
 
-                    
-                    -- area para formulario de delete
+                            
+                
+                           
+
+                <div id="modalContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger d-none" id="confirmDeleteBtn">Confirmar Exclusão</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
 </div>
 
+
+
+
+
 <?php include '../includes/popup-padrao.php'; ?>
 
-<script>
 
-    function carregarItens() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '../config/forma-pagamento/read.php', true); // Corrigir o caminho conforme necessário
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            try {
-                const resultados = JSON.parse(xhr.responseText);
-                atualizarGrid(resultados); // Exibe todos os resultados na grid
-            } catch (error) {
-                console.error("Erro ao processar os dados:", error);
-            }
-        } else {
-            console.error("Erro na requisição: " + xhr.status);
-        }
-    };
-    xhr.send();
-}
+
+<!-- Inclua o Bootstrap JS aqui antes dos seus scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
+<script src="../js/grid/read/read-cliente.js"></script>
 
-// Exibir popup com base nas variáveis passadas do PHP
-<?php if (isset($_GET['sucesso_fisica']) && $_GET['sucesso_fisica'] == 'true'): ?>
-    Swal.fire({
-        icon: 'success',
-        title: 'Sucesso!',
-        text: 'Cadastro de pessoa física realizado com sucesso!',
-        confirmButtonText: 'OK'
-    });
-<?php elseif (isset($_GET['sucesso_juridica']) && $_GET['sucesso_juridica'] == 'true'): ?>
-    Swal.fire({
-        icon: 'success',
-        title: 'Sucesso!',
-        text: 'Cadastro de pessoa jurídica realizado com sucesso!',
-        confirmButtonText: 'OK'
-    });
-<?php elseif (isset($_GET['senha_incorreta']) && $_GET['senha_incorreta'] == 'true'): ?>
-    Swal.fire({
-        icon: 'error',
-        title: 'Erro!',
-        text: 'As senhas não coincidem. Tente novamente.',
-        confirmButtonText: 'OK'
-    });
-<?php elseif (isset($_GET['verificar_campos']) && $_GET['verificar_campos'] == 'true'): ?>
-    Swal.fire({
-        icon: 'warning',
-        title: 'Atenção!',
-        text: 'Preencha todos os campos obrigatórios.',
-        confirmButtonText: 'OK'
-    });
-<?php endif; ?>
-</script>
-
-<script src="../js/grid-crud.js"></script>
 <script src="../js/buscarCep.js"></script>
 <script src="../js/pop-cadastro.js"></script>
 <script src="../js/valida-fisica-juridi.js"></script>

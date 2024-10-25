@@ -117,6 +117,6 @@
         </div>
 </header>
 
-<script src="../js/abrir-modal.js"></script>
+
 <script src="../js/script.js"></script>
 <script src="../js/popup-not.js"></script>

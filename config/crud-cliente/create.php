@@ -84,21 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Cadastra a pessoa
                     $id_pessoa = cadastrarPessoa($pdo, $nomePessoa, $numTelefone, $enderecoEmail, $senha, $dataNasc, $id_genero, $id_complemento, $id_ponto_ref, $id_estado, $id_uf, $id_cidade, $id_cep, $id_rua, $id_numero_casa, $id_bairro, $id_complemento, $id_ponto_ref);
 
-                    // Verifica se é Pessoa Física ou Jurídica e cadastra os respectivos dados
-                    if ($_POST['tipo_pessoa'] === 'fisica') {
-                        $cpf = $_POST['cpf'];
-                        $rg = $_POST['rg'];
-                        cadastrarPessoaFisica($pdo, $cpf, $rg, $id_pessoa);
-                        $sucesso_fisica = true;
-                    } elseif ($_POST['tipo_pessoa'] === 'juridica') {
-                        $cnpj = $_POST['cnpj'];
-                        $ie = $_POST['ie'];
-                        $razao = $_POST['razao-social'];
-                        $fantasia = $_POST['nome-fantasia'];
-                        cadastrarPessoaJuridica($pdo, $cnpj, $ie, $razao, $fantasia, $id_pessoa);
-                        $sucesso_juridica = true;
-                    }
-
                     // Lógica de upload de imagem (opcional)
                     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
                         $fileTmpPath = $_FILES['foto']['tmp_name'];
@@ -124,18 +109,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $stmt->bindParam(':id', $id_pessoa, PDO::PARAM_INT);
                                 $stmt->execute();
                             } else {
-                                echo "Erro ao mover o arquivo.";
+                                $_SESSION['mensagem'] = "Erro ao mover o arquivo.";
                             }
                         } else {
-                            echo "Formato de arquivo não permitido.";
+                            $_SESSION['mensagem'] = "Formato de arquivo não permitido.";
                         }
                     }
+
+                    // Verifica se é Pessoa Física ou Jurídica e cadastra os respectivos dados
+                    if ($_POST['tipo_pessoa'] === 'fisica') {
+                        $cpf = $_POST['cpf'];
+                        $rg = $_POST['rg'];
+                        cadastrarPessoaFisica($pdo, $cpf, $rg, $id_pessoa);
+                        
+                        $_SESSION['mensagem'] = "Pessoa física cadastrada com sucesso";
+                        header('Location: ../../pages/cliente.php');
+                        exit;
+
+                    } elseif ($_POST['tipo_pessoa'] === 'juridica') {
+                        $cnpj = $_POST['cnpj'];
+                        $ie = $_POST['ie'];
+                        $razao = $_POST['razao-social'];
+                        $fantasia = $_POST['nome-fantasia'];
+                        cadastrarPessoaJuridica($pdo, $cnpj, $ie, $razao, $fantasia, $id_pessoa);
+                        $sucesso_juridica = true;
+
+                        $_SESSION['mensagem'] = "Pessoa jurídica cadastrada com sucesso";
+                        header('Location: ../../pages/cliente.php');
+                        exit;
+                    }
+
                 }
             } else {
-                $senha_incorreta = true;
+                $_SESSION['mensagem'] = "Senhas não coincidem.";
+                header('Location: ../../pages/cliente.php');
+                exit;
             }
         } else {
-            $verificar_campos = true;
+            $_SESSION['mensagem'] = "Preencha todos os campos obrigatórios.";
+            header('Location: ../../pages/cliente.php');
+            exit;
         }
 
     } catch (PDOException $e) {

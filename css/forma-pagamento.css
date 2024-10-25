@@ -132,6 +132,7 @@ body {
     position: relative;
     max-height: 80%; /* Define um tamanho máximo para o conteúdo do modal */
     overflow-y: auto; /* Permite rolar o conteúdo caso ele ultrapasse a altura */
+    z-index: 1050;
 }
 
 /* Estilo do botão de fechar o modal */

@@ -3,7 +3,6 @@
     if(!isset($_SESSION) OR $_SESSION['logado'] != true):
         header("location: ../config/sair.php");        
     else:
-
     $permissao = $_SESSION['permissaoUsuario'];
 ?>
 
@@ -17,10 +16,10 @@
     <link rel="stylesheet" href="../css/forma-pagamento.css">
     <link href="../fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
     <title>Forma Pagamento</title>
 </head>
 <body>
+
 <?php include '../includes/header-funci.php'; ?>
 
 <div class="container mt-4">
@@ -53,9 +52,6 @@
         </div>
     </div>
 
-    
-
-
     <!-- Lista de itens -->
     <div class="mt-4">
         <h2 class="text-center">Lista de Itens</h2>
@@ -76,13 +72,14 @@
 <!-- Modal para Update e Delete -->
 <div class="modal fade" id="modalAcao" tabindex="-1" aria-labelledby="modalTituloAcao" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content"> <!-- Estrutura correta do modal Bootstrap -->
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTituloAcao">Ação</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p id="mensagemModalAcao"></p>
+
                 <!-- Formulário para update -->
                 <form id="formUpdate" class="d-none" method="POST" action="../config/forma-pagamento/update.php">
                     <!-- Campo oculto para armazenar o ID do item -->
@@ -98,42 +95,32 @@
                     <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                 </form>
 
-                    <form action="../config/forma-pagamento/delete.php" method="POST">
-
-                        <input type="hidden" id="inputDeleteIdItem" name="id_item">
-                        <input type="hidden" id="inputDeleteNome" name="nomeItem" value="">
-                        <!-- Botão para confirmar exclusão -->
-                        <button id="btnConfirmarDelete" class="btn btn-danger d-none">Confirmar Exclusão</button>
-                    </form>
+                <!-- Formulário para delete -->
+                <form action="../config/forma-pagamento/delete.php" method="POST">
+                    <input type="hidden" id="inputDeleteIdItem" name="id_item">
+                    <input type="hidden" id="inputDeleteNome" name="nomeItem" value="">
+                    <!-- Botão para confirmar exclusão -->
+                    <button id="btnConfirmarDelete" class="btn btn-danger d-none">Confirmar Exclusão</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Carrega os itens ao abrir a página -->
 <script>
-    function carregarItens() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '../config/forma-pagamento/read.php', true); // Corrigir o caminho conforme necessário
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            try {
-                const resultados = JSON.parse(xhr.responseText);
-                atualizarGrid(resultados); // Exibe todos os resultados na grid
-            } catch (error) {
-                console.error("Erro ao processar os dados:", error);
-            }
-        } else {
-            console.error("Erro na requisição: " + xhr.status);
-        }
-    };
-    xhr.send();
-}
+    document.addEventListener("DOMContentLoaded", function() {
+        carregarItens(); // Chama a função quando o DOM estiver carregado
+    });
 </script>
 
 <?php include '../includes/popup-padrao.php'; ?>
 
+<!-- Scripts carregados no final para melhor performance -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/grid-crud.js"></script>
+
+<script src="../js/grid/read/read-forma-pagamento.js"></script>
+<script src="../js/grid/modal.js"></script>
 
 </body>
 </html>
