@@ -1,74 +1,88 @@
-/* From Uiverse.io by Yaseen549 */ 
-/* .card {
-    width: 450px;
-    height: 280px;
-    border-radius: 30px;
-    background: #0d3587;
-    box-shadow: 5px 5px 20px rgb(25, 25, 25),
-    -5px -5px 20px rgb(60, 60, 60);
-    
-   }
-   
-.campos {
+main {
+    max-width: 1200px;
     width: 100%;
-    
-    position: relative;
-    
-    display: grid;
-    grid-template-columns: repeat(2, 171px);
-    justify-content: center;
-    gap: 21px;
-    padding-top: 13px;
-} */
-/* 
-.button-submit { */
-    /* width: 200px; Aumenta a largura do botão */
-    /* height: 40px; Aumenta a altura do botão */
-    /* background-color: #ffffff; Cor de fundo do botão */
-    /* color: #0d3587; Cor do texto do botão */
-    /* border: none; Remove a borda */
-    /* border-radius: 20px; Borda arredondada */
-    /* cursor: pointer;
-    margin-top: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto; Centraliza horizontalmente */
-    /* text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.label-campos {
-    color: white;
-}
-
-.area-dados {
-    height: 700px;
-    
-    position: relative;
-    top: 210px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.area-servico-produto {
-    
-} */
- /* Formulário responsivo */
-form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 600px;
-    width: 100%;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
+}
+
+#finalForm {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.dados-manutencao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+    grid-column: span 2; /* Garante que o título ocupe as duas colunas */
+    border-bottom: 2px solid #ddd; /* Linha abaixo do título para separação */
+    padding-bottom: 10px;
+}
+
+.input-container {
+    width: 100%;
+}
+
+.input-container .input,
+.input-container .formaPagamento {
+    padding: 10px;
+    margin: 2px;
+    font-size: 16px;
+    border: 1.5px solid lightgrey;
     border-radius: 12px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    position: relative; /* Adicionado para garantir que elementos absolutos fiquem dentro do form */
-  }
-  .ul-temporaria {
+    width: 100%;
+    height: 40px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#valorTotal {
+    font-weight: bold;
+    background-color: #f0f8ff;
+    border: 2px solid #0d3587;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: right;
+    color: #0d3587; /* Cor do texto para combinar com o destaque */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#addItemBtnServico, #addItemBtnProduto {
+    padding: 12px 17px;
+    font-size: 14px;
+    color: white;
+    background-color: #002775;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: none; /* Altera para display block para ficar visível após ação */
+    margin: 10px 0; /* Espaçamento entre os botões */
+    width: 25%;
+}
+
+#addItemBtnServico:hover, #addItemBtnProduto:hover {
+    background-color: #333;
+}
+
+.ul-temporaria {
     list-style-type: none;
     padding: 0;
     margin: 10px 0;
@@ -77,23 +91,53 @@ form {
     max-height: 150px;
     overflow-y: auto;
 }
+
+.ul-temporaria li {
+    padding: 2px 7px;
+    margin: 2px 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px;
+}
+
 .quantidade-input {
     width: 50px;
     margin-left: 10px;
 }
-.suggestions {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    max-height: 150px;
-    overflow-y: auto;
-}
-.suggestions li {
-    padding: 8px;
+
+.btn-submit {
     cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #0d3587;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    transition: background-color 0.3s ease;
 }
-.suggestions li:hover {
-    background-color: #ddd;
-}  
+
+.btn-submit:hover {
+    background-color: #333;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .dados-manutencao {
+        grid-template-columns: 1fr; /* Em telas menores, uma coluna */
+    }
+
+    #finalForm {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .btn-submit {
+        width: 100%; /* O botão ocupa toda a largura em telas menores */
+    }
+}

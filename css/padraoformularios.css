@@ -56,6 +56,7 @@
   /* Ajuste de margens para melhorar o espaçamento */
 .input-container {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .input-container label {
@@ -87,17 +88,22 @@
 
   /* Estilos para lista de sugestões */
   .suggestions {
-    max-height: 200px;
+    max-height: 150px;
     overflow-y: auto;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     background-color: white;
-    position: absolute;
     z-index: 1000; /* Aumentado para garantir que fique acima de outros elementos */
     width: 100%;
     top: 100%;
     left: 0;
     box-sizing: border-box;
     display: none; /* Inicialmente escondido */
+    list-style-type: none;
+    padding: 0;
+    margin: 2px;
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Efeito de sombra */
+
   }
   
   .suggestions.visible {
@@ -107,16 +113,80 @@
   .suggestions li {
     padding: 10px;
     cursor: pointer;
-    list-style: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px;
   }
   
   .suggestions li:hover {
     background-color: #f0f0f0;
   }
+  /* Remova a borda do último item para ficar mais clean */
+.suggestions li:last-child {
+  border-bottom: none;
+}
+/* Adiciona um espaço maior no topo do card de sugestões para sombra */
+.suggestions::before {
+  content: '';
+  display: block;
+  height: 5px;
+}
+/* Estilo da lista de serviços adicionados */
+.ul-temporaria {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  max-height: 150px;
+  overflow-y: auto;
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para destacar a lista */
+}
+
+/* Estilo para os itens dentro da lista */
+.ul-temporaria li {
+  padding: 10px 15px;
+  margin: 5px 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd; /* Linha de separação entre os itens */
+  border-radius: 8px; /* Bordas arredondadas para os itens */
+  max-height: 180px;
+}
+
+/* Remover borda do último item para ficar mais clean */
+.ul-temporaria li:last-child {
+  border-bottom: none;
+}
+
+/* Estilo para o botão "Remover" */
+.ul-temporaria li button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efeito de hover no botão "Remover" */
+.ul-temporaria li button:hover {
+  background-color: #ff1a1a;
+}
   
-  /* Responsividade */
-  @media (max-width: 768px) {
-    form {
-        grid-template-columns: 1fr;
-    }
+
+/* Responsividade para a lista */
+@media (max-width: 768px) {
+  .ul-temporaria li {
+      flex-direction: column;
+      align-items: flex-start;
   }
+
+  .ul-temporaria li button {
+      margin-top: 5px;
+      width: 100%; /* O botão ocupa toda a largura em telas menores */
+  }
+}
