@@ -1,271 +1,66 @@
-BANCO SEM CORREÇAO
-CREATE TABLE ruas (
-    id_rua INT AUTO_INCREMENT PRIMARY KEY,
-    nome_rua VARCHAR(200) NOT NULL
-);
+<div class="container mt-4">
+    <h2 class="text-center">Gerenciamento de Itens</h2>
 
-CREATE TABLE estados (
-    id_estado INT AUTO_INCREMENT PRIMARY KEY,
-    nome_estado VARCHAR(50) NOT NULL
+    <!-- Botão para abrir o modal -->
+    <button id="btnAbrirModalCadastro" class="btn-cadastrar">Cadastrar Novo Item</button>
+
+    <!-- Campo de busca -->
+    <div class="search-bar mb-3">
+        <input type="text" id="inputBusca" placeholder="Buscar item..." class="form-control">
+        <span class="icon-search"><i class="fa fa-search"></i></span>
+    </div>
+
+    <!-- Modal para cadastro de item -->
+    <div id="modalCadastro" class="modal-forma-pagamento">
+        <div class="modal-content-forma">
+            <span class="modal-close">&times;</span>
+            <h2>Cadastrar Novo Item</h2>
+            
+            
+            -- area para adicionar formulario cadastro
+
+
+        </div>
+    </div>
 
     
-);
-
-CREATE TABLE ufs (
-    id_uf INT AUTO_INCREMENT PRIMARY KEY,
-    sigla CHAR(2) UNIQUE NOT NULL,
-
-    fk_id_estado INT,
-    FOREIGN KEY (fk_id_estado) REFERENCES estados(id_estado) ON UPDATE CASCADE ON DELETE SET NULL
-);
-
-CREATE TABLE cidades (
-    id_cidade INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cidade VARCHAR(150) NOT NULL,
-
-    fk_id_uf INT,
-    FOREIGN KEY (fk_id_uf) REFERENCES ufs(id_uf) ON UPDATE CASCADE ON DELETE SET NULL
-);
-
-CREATE TABLE ceps (
-    id_cep INT AUTO_INCREMENT PRIMARY KEY,
-    numero_cep VARCHAR(20) NOT NULL,
-
-    fk_id_cidade INT,
-    FOREIGN KEY (fk_id_cidade) REFERENCES cidades(id_cidade) ON UPDATE CASCADE ON DELETE SET NULL
-);
 
 
-CREATE TABLE complementos (
-    id_complemento INT AUTO_INCREMENT PRIMARY KEY,
-    desc_complemento TEXT NOT NULL
-);
+    <!-- Lista de itens -->
+    <div class="mt-4">
+        <h2 class="text-center">Lista de Itens</h2>
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th>Nome do Item</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="gridResultadoBusca">
+                <!-- Os resultados da grid aparecerão aqui -->
+            </tbody>
+        </table>
+    </div>
+</div>
 
-CREATE TABLE pontos_referencias (
-    id_ponto_ref INT AUTO_INCREMENT PRIMARY KEY,
-    desc_ponto_ref TEXT NOT NULL
-);
+<!-- Modal para Update e Delete -->
+<div class="modal fade" id="modalAcao" tabindex="-1" aria-labelledby="modalTituloAcao" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"> <!-- Estrutura correta do modal Bootstrap -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTituloAcao">Ação</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="mensagemModalAcao"></p>
+                
+                -- area para formulario de cadastro
 
-CREATE TABLE numeros_casas (
-    id_numero_casa INT AUTO_INCREMENT PRIMARY KEY,
-    numero_casa VARCHAR(10) NOT NULL
-);
+                    
+                    -- area para formulario de delete
+            </div>
+        </div>
+    </div>
+</div>
 
-
-CREATE TABLE bairros (
-    id_bairro INT AUTO_INCREMENT PRIMARY KEY,
-    nome_bairro VARCHAR(100) NOT NULL
-);
-
-
-CREATE TABLE generos (
-    id_genero INT AUTO_INCREMENT PRIMARY KEY,
-    sexo VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE permissoes (
-    id_permissao INT AUTO_INCREMENT PRIMARY KEY,
-    tipo_permissao VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE pessoas (  
-    id_pessoa INT AUTO_INCREMENT PRIMARY KEY,
-    nome_pessoa VARCHAR(200) NOT NULL,
-    data_nasc DATE,
-    foto BLOB,
-    numero_telefone VARCHAR(20) NOT NULL UNIQUE,
-    endereco_email VARCHAR(200) NOT NULL UNIQUE,
-    senha VARCHAR(200) NOT NULL,
-    token_login VARCHAR(255),
-    
-    fk_id_permissao INT,
-    fk_id_cep INT,
-    
-    fk_id_rua INT,
-    fk_id_genero INT,
-    
-    fk_id_numero_casa INT,
-    fk_id_cidade INT,
-    fk_id_bairro INT,
-    fk_id_complemento INT,
-    fk_id_ponto_ref INT,
-
-    FOREIGN KEY (fk_id_permissao) REFERENCES permissoes(id_permissao) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_complemento) REFERENCES complementos(id_complemento) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_ponto_ref) REFERENCES pontos_referencias(id_ponto_ref) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_cep) REFERENCES ceps(id_cep) ON UPDATE CASCADE ON DELETE SET NULL,
-    
-    FOREIGN KEY (fk_id_rua) REFERENCES ruas(id_rua) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_genero) REFERENCES generos(id_genero) ON UPDATE CASCADE ON DELETE SET NULL,
-    
-    FOREIGN KEY (fk_id_numero_casa) REFERENCES numeros_casas(id_numero_casa) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_cidade) REFERENCES cidades(id_cidade) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_bairro) REFERENCES bairros(id_bairro) ON UPDATE CASCADE ON DELETE SET NULL
-);
-
-CREATE TABLE pessoas_fisicas(
-    id_pessoa_fisi INT AUTO_INCREMENT PRIMARY KEY,
-    cpf varchar(14) NOT NULL UNIQUE,
-    rg varchar(20) NOT NULL UNIQUE,
-    fk_id_pessoa INT,
-
-    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE SET NULL
-);
-
-CREATE TABLE pessoas_juridicas(
-    id_pessoa_juri INT AUTO_INCREMENT PRIMARY KEY,
-    cnpj VARCHAR(18) NOT NULL UNIQUE,
-    ie VARCHAR(20) NOT NULL UNIQUE,
-    razao_social VARCHAR(200),
-    nome_fantasia VARCHAR(150),
-    fk_id_pessoa INT,
-
-    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE SET NULL
-);
-
-CREATE TABLE cargos (
-    id_cargo INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cargo VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE funcoes (
-    id_funcao INT AUTO_INCREMENT PRIMARY KEY,
-    nome_funcao VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE funcionarios (
-    id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
-    fk_id_cargo INT,
-    fk_id_funcao INT,
-    fk_id_pessoa INT,
-    FOREIGN KEY (fk_id_cargo) REFERENCES cargos(id_cargo) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_funcao) REFERENCES funcoes(id_funcao) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE cores (
-    id_cor INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cor VARCHAR(15) NOT NULL
-);
-
-CREATE TABLE modelos (
-    id_modelo INT AUTO_INCREMENT PRIMARY KEY,
-    nome_modelo VARCHAR(30) NOT NULL
-);
-
-CREATE TABLE marcas (
-    id_marca INT AUTO_INCREMENT PRIMARY KEY,
-    nome_marca VARCHAR(30) NOT NULL
-);
-
-CREATE TABLE tipos_veiculos (
-    id_tipo_veiculo INT AUTO_INCREMENT PRIMARY KEY,
-    nome_tipo_veiculo VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE veiculos (
-    id_veiculo INT AUTO_INCREMENT PRIMARY KEY,
-    fk_id_pessoa INT,
-    placa VARCHAR(8) NOT NULL UNIQUE,
-    status BOOLEAN,
-    fk_id_cor INT,
-    fk_id_tipo_veiculo INT,
-    fk_id_modelo INT,
-    fk_id_marca INT,
-    FOREIGN KEY (fk_id_pessoa) REFERENCES pessoas(id_pessoa) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (fk_id_cor) REFERENCES cores(id_cor) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_tipo_veiculo) REFERENCES tipos_veiculos(id_tipo_veiculo) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_modelo) REFERENCES modelos(id_modelo) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_marca) REFERENCES marcas(id_marca) ON UPDATE CASCADE ON DELETE SET NULL
-);
-
-CREATE TABLE formas_pagamento (
-    id_forma_pagamento INT AUTO_INCREMENT PRIMARY KEY,
-    tipo_pagamento VARCHAR(50) NOT NULL,
-    
-);
-
-
-CREATE TABLE manutencoes (
-    id_manutencao INT AUTO_INCREMENT PRIMARY KEY,       
-    time_saida TIMESTAMP NULL,
-    km VARCHAR(10) NOT NULL,
-    defeito VARCHAR(500),
-    valor_total FLOAT,
-    fk_id_veiculo INT NOT NULL,
-    FOREIGN KEY (fk_id_veiculo) REFERENCES veiculos(id_veiculo) ON UPDATE CASCADE ON DELETE CASCADE
-    
-);
-
-CREATE TABLE pagamentos (
-    id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
-    valor_pagamento FLOAT NOT NULL,
-    fk_id_forma_pagamento INT,
-    data_pagamento DATE NOT NULL,
-    situacao BOOLEAN NOT NULL,
-    fk_id_manutencao INT,
-
-    FOREIGN KEY (fk_id_manutencao) REFERENCES manutencoes(id_manutencao) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_forma_pagamento) REFERENCES formas_pagamento(id_forma_pagamento) ON UPDATE CASCADE ON DELETE SET NULL
-);
-
-CREATE TABLE marcas_servicos_produtos (
-    id_marca_produto INT AUTO_INCREMENT PRIMARY KEY,
-    nome_marca_produto VARCHAR(30) NOT NULL
-);
-
-CREATE TABLE tipos_servicos_produtos (
-    id_tipo_servico_produto INT AUTO_INCREMENT PRIMARY KEY,
-    tipo_servico_produto VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE servicos_produtos (
-    id_servico_produto INT AUTO_INCREMENT PRIMARY KEY,
-    nome_servico_produto varchar(150) NOT NULL,
-    descricao TEXT,
-    valor_servico_produto FLOAT NOT NULL,
-    quantidade INT,
-
-    fk_id_marca_produto INT,
-    fk_id_tipo_servico INT,
-    FOREIGN KEY (fk_id_marca_produto) REFERENCES marcas_servicos_produtos(id_marca_produto) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (fk_id_tipo_servico) REFERENCES tipos_servicos_produtos(id_tipo_servico_produto) ON UPDATE CASCADE ON DELETE SET NULL
-);
-
-CREATE TABLE itens_manutencoes_servicos (
-    fk_id_manutencao INT,
-    fk_id_servico_produto INT,
-    quantidade INT,
-    valor_uni FLOAT NOT NULL,
-    valor_total FLOAT NOT NULL,
-
-    FOREIGN KEY (fk_id_servico_produto) REFERENCES servicos_produtos(id_servico_produto) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (fk_id_manutencao) REFERENCES manutencoes(id_manutencao) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE fornecedores (
-    id_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
-    nome_fantasia VARCHAR(150) NOT NULL,
-    razao_social VARCHAR(200) NOT NULL,
-    ie VARCHAR(20) NOT NULL,
-    cnpj VARCHAR(18) NOT NULL
-);
-
-CREATE TABLE compras (
-    id_compra INT AUTO_INCREMENT PRIMARY KEY,
-    data_compra TIMESTAMP NOT NULL,
-
-    valor_compra FLOAT NOT NULL,
-    fk_id_fornecedor INT,
-    FOREIGN KEY (fk_id_fornecedor) REFERENCES fornecedores(id_fornecedor) ON UPDATE CASCADE ON DELETE SET NULL
-);
-
-CREATE TABLE itens_compras_produtos (
-    id_itens_compra_produto INT AUTO_INCREMENT PRIMARY KEY,
-    quantidade INT NOT NULL,
-    valor_unitario FLOAT NOT NULL,
-    fk_id_servico_produto INT,
-    fk_id_compra INT,
-    FOREIGN KEY (fk_id_servico_produto) REFERENCES servicos_produtos(id_servico_produto) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (fk_id_compra) REFERENCES compras(id_compra) ON UPDATE CASCADE ON DELETE CASCADE
-);
+<?php include '../includes/popup-padrao.php'; ?>

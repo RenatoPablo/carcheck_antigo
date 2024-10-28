@@ -2,7 +2,10 @@
 // Conexão com o banco de dados
 require '../config.php';
 
+header('Content-Type: application/json'); // Cabeçalho para JSON
+
 try {
+    // Consulta para obter todas as formas de pagamento
     $sql = "SELECT * FROM formas_pagamento";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -13,6 +16,7 @@ try {
     // Retorna os dados como JSON
     echo json_encode($formas_pagamento);
 } catch (PDOException $e) {
+    // Retorna erro em formato JSON caso haja falha
     echo json_encode(['erro' => 'Erro ao buscar formas de pagamento: ' . $e->getMessage()]);
 }
 ?>
